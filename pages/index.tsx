@@ -27,11 +27,7 @@ function Header(): JSX.Element {
   return (
     <header className='wrapper'>
       <h1>T H A V M A</h1>
-      <p>
-        find out what was on the test;
-        <br />
-        so you never have to ask how it was 
-      </p>
+      <p>so… how was the test?</p>
       <style jsx>{`
         header {
           text-align: center;
