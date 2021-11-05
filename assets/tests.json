@@ -2,7 +2,7 @@
   {
     "id": 1,
     "course": "ap-calc-bc",
-    "name": "Chapter 5 Quiz 1",
+    "name": "Chapter 6 Quiz 1",
     "date": "2021-11-02T07:00:00.000Z",
     "difficulty": "Easy as sh*t",
     "content": [
@@ -47,6 +47,58 @@
       "The FRQ was about classical conditioning (US, UR, CS, CR), positive and negative reinforcement, extinction, and something else that I can’t remember. It had a hint that you had to have 8 definitions, and I’m just realizing now that that probably meant I should have individually defined US (unconditioned stimulus), UR (unconditioned response), CS (conditioned stimulus), and CR (conditioned response). Oh well… you can make sure to define them and do better than I did.",
       "FRQ was about a girl, Audrey, who was positively reinforced to throw temper tantrums by her mother, Benificient, who would give her candy (the positive reinforcer) after her tantrums. Audrey’s friend, Roxy, observed that behavior and then went home and tried it with her own mother, Malificient (Roxy used observational learning after seeing Roxy’s modeled behavior being rewarded). Malificient, however, didn’t give Roxy candy and thus Roxy’s learned behavior went extinct (after not being reinforced).",
       "Audrey’s mother, Benificient, was classically conditioned to feel anxiety whenever seeing her daughter, Audrey. Audrey’s temper tantrums served as the US (unconditioned stimulus) which evoked anxiety in Benificient—the UR (unconditioned response). After many times of seeing Audrey (originally the neutral stimulus) and then having her throw a tantrum (the unconditioned stimulus), Benificient learned to associate seeing Audrey with her temper tantrums. Thus, whenever she saw Audrey (now the conditioned stimulus), Benificient felt anxiety (now the conditioned response)."
+    ]
+  },
+  {
+    "id": 5,
+    "course": "ap-calc-bc",
+    "name": "Chapter 3 Quiz",
+    "date": "2021-09-09T07:00:00.000Z",
+    "difficulty": "It was fine",
+    "content": [
+      "the 1st page is a graph of velocity and u have to graph the derivative (acceleration) and then answer some questions about when it's at rest and if it's accelerating or not in a certain time interval (i said it was bc both acceleration and velocity were negative in that interval but u might have a diff version)",
+      "and then u also have to find the equation for the line tangent to Q(t) = 3[v(t)]^2 at t = 4",
+      "and then the 2nd page has two limits u have to evaluate (one has a bunch of ln and a hole but i forgot all the fancy log identities so i j found the derivative of the function itself and then plugged in the point... bc the limit was j the definition of a derivative at a point)",
+      "and u have to find the derivatives of 2 functions",
+      "and u have to use one of those f(x), g(x), h(x), g'(x), etc tables to evaluate a composite functions derivative value at some x",
+      "and then the last question on page 2 is finding an antiderivative"
+    ]
+  },
+  {
+    "id": 6,
+    "course": "ap-calc-bc",
+    "name": "Chapter 4 Test",
+    "date": "2021-10-05T07:00:00.000Z",
+    "difficulty": "Really difficult",
+    "content": [
+      "ok so the thing that got me was the related rates problem",
+      "there was only one on my test relating the circumference of the base of a pile of rocks (or something like that) to it's volume (v = r^3/3)",
+      "and then the other thing that was a bit difficult was a question asking you to find the derivative of an inverse tan function without using the formula (you have to use limits and the definition of a derivative at a point im p sure)",
+      "anyways the entire test went something like this",
+      "two multiple choice questions asking you to find the derivative of a function at a point",
+      "one free response asking you to find the tangent line to an inverse function at a point given a table of values for the original function",
+      "a couple of free response questions just finding derivatives; these were p easy imo",
+      "and then the related rates problem",
+      "and then the inverse tan problem",
+      "and then there's the yellow sheet which u can use a calculator on",
+      "it was j about the derivative of a parametric function",
+      "it'll ask u to find the points when the height of the parametric function is 2.5; you should simply graph the function of y(t) and then y = 2.5 and find where they intersect within the domain of t",
+      "it'll also ask u if, because there's a horizontal tangent line at t = 1.25 in the original parametric function, there is a vertical tangent line also at t = 1.25 but on the inverse parametric functuon",
+      "i said yes there will be because the inverse parametric function is simply going to swap the functions for x and y and thus the derivative for the inverse function at a given t is j going to be the inverse derivative of the original function if that makes sense"
+    ]
+  },
+  {
+    "id": 7,
+    "course": "ap-calc-bc",
+    "name": "Chapter 5 Quiz 1",
+    "date": "2021-10-21T07:00:00.000Z",
+    "difficulty": "Not too bad don’t worry",
+    "content": [
+      "only 1 page (3-5 questions)",
+      "first one is estimating the value of f(10.3) given f(x) and f(10), using the tangent line of f(10)",
+      "second is simply finding an integral using u-substitution",
+      "third and fourth are more integrals (one of them--at least for me--included a u-substitution for tan(x))",
+      "the last one is an estimation of the integral using a midpoint Riemann sum"
     ]
   }
 ]
