@@ -254,6 +254,7 @@ export default function IndexPage(): JSX.Element {
         {!access && Array(5).fill(null).map((_, idx) => <TestSection key={idx} />)}
         {access && tests
           .filter((t) => t.course === course)
+          .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
           .map((t) => (
             <TestSection key={t.id} {...t} />
           ))}
