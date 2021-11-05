@@ -147,7 +147,7 @@ export default function IndexPage(): JSX.Element {
   const { theme, setTheme } = useTheme();
   const { push, prefetch, replace, query: { s, c } } = useRouter();
   const school = useMemo(() => typeof s === 'string' ? s : 'gunn', [s]);
-  const course = useMemo(() => typeof c === 'string' ? c : 'alg-1a', [c]);
+  const course = useMemo(() => typeof c === 'string' ? c : courses[0].id, [c]);
  
   useEffect(() => {
     void prefetch('/join');
