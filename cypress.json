@@ -1,0 +1,12 @@
+{
+  "projectId": "fkgrv3",
+  "baseUrl": "http://localhost:3000",
+  "pluginsFile": "cypress/plugins/index.ts",
+  "supportFile": "cypress/support/index.ts",
+  "integrationFolder": "cypress/tests",
+  "env": {
+    "codeCoverage": {
+      "url": "/api/coverage"
+    }
+  }
+}

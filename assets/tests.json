@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "course": "ap-calc-bc",
+    "name": "Chapter 5 Quiz 1",
+    "date": "2021-11-02T07:00:00.000Z",
+    "difficulty": "Easy as sh*t",
+    "content": [
+      "You’re given a function value and it’s derivative at a point; you then have to estimate the value of the function at a similar point using a tangent-line approximation.",
+      "You’re given two definite integrals and you have to find the definite integral that consists of the sum of those two. This is simply about flipping the integral directions (which changes the sign) and then adding them correctly. Piece of cake.",
+      "There’s a graph of a function with areas marked A1 and A2; you have to find an integral in terms of A1 and A2. Again, this should be super easy. You just have to remember to keep your signs correct when inversing integrals, etc.",
+      "Then, there’s two questions where you simply use u-sub to evaluate the definite integral. You’re totally chillin.",
+      "The calculator section is pretty simple too. All you have to do is find the area bounded by y=ln(x) and y=ln(4). The answer’s kinda tricky I guess, though, because it’s 3 (even though it’ll ask you to round to 3 decimal places, you won’t have to)."
+    ]
+  },
+  {
+    "id": 2,
+    "course": "ap-econ",
+    "name": "Test 3 - Unit 4 & 5 - Production & Pure Competition",
+    "date": "2021-11-03T07:00:00.000Z",
+    "difficulty": "Difficult if you didn’t study",
+    "content": [
+      "Just do the practice tests on Schoology and you should be good. Otherwise, you’re kinda f*cked because Ms. Linsdell didn’t teach everything.",
+      "Do the practice tests. They were harder than the actual test. So if you do good on the practice tests, you’ll do good on the actual thing. The questions were very similar; some of the questions on the test were even word-for-word from the practice tests. SO DO THEM."
+    ]
+  },
+  {
+    "id": 3,
+    "course": "ap-calc-ab",
+    "name": "Latest Unit Test",
+    "date": "2021-11-02T07:00:00.000Z",
+    "difficulty": "Everyone failed",
+    "content": [
+      "Definitely a Limburg-made test. We pretty much all failed: it might’ve been stuff she taught, but it was all combined together on the same questions in convoluted ways. For example:",
+      "One question had a table of function values, derivative values, double derivative values, etc. and then you were given an expression in the terms of those functions. You had to first find the derivative symbolically using various rules (i.e. quotient rule, power rule, and chain rule) and then plug in the values from the table into your derivative to evaluate each expression.",
+      "Another question made you find the point on the function where IROC = AROC. This isn’t officially taught in AB Calc, but in BC it’s known as the mean value theorem (MVT). Essentially, you first have to use the quotient, power, and chain rules to find the derivative of a function. Then, you have to set that derivative expression equal to the AROC (which is simply Δy/Δx: they’ll give you two x-values and you’ll have to find the y-values by plugging those x-values into the original function) and solve for the x-values that make AROC (which is Δy/Δx) = IROC (which is your derivative). If you get multiple x-values, you’ll have to make sure to use the one that is in the domain they give you (i.e. in between the two x-values you used to find the AROC). So yeah, essentially, you’re f**ked."
+    ]
+  },
+  {
+    "id": 4,
+    "course": "ap-psych",
+    "name": "Unit 4 Test - Learning",
+    "date": "2021-11-05T07:00:00.000Z",
+    "difficulty": "AP Psychology Squid Game",
+    "content": [
+      "Perkins really did Squid Game this sh*t; the multiple choice was done in groups of 3. Pick your partners wisely—they better be smart or at least have access to THAVMA. Some questions were trippy (e.g. 22 was “formal operational” or some bullsh*t like that… Perkins said it wasn’t going to be included in your grade anyways), but other than that, it wasn’t that bad. You do have to know some names though (e.g. Pavlov, etc). And there’s a question about rats and radiation (answer is that the rats learned to associate distinct tastes with the nausea that comes from radiation exposure).",
+      "The FRQ was about classical conditioning (US, UR, CS, CR), positive and negative reinforcement, extinction, and something else that I can’t remember. It had a hint that you had to have 8 definitions, and I’m just realizing now that that probably meant I should have individually defined US (unconditioned stimulus), UR (unconditioned response), CS (conditioned stimulus), and CR (conditioned response). Oh well… you can make sure to define them and do better than I did.",
+      "FRQ was about a girl, Audrey, who was positively reinforced to throw temper tantrums by her mother, Benificient, who would give her candy (the positive reinforcer) after her tantrums. Audrey’s friend, Roxy, observed that behavior and then went home and tried it with her own mother, Malificient (Roxy used observational learning after seeing Roxy’s modeled behavior being rewarded). Malificient, however, didn’t give Roxy candy and thus Roxy’s learned behavior went extinct (after not being reinforced).",
+      "Audrey’s mother, Benificient, was classically conditioned to feel anxiety whenever seeing her daughter, Audrey. Audrey’s temper tantrums served as the US (unconditioned stimulus) which evoked anxiety in Benificient—the UR (unconditioned response). After many times of seeing Audrey (originally the neutral stimulus) and then having her throw a tantrum (the unconditioned stimulus), Benificient learned to associate seeing Audrey with her temper tantrums. Thus, whenever she saw Audrey (now the conditioned stimulus), Benificient felt anxiety (now the conditioned response)."
+    ]
+  }
+]

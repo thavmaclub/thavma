@@ -1,0 +1,33 @@
+name: Build 
+
+on:
+  push:
+
+env:
+  NODE_ENV: test
+  SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+  TWILIO_SID: ${{ secrets.TWILIO_SID }}
+  TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
+  TWILIO_PHONE: ${{ secrets.TWILIO_PHONE }}
+  PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            ~/.cache/yarn
+            .next/cache
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - run: yarn install --immutable
+      - run: yarn build
