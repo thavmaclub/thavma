@@ -2,7 +2,7 @@
   {
     "id": 1,
     "course": "ap-calc-bc",
-    "name": "Chapter 6 Quiz 1",
+    "name": "Chapter 6 Quiz",
     "date": "2021-11-02T07:00:00.000Z",
     "difficulty": "Easy as sh*t",
     "content": [
@@ -54,7 +54,7 @@
     "course": "ap-calc-bc",
     "name": "Chapter 3 Quiz",
     "date": "2021-09-09T07:00:00.000Z",
-    "difficulty": "It was fine",
+    "difficulty": "twas fine",
     "content": [
       "the 1st page is a graph of velocity and u have to graph the derivative (acceleration) and then answer some questions about when it's at rest and if it's accelerating or not in a certain time interval (i said it was bc both acceleration and velocity were negative in that interval but u might have a diff version)",
       "and then u also have to find the equation for the line tangent to Q(t) = 3[v(t)]^2 at t = 4",
@@ -90,9 +90,9 @@
   {
     "id": 7,
     "course": "ap-calc-bc",
-    "name": "Chapter 5 Quiz 1",
+    "name": "Chapter 5 Quiz",
     "date": "2021-10-21T07:00:00.000Z",
-    "difficulty": "Not too bad don’t worry",
+    "difficulty": "dw bout it",
     "content": [
       "only 1 page (3-5 questions)",
       "first one is estimating the value of f(10.3) given f(x) and f(10), using the tangent line of f(10)",
