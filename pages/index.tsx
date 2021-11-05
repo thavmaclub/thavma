@@ -28,9 +28,9 @@ function Header(): JSX.Element {
     <header className='wrapper'>
       <h1>T H A V M A</h1>
       <p>
-        find out what’s on your next test;
+        find out what was on the test;
         <br />
-        if your teachers won’t tell you, we will
+        so you never have to ask how it was 
       </p>
       <style jsx>{`
         header {
