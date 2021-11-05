@@ -13,7 +13,7 @@ import PinIcon from 'components/icons/pin';
 import Select from 'components/select';
 import SystemIcon from 'components/icons/system';
 
-import { Test } from 'lib/model';
+import { Course, School, Test } from 'lib/model';
 import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
@@ -21,7 +21,12 @@ import { useTheme } from 'lib/context/theme';
 import { useUser } from 'lib/context/user';
 
 import courses from 'assets/courses.json';
+import schools from 'assets/schools.json';
 import tests from 'assets/tests.json';
+
+const TESTS: Test[] = tests;
+const SCHOOLS: School[] = schools;
+const COURSES: Course[] = courses.filter((cs) => TESTS.some((t) => t.course === cs.id));
 
 function Header(): JSX.Element {
   return (
@@ -146,8 +151,8 @@ export default function IndexPage(): JSX.Element {
   const { access } = useAccess();
   const { theme, setTheme } = useTheme();
   const { push, prefetch, replace, query: { s, c } } = useRouter();
-  const school = useMemo(() => typeof s === 'string' ? s : 'gunn', [s]);
-  const course = useMemo(() => typeof c === 'string' ? c : 'alg-1a', [c]);
+  const school = useMemo(() => typeof s === 'string' ? s : SCHOOLS[0].id, [s]);
+  const course = useMemo(() => typeof c === 'string' ? c : COURSES[0].id, [c]);
  
   useEffect(() => {
     void prefetch('/join');
@@ -189,7 +194,7 @@ export default function IndexPage(): JSX.Element {
         <Header />
         <div className='form wrapper'>
           <Select
-            options={[{ value: 'gunn', label: 'Gunn High School [beta]' }]}
+            options={SCHOOLS.map((sc) => ({ value: sc.id, label: sc.name }))}
             label='School'
             icon={<PinIcon />}
             value={school}
@@ -200,7 +205,7 @@ export default function IndexPage(): JSX.Element {
             disabled
           />
           <Select
-            options={courses.map((cs) => ({ value: cs.id, label: cs.name }))}
+            options={COURSES.map((cs) => ({ value: cs.id, label: cs.name }))}
             label='Course'
             icon={<BookIcon />}
             value={course}
@@ -252,13 +257,13 @@ export default function IndexPage(): JSX.Element {
           )}
         </div>
         {!access && Array(5).fill(null).map((_, idx) => <TestSection key={idx} />)}
-        {access && tests
+        {access && TESTS 
           .filter((t) => t.course === course)
           .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
           .map((t) => (
             <TestSection key={t.id} {...t} />
           ))}
-        {access && !tests.some((t) => t.course === course) && ( 
+        {access && !TESTS.some((t) => t.course === course) && ( 
           <section>
             <div className='wrapper'>
               <div className='empty'>
