@@ -55,7 +55,6 @@ export default function JoinPage(): JSX.Element {
         <div className='centered'>
           <header>
             <h1>T H A V M A</h1>
-            <p>so… how was the test?</p>
           </header>
           <Form
             id='code'

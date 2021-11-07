@@ -27,7 +27,6 @@ function Header(): JSX.Element {
   return (
     <header className='wrapper'>
       <h1>T H A V M A</h1>
-      <p>so… how was the test?</p>
       <style jsx>{`
         header {
           text-align: center;
@@ -37,18 +36,13 @@ function Header(): JSX.Element {
         h1 {
           font-size: 36px;
           line-height: 1;
-          margin: 12px 0;
+          margin: 0;
         }
 
         @media (max-width: 400px) {
           h1 {
             font-size: 24px;
           }
-        }
-
-        p {
-          color: var(--accents-5);
-          margin: 0;
         }
       `}</style>
     </header>
