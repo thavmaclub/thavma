@@ -13,8 +13,8 @@
   <a aria-label='Maintainability' href='https://codeclimate.com/github/thavmaclub/thavma'>
     <img src='https://img.shields.io/codeclimate/maintainability/thavmaclub/thavma?style=flat-square&labelColor=000000'>
   </a>
-  <a aria-label='Integration tests' href='https://dashboard.cypress.io/projects/fkgrv3/runs'>
-    <img src='https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/fkgrv3&style=flat-square&labelColor=000000'>
+  <a aria-label='Integration tests' href='https://dashboard.cypress.io/projects/936nmz/runs'>
+    <img src='https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/936nmz&style=flat-square&labelColor=000000'>
   </a>
   <a aria-label='Coverage status' href='https://codecov.io/gh/thavmaclub/thavma'>
     <img src='https://img.shields.io/codecov/c/gh/thavmaclub/thavma?style=flat-square&labelColor=000000'>
