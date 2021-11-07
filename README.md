@@ -1,5 +1,4 @@
 <h1 align='center'>T  H  A  V  M  A</h1>
-<p align='center'>Find out what’s on your next test. If your teachers won’t tell you, THAVMA will.</p>
 <p align='center'>
   <a aria-label='Release version' href='https://github.com/thavmaclub/thavma/releases'>
     <img src='https://img.shields.io/github/v/release/thavmaclub/thavma?style=flat-square&labelColor=000000'>
