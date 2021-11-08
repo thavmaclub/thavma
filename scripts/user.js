@@ -1,7 +1,7 @@
 const supabase = require('./supabase')('test');
 const logger = require('./logger');
 
-const user = require('../cypress/fixtures/inviter.json');
+const user = require('../cypress/fixtures/user.json');
 
 async function main() {
   const { error } = await supabase.auth.signUp({ email: user.email, password: user.password });
