@@ -100,5 +100,20 @@
       "third and fourth are more integrals (one of them—at least for me—included a u-substitution for tan(x))",
       "the last one is an estimation of the integral using a midpoint Riemann sum"
     ]
+  },
+  {
+    "id": 8,
+    "course": "ap-calc-ab",
+    "name": "Latest Unit Test",
+    "date": "2021-11-18T07:00:00.000Z",
+    "difficulty": "easy",
+    "content": [
+      "Find the derivatives of the following:",
+      "y = sin^-1(3x - 5)",
+      "y = cos-1(x^3)",
+      "y = tan-1(e^x)",
+      "let g and h be inverse functions use table below to find h'(3): At x = 3: g(x) = 5, h(x) = 4, g'(x) = -1/4. At x= 4: g(x) = 3, h(x) = 1, g'(x) = 1/2.",
+      "let h(x) = 1/4x^3 + 2x - 1 and let g be the inverse of h. Notice that h(2) = 5. Find g'(5)."
+    ]
   }
 ]
