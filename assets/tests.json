@@ -115,5 +115,27 @@
       "let g and h be inverse functions use table below to find h'(3): At x = 3: g(x) = 5, h(x) = 4, g'(x) = -1/4. At x= 4: g(x) = 3, h(x) = 1, g'(x) = 1/2.",
       "let h(x) = 1/4x^3 + 2x - 1 and let g be the inverse of h. Notice that h(2) = 5. Find g'(5)."
     ]
+  },
+  {
+    "id": 9,
+    "course": "ap-calc-bc",
+    "name": "Chapter 6 Quiz",
+    "date": "2021-11-19T07:00:00.000Z",
+    "difficulty": "easy; just don’t forget to chain",
+    "content": [
+      "Three “find the derivative” questions:",
+      "y = log3(x^2); use logarithmic differentiation by rewriting in form of 3^y = x^2 and then taking the ln of both sides and bringing down the exponents to become coefficients.",
+      "f(x) = cosx^sinx; again, use logarithmic differentiation by taking the ln of both sides and bringing the sin(x) down as a coefficient instead of an exponent.",
+      "f(x) = (2x)^10 + (10)^2x; for this one, I said: f'(x) = 10(2x)^9(2) + (10)^2x(ln(10))(2) = 20(2x)^9 + 2ln(10)(10)^2x because d/dx(b^x) = b^x(ln(b)).",
+      "Two “find the integral” questions:",
+      "y = (lnx / x)dx; for this one, use u-sub and you’ll get: y = (1/2)(lnx)^2 + C which is pretty straightforward.",
+      "y = (x / (3x + 2)) dx; for this one, I said: y = (1/6)(ln(3x + 2)) + C just by guessing and checking using chain-rule.",
+      "One limit question that, when you first plugin the limit value, you’ll get an intedeterminate 0/0 solution so you’ll have to use derivatives to find the solution. I found that it DNE (does not exist) because, after using derivatives, I got a # / 0 which means there’s an asymptote there.",
+      "Back page has two questions: one really long one with a graph of a function f(t) that asks about an area function g(x) which is defined in terms of f(t).",
+      "Asks you to find g(0), g'(0), and g\"(0). My answers: g(0) = 9/2, g'(0) = 1 (this is just the f(0) value), and g\"(0) = DNE (because f(t) has a cusp at x = 0). I might be wrong though.",
+      "Asks if the value of g(4) is greater than the value of g(0). I said that value of g(4) was greater because it has more positive area under f(t) than g(0).",
+      "Asks to find the limit as x approaches -1 for h(4) / 4ln(2 + x) where h(x) is an area function in terms of f(t). Specifically, h(x) = integral of f(t) where the top is 3x bottom is -3. I fucked this one up; you have to use derivatives to evaluate the limit because the first time you plug in -1, you get an answer in terms of 0 / 0 which is indefinite. So, you have to use the derivative of h(4) (which uses the chain rule that I forgot about) and the derivative of 4ln(2 + x).",
+      "Last question was about an antiderivative G(x) of f(t)—unrelated to the f(t) depicted in the previous question’s graph—where G(2) = -7 and thus what is G(4). The options included -7 + f'(4), the definitive integral of f(t) where the top limit is 4 and the bottom limit is 2 + -7 (I said this was the correct answer), etc."
+    ]
   }
 ]
