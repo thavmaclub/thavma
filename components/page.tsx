@@ -42,7 +42,7 @@ export default function Page({
         <title>THAVMA</title>
         <meta
           name='description'
-          content='Find out what’s on your next test. If your teachers won’t tell you, THAVMA will.'
+          content='CLOSED BETA - INVITE ONLY - DM @thavmaclub for access'
         />
         <meta charSet='UTF-8' />
         <meta name='viewport' content='width=device-width,initial-scale=1.0' />
@@ -50,17 +50,15 @@ export default function Page({
         <meta property='og:title' content='THAVMA' />
         <meta
           property='og:description'
-          content='Find out what’s on your next test. If your teachers won’t tell you, THAVMA will.'
+          content='CLOSED BETA - INVITE ONLY - DM @thavmaclub for access'
         />
-        <meta property='og:image' content='/images/hammock-app.png' />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@thavmaclub' />
         <meta property='twitter:title' content='THAVMA'/>
         <meta
           property='twitter:description'
-          content='Find out what’s on your next test. If your teachers won’t tell you, THAVMA will.'
+          content='CLOSED BETA - INVITE ONLY - DM @thavmaclub for access'
         />
-        <meta property='twitter:image' content='/images/hammock-app.png' />
         <link
           rel='apple-touch-icon'
           sizes='57x57'

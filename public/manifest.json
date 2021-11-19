@@ -1,5 +1,11 @@
 {
- "name": "App",
+ "name": "THAVMA",
+ "short_name": "THAVMA",
+ "lang": "en-US",
+ "scope": "/",
+ "start_url": "/",
+ "display": "standalone",
+ "orientation": "portrait",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -37,5 +43,8 @@
    "type": "image\/png",
    "density": "4.0"
   }
- ]
+ ],
+ "theme_color": "#ffffff",
+ "background_color": "#ffffff",
+ "description": "CLOSED BETA - INVITE ONLY - DM @thavmaclub for access"
 }
