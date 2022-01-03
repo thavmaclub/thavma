@@ -1,10 +1,9 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { SegmentAnalytics } from '@segment/analytics.js-core';
 
 import segmentSnippet from 'lib/segment-snippet';
-import { useTheme } from 'lib/context/theme';
 
 declare global {
   interface Window {
@@ -26,15 +25,6 @@ export default function Page({
   useEffect(() => {
     window.analytics?.page('', name);
   }, [name]);
-
-  // Change the web app manifest colors based on the user's theme.
-  // @see {@link https://stackoverflow.com/a/57760135/10023158}
-  const { theme } = useTheme();
-  const [dark, setDark] = useState<boolean>(theme === 'dark');
-  useEffect(() => {
-    const mq = matchMedia('(prefers-color-scheme: dark)');
-    setDark(theme === 'dark' || (theme === 'system' && mq.matches));
-  }, [theme]);
 
   return (
     <>
@@ -128,14 +118,8 @@ export default function Page({
           sizes='16x16'
           href='/favicon-16x16.png'
         />
-        <link
-          rel='manifest'
-          href={dark ? '/dark-manifest.json' : '/manifest.json'}
-        />
-        <meta
-          name='msapplication-TileColor'
-          content={dark ? '#121212' : '#ffffff'}
-        />
+        <link rel='manifest' href='/manifest.json' />
+        <meta name='msapplication-TileColor' content='#000000' />
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-title' content='Hammock' />
@@ -145,7 +129,7 @@ export default function Page({
         />
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='application-name' content='Hammock' />
-        <meta name='theme-color' content={dark ? '#121212' : '#ffffff'} />
+        <meta name='theme-color' content='#000000' />
         <link rel='preconnect' href='https://segment.thavma.club' />
         <link rel='preconnect' href='https://track.thavma.club' />
       </Head>
