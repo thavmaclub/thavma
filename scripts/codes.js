@@ -1,9 +1,9 @@
 const { nanoid } = require('nanoid');
 
-const supabase = require('./supabase')('production');
+const supabase = require('./supabase')('development');
 const logger = require('./logger');
 
-const UID = 'f4efe723-f79d-4b3b-97a0-d3f868d7f044';
+const UID = '2bc70a00-bdbc-4e41-813b-df60a0dc7d7d';
 const CODES = Array(5).fill(null).map(() => ({ id: nanoid(), creator: UID }));
 
 async function codes() {
