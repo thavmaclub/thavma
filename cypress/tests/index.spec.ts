@@ -21,7 +21,7 @@ describe('Index PG', () => {
     cy.login(user);
     cy.visit(`/?code=${codes[0].id}`);
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);
-    cy.url().should('eq', 'http://localhost:3000/join');
+    cy.url().should('contain', '/join');
   });
 
   it('collects phone for invite codes', () => {
@@ -42,7 +42,7 @@ describe('Index PG', () => {
     cy.get('@phone-input').should('have.class', 'error');
     cy.percySnapshot('Index Form Error');
     cy.get('@phone-input')
-      .type(`${user.phone.substr(3)}`)
+      .type(`${user.phone.substring(3)}`)
       .should('have.value', user.phone);
     cy.contains('button', 'get codes')
       .click()
