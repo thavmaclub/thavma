@@ -58,7 +58,7 @@ export default function JoinPage(): JSX.Element {
           </header>
           <Form
             id='code'
-            label='[beta][invite only][$1/wk]'
+            label='[beta][invite only]'
             loading={loading}
             error={error}
             value={code}
