@@ -66,5 +66,6 @@ export default function plugins(
       return null;
     },
   });
+  on('file:preprocessor', require('@cypress/code-coverage/use-babelrc'));
   return { ...config, env: { ...config.env, ...env } };
 }
