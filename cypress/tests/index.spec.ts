@@ -16,7 +16,7 @@ describe('Index PG', () => {
   });
 
   it('redirects to /join for users w/ invalid invite', () => {
-    cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL}/rest/v1/codes?id=eq.${codes[0].id}`).as('use-code');
+    cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[0].id}`).as('use-code');
     cy.task('seed', { skipUser: true, skipCode: true });
     cy.login(user);
     cy.visit(`/?code=${codes[0].id}`);
@@ -32,8 +32,8 @@ describe('Index PG', () => {
     cy.percySnapshot('Index Form');
     cy.get('input[placeholder="phone number"]')
       .as('phone-input')
-      .type(`${user.phone.substr(0, 3)}{enter}`)
-      .should('have.value', user.phone.substr(0, 3))
+      .type(`${user.phone.substring(0, 3)}{enter}`)
+      .should('have.value', user.phone.substring(0, 3))
       .and('be.disabled')
       .and('have.css', 'cursor', 'wait')
       .loading();
@@ -73,7 +73,7 @@ describe('Index PG', () => {
   it('filters tests by course', () => {
     cy.task('seed');
     cy.login(user);
-    cy.visit('/', {
+    cy.visit('/?c=apc', {
       onBeforeLoad(win: Window) {
         win.localStorage.setItem('theme', 'light');
       },
@@ -86,8 +86,9 @@ describe('Index PG', () => {
       .and('be.disabled')
       .and('have.css', 'cursor', 'not-allowed');
     cy.get('select[aria-label="Course"]')
-      .should('have.value', 'alg-1a')
+      .should('have.value', 'apc')
       .select('ap-calc-bc');
+    cy.url().should('contain', 'c=ap-calc-bc');
     cy.contains('no contributions to show').should('not.exist');
     cy.percySnapshot('Index Test');
     cy.get('select[aria-label="Theme"]')
@@ -109,10 +110,10 @@ describe('Index PG', () => {
   });
 
   it('uses invite codes after login', () => {
-    cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL}/rest/v1/codes?id=eq.${codes[2].id}`).as('use-code');
+    cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[2].id}`).as('use-code');
     cy.task('seed', { skipUser: true, skipCode: true });
     cy.login(user);
-    cy.visit(`/?code=${codes[2].id}`);
+    cy.visit(`/?c=apc&code=${codes[2].id}`);
     cy.get('p.loading').should('be.visible');
     cy.get('h2.loading').should('be.visible');
     cy.wait('@use-code');
