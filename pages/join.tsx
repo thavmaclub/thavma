@@ -46,7 +46,7 @@ export default function JoinPage(): JSX.Element {
     void prefetch('/');
   }, [prefetch]);
   useEffect(() => {
-    if (access === true) void replace('/');
+    if (access === true) void replace(`/${window.location.search}`);
   }, [replace, access]);
   
   return (
