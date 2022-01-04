@@ -1,12 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
 import BookIcon from 'components/icons/book';
 import DarkIcon from 'components/icons/dark';
 import Form from 'components/form';
+import Header from 'components/header';
 import LightIcon from 'components/icons/light';
 import Page from 'components/page';
 import PinIcon from 'components/icons/pin';
@@ -23,34 +24,8 @@ import { useUser } from 'lib/context/user';
 import courses from 'assets/courses.json';
 import tests from 'assets/tests.json';
 
-function Header(): JSX.Element {
-  return (
-    <header className='wrapper'>
-      <h1>T H A V M A</h1>
-      <style jsx>{`
-        header {
-          text-align: center;
-          margin: 48px auto;
-        }
-
-        h1 {
-          font-size: 36px;
-          line-height: 1;
-          margin: 0;
-        }
-
-        @media (max-width: 400px) {
-          h1 {
-            font-size: 24px;
-          }
-        }
-      `}</style>
-    </header>
-  );
-}
-
-function TestSection({ name, date, difficulty, content }: Partial<Test>): JSX.Element {
-  const loading = useMemo(() => !name || !date || !difficulty || !content, [name, date, difficulty, content]);
+function TestSection({ name, date, difficulty, content, children }: Partial<Test> & { children?: ReactNode }): JSX.Element {
+  const loading = useMemo(() => !name && !date && !difficulty && !content, [name, date, difficulty, content]);
   useEffect(() => {
     if (!name || !date || !difficulty || !content) return;
     window.analytics?.track('Test Viewed', { name, date, difficulty, content });
@@ -60,20 +35,23 @@ function TestSection({ name, date, difficulty, content }: Partial<Test>): JSX.El
       <header className='wrapper'>
         <h2 className={cn({ loading })}>{!loading && name}</h2>
         <p className={cn({ loading })}>
-          {!loading && date && difficulty && `${new Date(date).toLocaleString('en', {
+          {!loading && date && `${new Date(date).toLocaleString('en', {
             weekday: 'long',
             month: 'numeric',
             day: 'numeric',
             year: 'numeric',
-          })} - ${difficulty}`}
+          })}${difficulty ? ` - ${difficulty}` : ''}`}
         </p>
       </header>
-      <ol className='wrapper'>
-        {loading && Array(5).fill(null).map((_, idx) => <li key={idx} className='loading' />)}
-        {!loading && content && content.map((c, idx) => (
-          <li key={idx}>{c}</li>
-        ))}
-      </ol>
+      {!children && (
+        <ol className='wrapper'>
+          {loading && Array(5).fill(null).map((_, idx) => <li key={idx} className='loading' />)}
+          {!loading && content && content.map((c, idx) => (
+            <li key={idx}>{c}</li>
+          ))}
+        </ol>
+      )}
+      {children}
       <style jsx>{`
         section {
           border-top: 1px solid var(--accents-2);
@@ -113,17 +91,17 @@ function TestSection({ name, date, difficulty, content }: Partial<Test>): JSX.El
           margin: 48px auto;
         }
 
-        li {
+        section :global(li) {
           margin: 24px 0;
         }
 
-        li.loading {
+        section :global(li.loading) {
           height: 54px;
           margin-left: -24px;
           list-style: none;
         }
 
-        ol {
+        section :global(ol) {
           padding-left: 48px;
           margin: 48px auto;
         }
@@ -242,6 +220,17 @@ export default function IndexPage(): JSX.Element {
           )}
         </div>
         {!access && Array(5).fill(null).map((_, idx) => <TestSection key={idx} />)}
+        {access && (
+          <TestSection
+            name='how it works'
+            date={new Date().toISOString()}
+          >
+            <ol className='wrapper'>
+              <li>make a contribution: whenever u ask someone about a test, dm <a href='https://instagram.com/thavmaclub' target='_blank' rel='noopener noreferrer'>@thavmaclub</a> with whatever they tell u about it</li>
+              <li>rely on others’s contributions: then, whenever u need info and no one’s awake at 1am the night before a test, login here and it’ll be waiting for u</li>
+            </ol>
+          </TestSection>
+        )}
         {access && tests
           .filter((t) => t.course === course)
           .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
@@ -283,7 +272,7 @@ export default function IndexPage(): JSX.Element {
             justify-content: center;
           }
          
-          .empty a {
+          main :global(a) {
             color: inherit;
           }
 
