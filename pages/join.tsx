@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import Form from 'components/form';
 import Page from 'components/page';
 
-import { Code } from 'lib/model';
 import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
@@ -21,12 +20,9 @@ export default function JoinPage(): JSX.Element {
     setLoading(true);
     setError(false);
     window.analytics?.track('Code Submitted', { code });
-    const { data, error: e } = await supabase
-      .from<Code>('codes')
-      .select()
-      .eq('id', code)
-      .is('user', null);
-    if (!data?.length || e) {
+    const { data: exists, error: e } = 
+      await supabase.rpc<boolean>('code_exists', { code });
+    if (!exists || e) {
       window.analytics?.track('Code Errored', { code, error: e?.message });
       setLoading(false);
       setError(true);
