@@ -12,6 +12,25 @@ describe('Join PG', () => {
     cy.url().should('eq', 'http://localhost:3000/');
   });
 
+  it('reuses codes by email', () => {
+    cy.task('seed');
+    cy.visit('/join', {
+      onBeforeLoad(win: Window) {
+        cy.stub(win, 'open').as('redirect');
+      },
+    });
+    cy.get('input[placeholder="invite code"]')
+      .as('input')
+      .type(`${codes[0].id}{enter}`)
+      .should('have.value', codes[0].id)
+      .and('be.disabled')
+      .and('have.css', 'cursor', 'wait')
+      .loading();
+    cy.get('@redirect')
+      .should('be.calledOnce')
+      .and('be.calledWithExactly', `http://localhost:3000/?code=${codes[2].id}`);
+  });
+
   it('verifies invite codes', () => {
     cy.task('seed', { skipUser: true });
     cy.visit('/join', {
