@@ -23,6 +23,12 @@ create policy "Used codes are viewable by their users"
   on codes for select using (
     auth.uid() = "user"
   );
+create policy "Used codes can be reused by their users"
+  on codes for update using (
+    auth.uid = "user"
+  ) with check (
+    auth.uid() = "user" and "user" != "creator"
+  );
 
 create domain phone as text check (value ~ '^(\+\d{1,3})\d{10}$');
 create table users (
