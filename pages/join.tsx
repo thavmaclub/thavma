@@ -66,6 +66,7 @@ export default function JoinPage(): JSX.Element {
             placeholder='invite code'
             onSubmit={onSubmit}
           />
+          {typeof access === 'string' && <p className='error'>{access}</p>}
         </div>
         <style jsx>{`
           main {
@@ -79,10 +80,6 @@ export default function JoinPage(): JSX.Element {
           .centered {
             margin: 48px 0;
           }
-        
-          .centered > :global(form) {
-            margin-top: 24px;
-          }
 
           .centered > :global(form button) {
             width: 85px;
@@ -95,20 +92,16 @@ export default function JoinPage(): JSX.Element {
           h1 {
             font-size: 4rem;
             line-height: 1;
-            margin: 0 0 24px;
+            margin: 0;
           }
 
-          p {
-            font-size: 1.25rem;
-            color: var(--accents-5);
-            margin: 8px 0 0;
-          }
-          
           .error {
+            margin: 12px 0 0;
+            font-size: 0.875rem;
             color: var(--error);
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-top: 12px;
+            width: 0;
+            min-width: 100%;
+            max-width: 100%;
           }
         `}</style>
       </main>
