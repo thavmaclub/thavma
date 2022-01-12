@@ -26,8 +26,10 @@ describe('Join PG', () => {
       .should('be.disabled')
       .and('have.css', 'cursor', 'wait')
       .loading();
-    cy.loading(false).get('@input').should('have.class', 'error').clear();
-    cy.percySnapshot('Join Empty Error');
+    cy.loading(false)
+      .get('@input')
+      .should('have.class', 'error');
+    cy.percySnapshot('Join Error');
     cy.contains('button', 'request access')
       .click()
       .should('be.disabled')
@@ -36,25 +38,15 @@ describe('Join PG', () => {
     cy.loading(false)
       .get('@input')
       .should('have.class', 'error')
+      .clear()
       .type(`${codes[0].id}{enter}`)
       .should('have.value', codes[0].id)
-      .and('be.disabled')
-      .and('have.css', 'cursor', 'wait')
-      .loading();
-    cy.loading(false)
-      .get('@input')
-      .should('have.class', 'error');
-    cy.percySnapshot('Join Error');
-    cy.get('@input')
-      .clear()
-      .type(`${codes[2].id}{enter}`)
-      .should('have.value', codes[2].id)
       .and('be.disabled')
       .and('have.css', 'cursor', 'wait')
       .loading();
     cy.percySnapshot('Join Loading');
     cy.get('@redirect')
       .should('be.calledOnce')
-      .and('be.calledWithExactly', `http://localhost:3000/?code=${codes[2].id}`);
+      .and('be.calledWithExactly', `http://localhost:3000/?code=${codes[0].id}`);
   });
 });

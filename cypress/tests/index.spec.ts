@@ -21,7 +21,7 @@ describe('Index PG', () => {
     cy.login(user);
     cy.visit(`/?code=${codes[0].id}`);
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);
-    cy.url().should('contain', '/join');
+    cy.url().should('contain', '/join').and('contain', `code=${codes[0].id}`);
   });
 
   it('collects phone for invite codes', () => {
@@ -119,5 +119,18 @@ describe('Index PG', () => {
     cy.wait('@use-code');
     cy.contains('no contributions to show').should('be.visible');
     cy.get('.loading').should('not.exist');
+  });
+
+  it('reuses codes by email address', () => {
+    cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[1].id}`).as('use-code');
+    cy.task('seed', { skipUser: true, skipCode: true });
+    cy.login(user);
+    cy.visit(`/?c=apc&code=${codes[1].id}`);
+    cy.get('p.loading').should('be.visible');
+    cy.get('h2.loading').should('be.visible');
+    cy.wait('@use-code').its('response.statusCode').should('eq', 404);
+    cy.url().should('contain', `/join?c=apc&code=${codes[1].id}`);
+    cy.get('p.error').should('be.visible').and('contain', 'used was invalid');
+    cy.percySnapshot('Join Code Error');
   });
 });
