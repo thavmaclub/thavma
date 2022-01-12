@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, createContext, useContext } from 'react';
 
 export interface AccessContextType {
-  access?: boolean;
-  setAccess: Dispatch<SetStateAction<boolean | undefined>>;
+  access?: boolean | string;
+  setAccess: Dispatch<SetStateAction<boolean | string | undefined>>;
 }
 
 export const AccessContext = createContext<AccessContextType>({

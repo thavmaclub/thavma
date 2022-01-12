@@ -50,7 +50,7 @@ export default function plugins(
       if (!skipCodes) {
         const { error } = await supabase
           .from<Code>('codes')
-          .insert(skipCode ? codes.filter((c) => !c.user) : codes);
+          .insert(skipCode ? codes.filter((c) => c.user !== user.id) : codes);
         if (error) throw new Error(`Error inserting codes: ${error.message}`);
       }
       const { error: err } = await supabase.from<User>('users').delete();

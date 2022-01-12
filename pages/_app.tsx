@@ -77,7 +77,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   }, [theme]);
 
   const [user, setUser] = useState<User>();
-  const [access, setAccess] = useState<boolean>();
+  const [access, setAccess] = useState<boolean | string>();
   const getUser = useCallback(async () => {
     const uid = supabase.auth.user()?.id;
     if (!uid) {
@@ -106,7 +106,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         .from<Code>('codes')
         .update({ user: uid })
         .eq('id', code);
-      setAccess(!error);
+      setAccess(error ? 'The invite code you used was invalid or had already been used by another email address. Try logging in again with a different Google account.' : true);
       window.analytics?.track(error ? 'Code Denied' : 'Code Used', { code, error });
     } else {
       const { data } = await supabase

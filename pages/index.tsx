@@ -121,7 +121,8 @@ export default function IndexPage(): JSX.Element {
     void prefetch('/join');
   }, [prefetch]);
   useEffect(() => {
-    if (access === false) void replace(`/join${window.location.search}`);
+    if (access === false || typeof access === 'string') 
+      void replace(`/join${window.location.search}`);
   }, [replace, access]);
 
   const { user, setUser } = useUser();
