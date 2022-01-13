@@ -126,8 +126,6 @@ describe('Index PG', () => {
     cy.task('seed', { skipUser: true, skipCode: true });
     cy.login(user);
     cy.visit(`/?c=apc&code=${codes[1].id}`);
-    cy.get('p.loading').should('be.visible');
-    cy.get('h2.loading').should('be.visible');
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);
     cy.url().should('contain', `/join?c=apc&code=${codes[1].id}`);
     cy.get('p.error').should('be.visible').and('contain', 'used was invalid');
