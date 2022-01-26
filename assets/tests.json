@@ -137,5 +137,19 @@
       "Asks to find the limit as x approaches -1 for h(4) / 4ln(2 + x) where h(x) is an area function in terms of f(t). Specifically, h(x) = integral of f(t) where the top is 3x bottom is -3. I fucked this one up; you have to use derivatives to evaluate the limit because the first time you plug in -1, you get an answer in terms of 0 / 0 which is indefinite. So, you have to use the derivative of h(4) (which uses the chain rule that I forgot about) and the derivative of 4ln(2 + x).",
       "Last question was about an antiderivative G(x) of f(t)—unrelated to the f(t) depicted in the previous question’s graph—where G(2) = -7 and thus what is G(4). The options included -7 + f'(4), the definitive integral of f(t) where the top limit is 4 and the bottom limit is 2 + -7 (I said this was the correct answer), etc."
     ]
+  },
+  {
+    "id": 10,
+    "course": "ap-psych",
+    "name": "6.4 Quiz: Mod 47 and 51",
+    "date": "2022-01-26T07:00:00.000Z",
+    "difficulty": "easy; all questions on Quizlet",
+    "content": [
+      "Their marital relationship will improve",
+      "Quickly learning the process of developing a mobile app for an Internet-based magazine",
+      "cross-sectional",
+      "Decrease in sex hormones in late adulthood",
+      "integrity versus despair"
+    ]
   }
 ]
