@@ -151,5 +151,62 @@
       "Decrease in sex hormones in late adulthood",
       "integrity versus despair"
     ]
+  },
+  {
+    "id": 11,
+    "course": "ap-psych",
+    "name": "6.1 Quiz: Mod 42-44",
+    "date": "2022-01-10T07:00:00.000Z",
+    "difficulty": "easy; all questions on Quizlet",
+    "content": [
+      "Assimilation",
+      "Fetal alcohol syndrome",
+      "theory of mind",
+      "formal operational",
+      "object permanence",
+      "the ages of onset for many cognitive milestones occur earlier than originally established",
+      "preoperational",
+      "Lev Vygotsky’s social learning theory, because it includes the concept of zone of proximal development",
+      "Habituation",
+      "Jean Piaget’s theory of conservation"
+    ]
+  },
+  {
+    "id": 12,
+    "course": "ap-psych",
+    "name": "6.2 Quiz: Mod 45, 46, and 50",
+    "date": "2022-01-17T07:00:00.000Z",
+    "difficulty": "easy; all questions on Quizlet",
+    "content": [
+      "Authoritarian",
+      "express happiness when the mother returned to the room",
+      "gender-role development",
+      "temperament",
+      "a combination of genetics, prenatal hormones, and social influences",
+      "contact comfort was the primary basis of attachment for the infant monkeys",
+      "societal norms and other environmental factors",
+      "Presence of ovaries",
+      "androgyny",
+      "Konrad Lorenz"
+    ]
+  },
+  {
+    "id": 13,
+    "course": "ap-psych",
+    "name": "6.3 Quiz: Mod 48 and 49",
+    "date": "2022-01-23T07:00:00.000Z",
+    "difficulty": "easy; all questions on Quizlet",
+    "content": [
+      "Erik Erikson",
+      "Each stage in the life span presents the task of resolving a different psychosocial conflict.",
+      "preconventional",
+      "Mohammed has dated a few people but has not been very successful, so he has decided to give up on dating.",
+      "He is going through the process of exploring his identity that many adolescents experience.",
+      "Bobby is still developing new neural connections in his brain.",
+      "Competence vs. Inferiority",
+      "Postconventional",
+      "Having people solve moral dilemmas",
+      "rational abstract principles, whereas the moral reasoning of females is based on relationships and the social context"
+    ]
   }
 ]
