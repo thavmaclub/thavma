@@ -1,3 +1,14 @@
+export interface Assessment {
+  id: number;
+  questions: Question[];
+}
+
+export interface Question {
+  question: string;
+  answers: string[];
+  answer?: number;
+}
+
 export interface Course {
   id: string;
   name: string;

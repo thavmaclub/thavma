@@ -3,6 +3,16 @@ drop table codes cascade;
 drop table users cascade;
 drop domain phone cascade;
 
+create type question as (
+  "question" text,
+  "answers" text[],
+  "answer" int
+);
+create table assessments (
+  "id" bigint generated always as identity primary key,
+  "questions" question[] not null
+);
+
 create table codes (
   "id" text unique not null primary key,
   "creator" uuid not null references auth.users(id),
