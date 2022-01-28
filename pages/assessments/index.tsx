@@ -16,13 +16,23 @@ export default function AssessmentsPage({ assessments }: Props): JSX.Element {
     <Page name='Assessments'>
       <main>
         <Header />
-        {(assessments || []).map((assessment) => (
-          <Link href={`/assessments/${assessment.id}`}>
-            <a>Assessment {assessment.id}</a>
-          </Link>
-        ))}
+        <ul className='wrapper'>
+          {(assessments || []).map((assessment) => (
+            <li key={assessment.id}>
+              <Link href={`/assessments/${assessment.id}`}>
+                <a>Assessment {assessment.id}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
         <style jsx>{`
-
+          main :global(a) {
+            color: inherit;
+          }
+          
+          li {
+            margin: 12px 0;
+          }
         `}</style>
       </main>
     </Page>

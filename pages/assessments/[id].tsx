@@ -36,36 +36,59 @@ export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
     <Page name='Assessment'>
       <main>
         <Header />
-        <h2>Assessment {assessment.id}</h2>
-        {assessment.questions.map((question, questionIdx) => (
-          <section key={questionIdx}>
-            <p>{question.question}</p>
-            <ul>
-              {question.answers.map((answer, answerIdx) => (
-                <li key={answerIdx}>
-                  <input
-                    id={`${questionIdx}-${answerIdx}`}
-                    type='radio'
-                    value={answerIdx}
-                    className='radio'
-                    checked={question.answer === answerIdx}
-                    onChange={() => setAssessment((prev) => {
-                      console.log('Prev:', prev);
-                      const updated = rfdc()(prev);
-                      console.log('Updated:', updated);
-                      updated.questions[questionIdx].answer = answerIdx;
-                      console.log('Updated question:', updated.questions[questionIdx]);
-                      console.log('Updated:', updated);
-                      return updated;
-                    })}
-                  />
-                  <label htmlFor={`${questionIdx}-${answerIdx}`}>{answer}</label>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+        <article className='wrapper'>
+          <h2>Assessment {assessment.id}</h2>
+          {assessment.questions.map((question, questionIdx) => (
+            <section key={questionIdx}>
+              <p><b>{questionIdx + 1}. </b>{question.question}</p>
+              <ul>
+                {question.answers.map((answer, answerIdx) => (
+                  <li key={answerIdx}>
+                    <input
+                      id={`${questionIdx}-${answerIdx}`}
+                      type='radio'
+                      value={answerIdx}
+                      className='radio'
+                      checked={question.answer === answerIdx}
+                      onChange={() => setAssessment((prev) => {
+                        console.log('Prev:', prev);
+                        const updated = rfdc()(prev);
+                        console.log('Updated:', updated);
+                        updated.questions[questionIdx].answer = answerIdx;
+                        console.log('Updated question:', updated.questions[questionIdx]);
+                        console.log('Updated:', updated);
+                        return updated;
+                      })}
+                    />
+                    <label htmlFor={`${questionIdx}-${answerIdx}`}>{answer}</label>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </article>
         <style jsx>{`
+          p {
+            margin: 0 0 8px;
+          }
+
+          ul {
+            margin: 0;
+            padding: 0;
+          }
+          
+          li {
+            list-style: none;
+            margin: 4px 0;
+          }
+          
+          label {
+            margin-left: 8px;
+          }
+
+          section {
+            margin: 0 0 24px;
+          }
         `}</style>
       </main>
     </Page>
