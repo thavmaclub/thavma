@@ -2,7 +2,7 @@
 
 import { ParsedUrlQuery } from 'querystring';
 
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useEffect, useState } from 'react';
 import rfdc from 'rfdc';
 
@@ -99,15 +99,13 @@ interface Query extends ParsedUrlQuery {
   id: string;
 }
 
-export const getStaticProps: GetStaticProps<Props, Query> = async (ctx: GetStaticPropsContext<Query>) => {
-  if (!ctx.params) throw new Error('Cannot get static props without params');
-  const { data, error } = await supabase.from<Assessment>('assessments').select().eq('id', Number(ctx.params.id));
-  if (error || !data?.length) return { notFound: true, revalidate: 1 };
-  return { props: { assessment: data[0] }, revalidate: 1 };
-};
-
-export const getStaticPaths: GetStaticPaths<Query> = async () => {
-  const { data } = await supabase.from<Assessment>('assessments').select();
-  const ids = (data || []).map((assessment) => assessment.id.toString());
-  return { paths: ids.map((id) => ({ params: { id } })), fallback: true };
+export const getServerSideProps: GetServerSideProps<Props, Query> = 
+  async (ctx: GetServerSidePropsContext<Query>) => {
+  if (!ctx.params) throw new Error('Cannot get page props without params');
+  const { data, error } = await supabase
+    .from<Assessment>('assessments')
+    .select()
+    .eq('id', Number(ctx.params.id));
+  if (error || !data?.length) return { notFound: true };
+  return { props: { assessment: data[0] } };
 };

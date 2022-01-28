@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 
 import Header from 'components/header';
@@ -39,10 +39,10 @@ export default function AssessmentsPage({ assessments }: Props): JSX.Element {
   );
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const { data } = await supabase
     .from<Assessment>('assessments')
     .select()
     .order('id');
-  return { props: { assessments: data ?? [] }, revalidate: 1 };
+  return { props: { assessments: data ?? [] } };
 };
