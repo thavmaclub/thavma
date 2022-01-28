@@ -40,6 +40,9 @@ export default function AssessmentsPage({ assessments }: Props): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { data } = await supabase.from<Assessment>('assessments').select();
+  const { data } = await supabase
+    .from<Assessment>('assessments')
+    .select()
+    .order('id');
   return { props: { assessments: data ?? [] }, revalidate: 1 };
 };
