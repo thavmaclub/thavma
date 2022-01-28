@@ -8,7 +8,7 @@ import { Assessment } from 'lib/model';
 import supabase from 'lib/supabase';
 
 interface Props {
-  assessments: Assessment[];
+  assessments?: Assessment[];
 }
 
 export default function AssessmentsPage({ assessments }: Props): JSX.Element {
@@ -16,7 +16,7 @@ export default function AssessmentsPage({ assessments }: Props): JSX.Element {
     <Page name='Assessments'>
       <main>
         <Header />
-        {assessments.map((assessment) => (
+        {(assessments || []).map((assessment) => (
           <Link href={`/assessments/${assessment.id}`}>
             <a>Assessment {assessment.id}</a>
           </Link>

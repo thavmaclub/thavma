@@ -12,8 +12,12 @@ import Page from 'components/page';
 import { Assessment } from 'lib/model';
 import supabase from 'lib/supabase';
 
-export default function AssessmentPage(props: Assessment): JSX.Element {
-  const [assessment, setAssessment] = useState<Assessment>(props);
+interface Props {
+  assessment?: Assessment;
+}
+
+export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
+  const [assessment, setAssessment] = useState(d || { id: 0, questions: [] });
   useEffect(() => {
     async function update(): Promise<void> {
       const { data, error } = await supabase
@@ -72,11 +76,11 @@ interface Query extends ParsedUrlQuery {
   id: string;
 }
 
-export const getStaticProps: GetStaticProps<Assessment, Query> = async (ctx: GetStaticPropsContext<Query>) => {
+export const getStaticProps: GetStaticProps<Props, Query> = async (ctx: GetStaticPropsContext<Query>) => {
   if (!ctx.params) throw new Error('Cannot get static props without params');
   const { data, error } = await supabase.from<Assessment>('assessments').select().eq('id', Number(ctx.params.id));
   if (error || !data?.length) return { notFound: true, revalidate: 1 };
-  return { props: data[0], revalidate: 1 };
+  return { props: { assessment: data[0] }, revalidate: 1 };
 };
 
 export const getStaticPaths: GetStaticPaths<Query> = async () => {
