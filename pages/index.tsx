@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import BookIcon from 'components/icons/book';
 import DarkIcon from 'components/icons/dark';
+import Form from 'components/form';
 import Header from 'components/header';
 import LightIcon from 'components/icons/light';
 import Page from 'components/page';
@@ -156,7 +157,7 @@ export default function IndexPage(): JSX.Element {
     <Page name='Index'>
       <main>
         <Header />
-        <div className='form wrapper'>
+        <Form>
           <Select
             options={[{ value: 'gunn', label: 'Gunn High School [beta]' }]}
             label='School'
@@ -219,7 +220,7 @@ export default function IndexPage(): JSX.Element {
               error={error}
             />
           )}
-        </div>
+        </Form>
         {!access && Array(5).fill(null).map((_, idx) => <TestSection key={idx} />)}
         {access && (
           <TestSection
@@ -275,54 +276,6 @@ export default function IndexPage(): JSX.Element {
          
           main :global(a) {
             color: inherit;
-          }
-
-          .form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 24px auto;
-          }
-
-          .form > :global(form) {
-            margin-top: -${12 * 0.875 * 1.5 + 6}px;
-            margin-left: var(--margin);
-            flex: 1.5 1 0;
-          }
-
-          .form > :global(form button) {
-            width: 60px;
-          }
-
-          .form > :global(label) {
-            flex: 1 1 0;
-            margin-left: var(--margin);
-          }
-
-          .form > :global(label:first-child) {
-            margin-left: 0;
-          }
-
-          @media (max-width: 600px) {
-            .form {
-              flex-direction: column;
-            }
-
-            .form > :global(form) {
-              margin-left: 0;
-              margin-top: var(--margin);
-              width: 100%;
-            }
-
-            .form > :global(label) {
-              margin-left: 0;
-              margin-top: var(--margin);
-              width: 100%;
-            }
-
-            .form > :global(label:first-child) {
-              margin-top: 0;
-            }
           }
         `}</style>
       </main>
