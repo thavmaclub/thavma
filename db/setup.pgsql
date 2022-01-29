@@ -10,8 +10,11 @@ create type question as (
 );
 create table assessments (
   "id" bigint generated always as identity primary key,
+  "name" text not null,
+  "pwd" text not null,
   "questions" question[] not null
 );
+alter publication supabase_realtime add table assessments;
 
 create table codes (
   "id" text unique not null primary key,

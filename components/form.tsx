@@ -22,10 +22,6 @@ export default function Form({ children }: FormProps): JSX.Element {
           flex: 1.5 1 0;
         }
 
-        div > :global(form button) {
-          width: 60px;
-        }
-
         div > :global(label) {
           flex: 1 1 0;
           margin-left: var(--margin);

@@ -249,6 +249,10 @@ export default function IndexPage(): JSX.Element {
           main :global(a) {
             color: inherit;
           }
+
+          main :global(form button) {
+            width: 60px;
+          }
         `}</style>
       </main>
     </Page>

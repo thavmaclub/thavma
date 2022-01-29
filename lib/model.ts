@@ -1,5 +1,7 @@
 export interface Assessment {
   id: number;
+  name: string;
+  pwd: string;
   questions: Question[];
 }
 
