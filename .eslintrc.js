@@ -40,7 +40,7 @@ module.exports = {
     // private async someAsyncSideEffectFunction(): Promise<void> {
     //   ...do async side effect stuff
     // }
-    'no-void': ['error', { allowAsStatement: true }],
+    'no-void': ['warn', { allowAsStatement: true }],
 
     // Allow for skipping code paths by returning undefined values or callbacks.
     // @see {@link https://eslint.org/docs/rules/consistent-return}
