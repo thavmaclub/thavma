@@ -5,21 +5,18 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 
 import BookIcon from 'components/icons/book';
-import DarkIcon from 'components/icons/dark';
 import Form from 'components/form';
 import Header from 'components/header';
-import LightIcon from 'components/icons/light';
 import Page from 'components/page';
 import PinIcon from 'components/icons/pin';
 import Select from 'components/select';
-import SystemIcon from 'components/icons/system';
 import TextField from 'components/textfield';
+import ThemeSelect from 'components/theme-select';
 
 import { Test } from 'lib/model';
 import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
-import { useTheme } from 'lib/context/theme';
 import { useUser } from 'lib/context/user';
 
 import courses from 'assets/courses.json';
@@ -113,7 +110,6 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
 
 export default function IndexPage(): JSX.Element {
   const { access } = useAccess();
-  const { theme, setTheme } = useTheme();
   const { push, prefetch, replace, query: { s, c } } = useRouter();
   const school = useMemo(() => typeof s === 'string' ? s : 'gunn', [s]);
   const course = useMemo(() => typeof c === 'string' ? c : courses[0].id, [c]);
@@ -179,31 +175,7 @@ export default function IndexPage(): JSX.Element {
               return push(`/?s=${school}&c=${v}`, undefined, { shallow: true });
             }}
           />
-          <Select
-            value={theme}
-            onChange={(v) => {
-              window.analytics?.track('Theme Selected', { theme: v });
-              setTheme(v);
-            }}
-            label='Theme'
-            options={[
-              {
-                value: 'system',
-                label: 'System',
-                icon: <SystemIcon />,
-              },
-              {
-                value: 'dark',
-                label: 'Dark',
-                icon: <DarkIcon />,
-              },
-              {
-                value: 'light',
-                label: 'Light',
-                icon: <LightIcon />,
-              },
-            ]}
-          />
+          <ThemeSelect />
           {!user && (
             <TextField
               id='phone'
