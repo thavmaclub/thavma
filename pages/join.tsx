@@ -1,8 +1,8 @@
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import Form from 'components/form';
 import Page from 'components/page';
+import TextField from 'components/textfield';
 
 import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
@@ -52,7 +52,7 @@ export default function JoinPage(): JSX.Element {
           <header>
             <h1>T H A V M A</h1>
           </header>
-          <Form
+          <TextField
             id='code'
             label='[beta][invite only]'
             loading={loading}

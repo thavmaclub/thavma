@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import cn from 'classnames';
 
-export interface FormProps {
+export interface TextFieldProps {
   error?: boolean;
   loading?: boolean;
   label?: string;
@@ -14,7 +14,7 @@ export interface FormProps {
   onSubmit: (evt: FormEvent) => unknown;
 }
 
-export default function Form({ error, loading, label, type = 'text', id, value, setValue, button, placeholder, onSubmit }: FormProps): JSX.Element {
+export default function TextField({ error, loading, label, type = 'text', id, value, setValue, button, placeholder, onSubmit }: TextFieldProps): JSX.Element {
   return (
     <form onSubmit={onSubmit}>
       {label && <label htmlFor={id} className={cn({ error, disabled: loading })}>{label}</label>}

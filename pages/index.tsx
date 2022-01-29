@@ -6,13 +6,13 @@ import { useRouter } from 'next/router';
 
 import BookIcon from 'components/icons/book';
 import DarkIcon from 'components/icons/dark';
-import Form from 'components/form';
 import Header from 'components/header';
 import LightIcon from 'components/icons/light';
 import Page from 'components/page';
 import PinIcon from 'components/icons/pin';
 import Select from 'components/select';
 import SystemIcon from 'components/icons/system';
+import TextField from 'components/textfield';
 
 import { Test } from 'lib/model';
 import supabase from 'lib/supabase';
@@ -204,7 +204,7 @@ export default function IndexPage(): JSX.Element {
             ]}
           />
           {!user && (
-            <Form
+            <TextField
               id='phone'
               label='[get invite codes]'
               value={phone}
