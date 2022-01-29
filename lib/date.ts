@@ -1,4 +1,4 @@
-export default function dateString(...args: Parameters<typeof Date>): string {
+export default function dateString(...args: ConstructorParameters<typeof Date>): string {
   return new Date(...args).toLocaleString('en', {
     weekday: 'long',
     month: 'numeric',
