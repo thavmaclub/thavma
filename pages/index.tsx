@@ -14,6 +14,7 @@ import TextField from 'components/textfield';
 import ThemeSelect from 'components/theme-select';
 
 import { Test } from 'lib/model';
+import dateString from 'lib/date';
 import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
@@ -33,12 +34,7 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
       <header className='wrapper'>
         <h2 className={cn({ loading })}>{!loading && name}</h2>
         <p className={cn({ loading })}>
-          {!loading && date && `${new Date(date).toLocaleString('en', {
-            weekday: 'long',
-            month: 'numeric',
-            day: 'numeric',
-            year: 'numeric',
-          })}${difficulty ? ` - ${difficulty}` : ''}`}
+          {!loading && date && `${dateString(date)}${difficulty ? ` - ${difficulty}` : ''}`}
         </p>
       </header>
       {!children && (

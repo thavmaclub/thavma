@@ -1,7 +1,9 @@
-drop function code_exists cascade;
-drop table codes cascade;
-drop table users cascade;
-drop domain phone cascade;
+drop function code_exists;
+drop table assessments;
+drop type question;
+drop table codes;
+drop table users;
+drop domain phone;
 
 create type question as (
   "question" text,
@@ -12,6 +14,7 @@ create table assessments (
   "id" bigint generated always as identity primary key,
   "name" text not null,
   "pwd" text not null,
+  "date" timestamptz not null,
   "questions" question[] not null
 );
 alter publication supabase_realtime add table assessments;

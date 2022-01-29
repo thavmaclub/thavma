@@ -2,6 +2,7 @@ export interface Assessment {
   id: number;
   name: string;
   pwd: string;
+  date: Date;
   questions: Question[];
 }
 

@@ -10,6 +10,7 @@ import TextField from 'components/textfield';
 import ThemeSelect from 'components/theme-select';
 
 import { Assessment } from 'lib/model';
+import dateString from 'lib/date';
 import supabase from 'lib/supabase';
 import useNProgress from 'lib/nprogress';
 
@@ -25,7 +26,7 @@ export default function AssessmentsPage(): JSX.Element {
     window.analytics?.track('Assessment Submitted', { name });
     const { error: e } = await supabase
       .from<Assessment>('assessments')
-      .insert({ name, pwd: nanoid(), questions: [] });
+      .insert({ name, pwd: nanoid(), date: new Date(), questions: [] });
     setLoading(false);
     if (e) {
       setError(true);
@@ -41,7 +42,8 @@ export default function AssessmentsPage(): JSX.Element {
     void (async () => {
       const { data } = await supabase
         .from<Assessment>('assessments')
-        .select();
+        .select()
+        .order('date', { ascending: false });
       setAssessments((prev) => data ?? prev);
     })();
   }, []);
@@ -89,7 +91,10 @@ export default function AssessmentsPage(): JSX.Element {
             <li>
               <dl className='wrapper' key={assessment.id}>
                 <dt>name</dt>
-                <dd>{assessment.name}</dd>
+                <dd>
+                  {assessment.name}<br />
+                  <span>{dateString(assessment.date)}</span>
+                </dd>
                 <dt>link</dt>
                 <dd><Link href={`/assessments/${assessment.id}`}><a>thavma.club/assessments/{assessment.id}</a></Link></dd>
                 <dt>pwd</dt>
@@ -125,6 +130,11 @@ export default function AssessmentsPage(): JSX.Element {
 
           dd {
             margin: 0;
+          }
+
+          dd span {
+            text-transform: lowercase;
+            color: var(--accents-5);
           }
         `}</style>
       </main>
