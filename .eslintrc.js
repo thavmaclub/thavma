@@ -108,6 +108,14 @@ module.exports = {
     // @see {@link https://git.io/JnsaY}
     'react/require-default-props': 'off',
 
+    // I use index keys when rendering fallback loading screens where:
+    // 1. the list and items are static–they are not computed and do not change;
+    // 2. the items in the list have no ids;
+    // 3. the list is never reordered or filtered.
+    // @see {@link https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md}
+    // @see {@link https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318}
+    'react/no-array-index-key': 'warn',
+
     // Configure `jsx-a11y` to recognize RMWC input components as controls.
     // {@link https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md#case-my-label-and-input-components-are-custom-components}
     'jsx-a11y/label-has-associated-control': [
