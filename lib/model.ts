@@ -1,5 +1,6 @@
 export interface Assessment {
   id: number;
+  creator: string;
   name: string;
   pwd: string;
   date: Date;

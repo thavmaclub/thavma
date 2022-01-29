@@ -1,10 +1,9 @@
-/* eslint-disable react/no-array-index-key */
-
 import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
 import BookIcon from 'components/icons/book';
+import Empty from 'components/empty';
 import Form from 'components/form';
 import Header from 'components/header';
 import Page from 'components/page';
@@ -65,10 +64,6 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
           height: 24px;
         }
 
-        .loading {
-          border-radius: var(--radius);
-        }
-
         p {
           text-transform: lowercase;
           color: var(--accents-5);
@@ -105,19 +100,11 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
 }
 
 export default function IndexPage(): JSX.Element {
-  const { access } = useAccess();
-  const { push, prefetch, replace, query: { s, c } } = useRouter();
+  const { access } = useAccess({ required: true });
+  const { push, query: { s, c } } = useRouter();
   const school = useMemo(() => typeof s === 'string' ? s : 'gunn', [s]);
   const course = useMemo(() => typeof c === 'string' ? c : courses[0].id, [c]);
  
-  useEffect(() => {
-    void prefetch('/join');
-  }, [prefetch]);
-  useEffect(() => {
-    if (access === false || typeof access === 'string') 
-      void replace(`/join${window.location.search}`);
-  }, [replace, access]);
-
   const { user, setUser } = useUser();
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
@@ -210,12 +197,12 @@ export default function IndexPage(): JSX.Element {
         {access && !tests.some((t) => t.course === course) && ( 
           <section>
             <div className='wrapper'>
-              <div className='empty'>
+              <Empty>
                 <p>
                   no contributions to show yet;<br />
                   dm test info to <a href='https://instagram.com/thavmaclub' target='_blank' rel='noopener noreferrer'>@thavmaclub</a>
                 </p>
-              </div>
+              </Empty>
             </div>
           </section>
         )}
@@ -223,23 +210,6 @@ export default function IndexPage(): JSX.Element {
           section {
             border-top: 1px solid var(--accents-2);
             padding: var(--margin) 0;
-          }
-         
-          .empty {
-            border: 1px dashed var(--accents-2);
-            border-radius: 4px;
-            color: var(--accents-3);
-            font-size: 1rem;
-            font-weight: 400;
-            position: relative;
-            text-align: center;
-            padding: 24px;
-            height: 100%;
-            min-height: 85vh; 
-            margin: 48px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
           }
          
           main :global(a) {

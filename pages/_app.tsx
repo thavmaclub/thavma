@@ -90,9 +90,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       setUser(data ? data[0] : undefined);
     }
   }, []);
-  const {
-    query: { code },
-  } = useRouter();
+  const { query: { code } } = useRouter();
   const getAccess = useCallback(async () => {
     const uid = supabase.auth.user()?.id;
     if (!uid && window.location.href.includes('#access')) {
@@ -210,6 +208,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
             }
 
             .loading {
+              border-radius: var(--radius);
               background-image: linear-gradient(
                 270deg,
                 var(--accents-1),
