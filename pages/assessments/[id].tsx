@@ -1,10 +1,7 @@
-/* eslint-disable react/no-array-index-key */
-
-import { ParsedUrlQuery } from 'querystring';
-
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useEffect, useState } from 'react';
+import cn from 'classnames';
 import rfdc from 'rfdc';
+import { useRouter } from 'next/router';
 
 import Header from 'components/header';
 import Page from 'components/page';
@@ -12,14 +9,24 @@ import Page from 'components/page';
 import { Assessment } from 'lib/model';
 import supabase from 'lib/supabase';
 
-interface Props {
-  assessment?: Assessment;
-}
+const clone = rfdc();
 
-export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
-  const [assessment, setAssessment] = useState(d || { id: 0, questions: [] });
+export default function AssessmentPage(): JSX.Element {
+  const { query } = useRouter();
+  const [assessment, setAssessment] = useState<Assessment>();
+  useEffect(() => {
+    void (async () => {
+      if (typeof query.id !== 'string') return console.warn('No query ID.');
+      const { data } = await supabase
+        .from<Assessment>('assessments')
+        .select()
+        .eq('id', query.id);
+      setAssessment((prev) => data ? data[0] : prev);
+    })();
+  }, [query.id]);
   useEffect(() => {
     async function update(): Promise<void> {
+      if (!assessment) return console.warn('No assessment to update.');
       const { data, error } = await supabase
         .from<Assessment>('assessments')
         .update({ questions: assessment.questions })
@@ -37,8 +44,10 @@ export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
       <main>
         <Header />
         <article className='wrapper'>
-          <h2>Assessment {assessment.id}</h2>
-          {assessment.questions.map((question, questionIdx) => (
+          <h2 className={cn({ loading: !assessment })}>
+            {assessment?.name}
+          </h2>
+          {assessment?.questions.map((question, questionIdx) => (
             <section key={questionIdx}>
               <p><b>{questionIdx + 1}. </b>{question.question}</p>
               <ul>
@@ -51,8 +60,9 @@ export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
                       className='radio'
                       checked={question.answer === answerIdx}
                       onChange={() => setAssessment((prev) => {
+                        if (!prev) return prev;
                         console.log('Prev:', prev);
-                        const updated = rfdc()(prev);
+                        const updated = clone(prev);
                         console.log('Updated:', updated);
                         updated.questions[questionIdx].answer = answerIdx;
                         console.log('Updated question:', updated.questions[questionIdx]);
@@ -94,18 +104,3 @@ export default function AssessmentPage({ assessment: d }: Props): JSX.Element {
     </Page>
   );
 }
-
-interface Query extends ParsedUrlQuery {
-  id: string;
-}
-
-export const getServerSideProps: GetServerSideProps<Props, Query> = 
-  async (ctx: GetServerSidePropsContext<Query>) => {
-  if (!ctx.params) throw new Error('Cannot get page props without params');
-  const { data, error } = await supabase
-    .from<Assessment>('assessments')
-    .select()
-    .eq('id', Number(ctx.params.id));
-  if (error || !data?.length) return { notFound: true };
-  return { props: { assessment: data[0] } };
-};
