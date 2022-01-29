@@ -176,7 +176,12 @@ export default function AssessmentsPage(): JSX.Element {
           {access && loaded && !assessments.length && (
             <li>
               <div className='wrapper'>
-                <Empty>no assessments to show yet</Empty>
+                <Empty>
+                  <p>
+                    no assessments to show yet;<br />
+                    create one with the form above 
+                  </p>
+                </Empty>
               </div>
             </li>
           )}
