@@ -22,7 +22,12 @@ let env = {};
   env = { ...env, ...dotenv.config({ path: dotfile }).parsed };
 });
 
-type Overrides = { skipCode?: boolean; skipCodes?: boolean; skipUser?: boolean; skipInviter?: boolean };
+type Overrides = {
+  skipCode?: boolean;
+  skipCodes?: boolean;
+  skipUser?: boolean;
+  skipInviter?: boolean;
+};
 
 declare global {
   namespace Cypress {
@@ -43,8 +48,13 @@ export default function plugins(
 ): Cypress.ConfigOptions {
   codecov(on, config);
   on('task', {
-    async seed({ skipCode, skipCodes, skipUser, skipInviter }: Overrides = {}): Promise<null> {
-      const { error: e} = await supabase.from<Code>('codes').delete();
+    async seed({
+      skipCode,
+      skipCodes,
+      skipUser,
+      skipInviter,
+    }: Overrides = {}): Promise<null> {
+      const { error: e } = await supabase.from<Code>('codes').delete();
       if (e) throw new Error(`Error deleting codes: ${e.message}`);
       if (!skipCodes) {
         const { error } = await supabase
@@ -55,17 +65,28 @@ export default function plugins(
       const { error: err } = await supabase.from<User>('users').delete();
       if (err) throw new Error(`Error deleting users: ${err.message}`);
       if (!skipUser) {
-        const { error } = await supabase.from<User>('users').insert({ id: user.id, phone: user.phone });
+        const { error } = await supabase
+          .from<User>('users')
+          .insert({ id: user.id, phone: user.phone });
         if (error) throw new Error(`Error inserting user: ${error.message}`);
       }
       if (!skipInviter) {
-        const { error } = await supabase.from<User>('users').insert({ id: inviter.id, phone: inviter.phone });
+        const { error } = await supabase
+          .from<User>('users')
+          .insert({ id: inviter.id, phone: inviter.phone });
         if (error) throw new Error(`Error inserting inviter: ${error.message}`);
       }
-      const { error: errr } = await supabase.from<Assessment>('assessments').delete();
+      const { error: errr } = await supabase
+        .from<Assessment>('assessments')
+        .delete();
       if (errr) throw new Error(`Error deleting assessments: ${errr.message}`);
       return null;
     },
+  });
+  on('before:browser:launch', (browser, launchOptions) => {
+    if (browser.family === 'firefox')
+      launchOptions.extensions.push(path.resolve(__dirname, '../../ext'));
+    return launchOptions;
   });
   return { ...config, env: { ...config.env, ...env } };
 }

@@ -12,20 +12,86 @@ describe('Assessments PG', () => {
 
   it('shows fallback during login', () => {
     cy.seed({ skipUser: true, skipCode: true });
-    cy.visit(`/assessments#access_token=l0R3m_1psUm-d035Nt_w0rK?code=${codes[1].id}`);
+    cy.visit(
+      `/assessments#access_token=l0R3m_1psUm-d035Nt_w0rK?code=${codes[1].id}`
+    );
     cy.get('dt.loading').should('be.visible');
     cy.get('dd.loading').should('be.visible');
     cy.percySnapshot('Assessments Fallback');
   });
 
-  it('creates and shows assessments', () => {
-    cy.intercept('POST', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`).as('create-assessment');
-    cy.intercept('GET', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments?select=*&order=date.desc.nullslast`).as('get-assessments');
+  it('prompts to install extension', () => {
+    cy.intercept(
+      'POST',
+      `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
+    ).as('create-assessment');
     cy.seed();
     cy.login(user);
     cy.visit('/assessments', {
       onBeforeLoad(win: Window) {
-        cy.stub(win, 'postMessage');        
+        cy.stub(win, 'postMessage');
+      },
+    });
+    cy.get('input[placeholder="ex: chapter 6 psych test"]')
+      .as('assessment-input')
+      .type(`${assessment.name}{enter}`)
+      .should('have.value', assessment.name)
+      .and('be.disabled')
+      .and('have.css', 'cursor', 'wait')
+      .loading();
+    cy.wait('@create-assessment').as('assessment');
+    cy.get('@assessment').its('response.statusCode').should('eq', 201);
+    cy.get('@assessment')
+      .its('response.body')
+      .then((body: Assessment[]) => {
+        cy.window()
+          .its('postMessage')
+          .should('be.calledOnce')
+          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+        cy.contains('no assessments to show').should('not.exist');
+        cy.contains('dd', assessment.name).should('be.visible');
+        cy.contains('.dialog', 'install THAVMA’s Firefox extension')
+          .should('be.visible')
+          .within(() => {
+            cy.contains('a', 'install Firefox')
+              .should('be.visible')
+              .and(
+                'have.attr',
+                'href',
+                'https://mozilla.org/firefox/download/thanks'
+              );
+            cy.contains('a', 'install extension')
+              .should('be.visible')
+              .and('have.attr', 'href', '/thavma.xpi');
+            cy.contains('button', 'verify installation')
+              .should('be.visible')
+              .click();
+          });
+        cy.window()
+          .its('postMessage')
+          .should('be.calledTwice')
+          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+        cy.get('.dialog').should('be.visible');
+        cy.percySnapshot('Assessments Install');
+      });
+  });
+
+  it('creates and shows assessments', () => {
+    cy.intercept(
+      'POST',
+      `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
+    ).as('create-assessment');
+    cy.intercept(
+      'GET',
+      `${
+        Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string
+      }/rest/v1/assessments?select=*&order=date.desc.nullslast`
+    ).as('get-assessments');
+    cy.seed();
+    cy.login(user);
+    cy.visit('/assessments', {
+      onBeforeLoad(win: Window) {
+        cy.spy(win, 'postMessage');
       },
     });
     cy.get('dt.loading').should('be.visible');
@@ -59,17 +125,21 @@ describe('Assessments PG', () => {
         cy.window()
           .its('postMessage')
           .should('be.calledOnce')
-          .and('be.calledWithExactly', body[0].id);
+          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
       });
     cy.contains('no assessments to show').should('not.exist');
     cy.contains('dd', assessment.name).should('be.visible');
+    cy.contains('.dialog', 'you’re almost setup').should('be.visible');
+    cy.percySnapshot('Assessments Agree');
+    cy.contains('button', 'i agree not to raise my test average').click();
+    cy.get('.dialog').should('not.exist');
     cy.get('select[aria-label="Theme"]')
-      .as('theme-select')  
+      .as('theme-select')
       .should('have.value', 'system')
       .select('dark');
-    cy.percySnapshot('Index Dark');
+    cy.percySnapshot('Assessments Dark');
     cy.get('@theme-select').select('light');
-    cy.percySnapshot('Index Light');
+    cy.percySnapshot('Assessments Light');
     cy.get('@theme-select').select('system');
     cy.seed();
     cy.contains('dd').should('not.exist');
