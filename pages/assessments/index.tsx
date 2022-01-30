@@ -251,7 +251,7 @@ export default function AssessmentsPage(): JSX.Element {
         {ext === true && assessment && (
           <div className='dialog'>
             <article>
-              <p>you’re almost all set; now, simply:</p>
+              <p>you’re almost setup; now, simply:</p>
               <ol>
                 <li>send your test link and pwd to a friend</li>
                 <li>
