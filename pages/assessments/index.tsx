@@ -214,7 +214,7 @@ export default function AssessmentsPage(): JSX.Element {
         {ext === true && assessment && (
           <div className='dialog'>
             <article>
-              <p>you’re almost set; now, simply:</p>
+              <p>you’re almost all set; now, simply:</p>
               <ol>
                 <li>send your test link and pwd to a friend</li>
                 <li>click on THAVMA’s extension icon (the black box in the top right of Firefox) <b>a single time</b> (clicking multiple times can cause issues) after Schoology’s test questions have loaded</li>
@@ -262,6 +262,7 @@ export default function AssessmentsPage(): JSX.Element {
             width: 100%;
             transform: translateY(-50%);
             pointer-events: none;
+            padding: 12px;
           }
 
           .dialog article {
@@ -272,11 +273,19 @@ export default function AssessmentsPage(): JSX.Element {
             box-shadow: var(--shadow-large);
             padding: 48px;
             max-width: 500px;
-            margin: 24px auto;
+            margin: 0 auto;
           }
 
           .dialog article p {
             margin: 0;
+          }
+
+          .dialog article ol {
+            margin: 24px 0;
+          }
+
+          .dialog article li {
+            margin: 12px 0;
           }
 
           .dialog .buttons {
