@@ -9,6 +9,7 @@
     "dev": "next dev",
     "dev:cy": "cypress open",
     "build": "next build",
+    "build:ext": "web-ext build -s ext -a ext/build -o",
     "start": "next start",
     "start:cy": "percy exec -- cypress run",
     "lint": "next lint",
