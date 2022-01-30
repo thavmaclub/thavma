@@ -1,5 +1,5 @@
 console.log('Installing background extension script...');
-const url = 'http://localhost:3000';
+const url = 'https://thavma.club';
 browser.browserAction.onClicked.addListener(() => {
   console.log('Browser action clicked...');
   browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {

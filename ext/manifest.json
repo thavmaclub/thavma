@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Schoology",
-  "version": "0.0",
-  "description": "Firefox extension and web app to hack Schoology Learnosity assessments.",
+  "name": "THAVMA",
+  "version": "0.0.0",
+  "description": "Firefox extension to hack Schoology Learnosity assessments.",
   "homepage_url": "https://github.com/t1v1/schoology#readme",
   "permissions": [
     "http://localhost/api/assessments/*",
