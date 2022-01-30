@@ -53,18 +53,19 @@ export default function TextField({ error, loading, label, type = 'text', id, va
 
         @keyframes shake {
           0% {
-            transform:translateX(calc(0 - 0%))
+            transform: translateX(calc(0 - 0%));
           }
           33% {
-            animation-timing-function:cubic-bezier(0.5, 0, 0.701732, 0.495819);
-            transform:translateX(calc(4% - 0%))
+            animation-timing-function: cubic-bezier(0.5, 0, 0.701732, 0.495819);
+            transform: translateX(calc(4% - 0%));
           }
           66% {
-            animation-timing-function:cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
-            transform:translateX(calc(-4% - 0%))
+            animation-timing-function:
+              cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
+            transform: translateX(calc(-4% - 0%));
           }
           100% {
-            transform:translateX(calc(0 - 0%))
+            transform: translateX(calc(0 - 0%));
           }
         }
 
