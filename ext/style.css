@@ -1,0 +1,20 @@
+#t1v1 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 8px;
+  font-family: sans-serif;
+  font-weight: normal;
+  line-height: 1;
+  color: #666;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 2px;
+  padding: 2px;
+  z-index: 100000000;
+  opacity: 0;
+}
+
+#t1v1:hover {
+  opacity: 1;
+}

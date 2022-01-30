@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg870"
+   width="1000"
+   height="1000"
+   viewBox="0 0 999.99997 999.99997"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:export-filename="/home/nchiang/repos/schoology/icons/96.png"
+   inkscape:export-xdpi="9.2159996"
+   inkscape:export-ydpi="9.2159996"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs874" />
+  <sodipodi:namedview
+     id="namedview872"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     width="1000px"
+     inkscape:zoom="0.3580078"
+     inkscape:cx="938.52705"
+     inkscape:cy="722.05132"
+     inkscape:window-width="1584"
+     inkscape:window-height="820"
+     inkscape:window-x="8"
+     inkscape:window-y="35"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g876" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g876">
+    <circle
+       style="fill:#48aeec;fill-opacity:1;stroke-width:0.457318;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="path1218"
+       cx="500"
+       cy="500"
+       r="500" />
+    <circle
+       style="fill:#ffffff;fill-opacity:0.99436969;stroke-width:0.376166;stroke-linejoin:round;paint-order:markers fill stroke"
+       id="circle5483"
+       cx="500"
+       cy="500"
+       r="411.27429" />
+    <text
+       xml:space="preserve"
+       style="font-size:800px;line-height:1.25;font-family:sans-serif"
+       x="238.06818"
+       y="790.76703"
+       id="text14148"><tspan
+         sodipodi:role="line"
+         id="tspan14146"
+         x="238.06818"
+         y="790.76703"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:800px;font-family:Inter;-inkscape-font-specification:'Inter Bold'">S</tspan></text>
+  </g>
+</svg>

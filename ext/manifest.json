@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "Schoology",
+  "version": "0.0",
+  "description": "Firefox extension and web app to hack Schoology Learnosity assessments.",
+  "homepage_url": "https://github.com/t1v1/schoology#readme",
+  "permissions": [
+    "http://localhost/api/assessments/*",
+    "https://thavma.club/api/assessments/*",
+    "activeTab",
+    "storage"
+  ],
+  "icons": {
+    "48": "icons/48.png",
+    "96": "icons/96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.schoology.com/common-assessment-delivery/*"],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    },
+    {
+      "matches": [
+        "http://localhost/assessments",
+        "http://localhost/assessments?*",
+        "https://thavma.club/assessments",
+        "https://thavma.club/assessments?*"
+      ],
+      "js": ["thavma.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icons/48.png",
+    "default_title": "Schoology"
+  }
+}
