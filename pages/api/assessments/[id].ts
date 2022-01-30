@@ -21,7 +21,7 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
           .eq('id', Number(req.query.id))
           .eq('pwd', req.query.pwd);
         if (error) throw new APIError(error.message, 500);
-        if (!data?.length) throw new APIError('No assessment data', 500);
+        if (!data?.length) throw new APIError('No data', 500);
         res.status(200).json(data[0]);
         break;
       }
@@ -33,7 +33,7 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
           .eq('id', Number(req.query.id))
           .eq('pwd', req.query.pwd);
         if (error) throw new APIError(error.message, 500);
-        if (!data?.length) throw new APIError('No assessment data', 500);
+        if (!data?.length) throw new APIError('No data', 500);
         res.status(200).json(data[0]);
         break;
       }
