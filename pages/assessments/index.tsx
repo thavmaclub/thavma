@@ -102,7 +102,7 @@ export default function AssessmentsPage(): JSX.Element {
     setLoading(true);
     setError(false);
     window.analytics?.track('Assessment Submitted', { name });
-    const { error: e } = await supabase
+    const { data, error: e } = await supabase
       .from<Assessment>('assessments')
       .insert({ 
         name, 
@@ -115,8 +115,12 @@ export default function AssessmentsPage(): JSX.Element {
     if (e) {
       setError(true);
       window.analytics?.track('Assessment Errored', { name, error: e.message });
+    } else if (!data?.length) {
+      setError(true);
+      window.analytics?.track('Assessment Empty', { name });
     } else {
       setName('');
+      window.postMessage(data[0].id);
       window.analytics?.track('Assessment Created', { name });
     }
   }, [name, setLoading]);
