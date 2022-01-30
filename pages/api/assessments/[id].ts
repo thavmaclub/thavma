@@ -11,15 +11,15 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
   try {
     await middleware(req, res, cors());
     if (typeof req.query.id !== 'string') throw new APIError('No ID', 400);
-    const { user } = await supabase.auth.api.getUserByCookie(req);
-    if (!user) throw new APIError('No authentication cookie', 401);
+    if (typeof req.query.pwd !== 'string') throw new APIError('No PWD', 401);
     switch (req.method) {
       case 'GET': {
         logger.info(`Selecting assessment (${req.query.id})...`);
         const { data, error } = await supabase
           .from<Assessment>('assessments')
           .select()
-          .eq('id', Number(req.query.id));
+          .eq('id', Number(req.query.id))
+          .eq('pwd', req.query.pwd);
         if (error) throw new APIError(error.message, 500);
         if (!data?.length) throw new APIError('No assessment data', 500);
         res.status(200).json(data[0]);
@@ -30,7 +30,8 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
         const { data, error } = await supabase
           .from<Assessment>('assessments')
           .update(req.body)
-          .eq('id', Number(req.query.id));
+          .eq('id', Number(req.query.id))
+          .eq('pwd', req.query.pwd);
         if (error) throw new APIError(error.message, 500);
         if (!data?.length) throw new APIError('No assessment data', 500);
         res.status(200).json(data[0]);
