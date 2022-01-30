@@ -32,6 +32,10 @@ const light = `
   --accents-6: #444;
   --accents-7: #333;
   --accents-8: #111;
+  
+  --shadow-small: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 30px 60px rgba(0, 0, 0, 0.12);
 `;
 
 const dark = `
@@ -39,7 +43,7 @@ const dark = `
   --on-primary: #000;
   --background: #000;
   --on-background: #fff; 
-  --selection: #f81ce5;
+  --selection: #09a381;
   --on-selection: #fff;
 
   --accents-1: #111;

@@ -92,6 +92,24 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
 }
 
 export default function AssessmentsPage(): JSX.Element {
+  const [assessment, setAssessment] = useState<Assessment>();
+  const [ext, setExt] = useState<boolean>();
+  const verifyExt = useCallback((assessmentId: number) => {
+    window.postMessage(assessmentId);
+    const timeoutId = setTimeout(() => {
+      setExt(false);
+      /* eslint-disable-next-line @typescript-eslint/no-use-before-define */
+      window.removeEventListener('message', listener);
+    }, 500);
+    const listener = (msg: { data: unknown }) => {
+      if (msg.data !== 'THAVMA_EXT_ACTIVE') return;
+      clearTimeout(timeoutId);
+      setExt(true);
+      window.removeEventListener('message', listener);
+    };
+    window.addEventListener('message', listener);
+  }, []);
+
   const { access } = useAccess({ required: true });
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
@@ -120,10 +138,11 @@ export default function AssessmentsPage(): JSX.Element {
       window.analytics?.track('Assessment Empty', { name });
     } else {
       setName('');
-      window.postMessage(data[0].id);
-      window.analytics?.track('Assessment Created', { name });
+      setAssessment(data[0]);
+      verifyExt(data[0].id);
+      window.analytics?.track('Assessment Created', { id: data[0].id, name });
     }
-  }, [name, setLoading]);
+  }, [name, setLoading, verifyExt]);
 
   const [loaded, setLoaded] = useState(false);
   const [assessments, setAssessments] = useState<Assessment[]>([]);
@@ -174,7 +193,43 @@ export default function AssessmentsPage(): JSX.Element {
             error={error}
           />
         </Form>
-        <ul>
+        {ext === false && assessment && (
+          <div className='dialog'>
+            <article>
+              <p>to connect to your friend—and their answers—during your <i>{assessment.name}</i>, you’ll have to install THAVMA’s Firefox extension (and, ofc, install Firefox first):</p>
+              <div className='buttons'>
+                <a href='https://mozilla.org/firefox/download/thanks' target='_blank' rel='noopener noreferrer'>
+                  1. install Firefox 
+                </a>
+                <a href='/thavma.xpi'>
+                  2. install extension
+                </a>
+                <button type='button' onClick={() => verifyExt(assessment.id)}>
+                  3. verify installation
+                </button>
+              </div>
+            </article>
+          </div>
+        )}
+        {ext === true && assessment && (
+          <div className='dialog'>
+            <article>
+              <p>you’re almost set; now, simply:</p>
+              <ol>
+                <li>send your test link and pwd to a friend</li>
+                <li>click on THAVMA’s extension icon (the black box in the top right of Firefox) <b>a single time</b> (clicking multiple times can cause issues) after Schoology’s test questions have loaded</li>
+                <li>hover over the bottom left of Schoology to see your friend’s answers as they go</li>
+              </ol>
+              <p>remember, with great pwr comes great responsibility:</p>
+              <div className='buttons'>
+                <button type='button' onClick={() => setExt(undefined)}>
+                  i agree not to raise my test average more than 25%
+                </button>
+              </div>
+            </article>
+          </div>
+        )}
+        <ul className='assessments'>
           {(!access || !loaded) && Array(5).fill(null).map((_, idx) => <TestLI key={idx} />)}
           {access && assessments.map((a) => <TestLI key={a.id} {...a} />)}
           {access && loaded && !assessments.length && (
@@ -196,9 +251,56 @@ export default function AssessmentsPage(): JSX.Element {
             margin: 0;
           }
         
-          li {
+          ul li {
             border-top: 1px solid var(--accents-2);
             list-style: none;
+          }
+
+          .dialog {
+            position: fixed;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            pointer-events: none;
+          }
+
+          .dialog article {
+            pointer-events: auto;
+            background: var(--background);
+            border: 1px solid var(--accents-2);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-large);
+            padding: 48px;
+            max-width: 500px;
+            margin: 24px auto;
+          }
+
+          .dialog article p {
+            margin: 0;
+          }
+
+          .dialog .buttons {
+            margin-top: 24px;
+          }
+
+          .dialog .buttons a,
+          .dialog .buttons button {
+            background: var(--on-background);
+            color: var(--background);
+            padding: 12px 24px;
+            border: unset;
+            border-radius: var(--radius);
+            display: block;
+            margin: 12px auto 0;
+            width: 100%;
+            max-width: 250px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            line-height: 1;
+            text-align: center;
+            font: inherit;
+            appearance: unset;
+            cursor: pointer;
           }
         `}</style>
       </main>
