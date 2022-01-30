@@ -4,5 +4,6 @@ window.addEventListener('message', async (evt) => {
   if (evt.data && !Number.isNaN(Number(evt.data))) {
     console.log('Setting assessment...', evt.data);
     await browser.storage.local.set({ id: evt.data });
+    window.postMessage('THAVMA_EXT_ACTIVE');
   }
 });
