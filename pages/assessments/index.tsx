@@ -17,8 +17,16 @@ import supabase from 'lib/supabase';
 import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
 
-function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
-  const loading = useMemo(() => !id && !name && !date && !pwd, [id, name, date, pwd]);
+function AssessmentLI({
+  id,
+  name,
+  date,
+  pwd,
+}: Partial<Assessment>): JSX.Element {
+  const loading = useMemo(
+    () => !id && !name && !date && !pwd,
+    [id, name, date, pwd]
+  );
   useEffect(() => {
     if (!id || !name || !date || !pwd) return;
     window.analytics?.track('Assessment Viewed', { id, name, date, pwd });
@@ -28,14 +36,18 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
       <dl className='wrapper'>
         <dt className={cn({ loading })}>{!loading && 'name'}</dt>
         <dd className={cn({ loading })}>
-          {!loading && name}<br />
+          {!loading && name}
+          <br />
           <span>{!loading && date && dateString(date)}</span>
         </dd>
         <dt className={cn({ loading })}>{!loading && 'link'}</dt>
         <dd className={cn({ loading })}>
-          {!loading && id && (
-            <Link href={`/assessments/${id}`}>
-              <a>thavma.club/assessments/{id}</a>
+          {!loading && id && pwd && (
+            <Link href={`/assessments/${id}?pwd=${pwd}`}>
+              <a>
+                thavma.club/assessments/{id}
+                <i>?pwd={pwd}</i>
+              </a>
             </Link>
           )}
         </dd>
@@ -48,7 +60,7 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
           padding: 48px 0;
           list-style: none;
         }
-        
+
         dt {
           font-weight: 600;
           margin: 12px 0 0;
@@ -60,7 +72,7 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
 
         dt.loading {
           height: 15px;
-          max-width: 48px;
+          max-width: 40px;
           margin-bottom: 6px;
         }
 
@@ -70,14 +82,25 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
 
         dd.loading {
           min-height: 15px;
-          max-width: 200px;
+        }
+
+        dd.loading:nth-of-type(1) {
+          max-width: 140px;
+        }
+
+        dd.loading:nth-of-type(2) {
+          max-width: 370px;
+        }
+
+        dd.loading:nth-of-type(3) {
+          max-width: 160px;
         }
 
         dd span {
           text-transform: lowercase;
           color: var(--accents-5);
         }
-        
+
         dd.loading span {
           height: 15px;
           display: block;
@@ -90,6 +113,8 @@ function TestLI({ id, name, date, pwd }: Partial<Assessment>): JSX.Element {
     </li>
   );
 }
+
+const fallback = Array(5).fill(null);
 
 export default function AssessmentsPage(): JSX.Element {
   const [assessment, setAssessment] = useState<Assessment>();
@@ -114,35 +139,41 @@ export default function AssessmentsPage(): JSX.Element {
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
-  const onSubmit = useCallback(async (evt: FormEvent) => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    setLoading(true);
-    setError(false);
-    window.analytics?.track('Assessment Submitted', { name });
-    const { data, error: e } = await supabase
-      .from<Assessment>('assessments')
-      .insert({ 
-        name, 
-        creator: supabase.auth.user()?.id,
-        pwd: nanoid(), 
-        date: new Date(), 
-        questions: [],
-      });
-    setLoading(false);
-    if (e) {
-      setError(true);
-      window.analytics?.track('Assessment Errored', { name, error: e.message });
-    } else if (!data?.length) {
-      setError(true);
-      window.analytics?.track('Assessment Empty', { name });
-    } else {
-      setName('');
-      setAssessment(data[0]);
-      verifyExt(data[0].id);
-      window.analytics?.track('Assessment Created', { id: data[0].id, name });
-    }
-  }, [name, setLoading, verifyExt]);
+  const onSubmit = useCallback(
+    async (evt: FormEvent) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      setLoading(true);
+      setError(false);
+      window.analytics?.track('Assessment Submitted', { name });
+      const { data, error: e } = await supabase
+        .from<Assessment>('assessments')
+        .insert({
+          name,
+          creator: supabase.auth.user()?.id,
+          pwd: nanoid(),
+          date: new Date(),
+          questions: [],
+        });
+      setLoading(false);
+      if (e) {
+        setError(true);
+        window.analytics?.track('Assessment Errored', {
+          name,
+          error: e.message,
+        });
+      } else if (!data?.length) {
+        setError(true);
+        window.analytics?.track('Assessment Empty', { name });
+      } else {
+        setName('');
+        setAssessment(data[0]);
+        verifyExt(data[0].id);
+        window.analytics?.track('Assessment Created', { id: data[0].id, name });
+      }
+    },
+    [name, setLoading, verifyExt]
+  );
 
   const [loaded, setLoaded] = useState(false);
   const [assessments, setAssessments] = useState<Assessment[]>([]);
@@ -196,14 +227,20 @@ export default function AssessmentsPage(): JSX.Element {
         {ext === false && assessment && (
           <div className='dialog'>
             <article>
-              <p>to connect to your friend—and their answers—during your <i>{assessment.name}</i>, you’ll have to install THAVMA’s Firefox extension (and, ofc, install Firefox first):</p>
+              <p>
+                to connect to your friend—and their answers—during your{' '}
+                <i>{assessment.name}</i>, you’ll have to install THAVMA’s
+                Firefox extension (and, ofc, install Firefox first):
+              </p>
               <div className='buttons'>
-                <a href='https://mozilla.org/firefox/download/thanks' target='_blank' rel='noopener noreferrer'>
-                  1. install Firefox 
+                <a
+                  href='https://mozilla.org/firefox/download/thanks'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  1. install Firefox
                 </a>
-                <a href='/thavma.xpi'>
-                  2. install extension
-                </a>
+                <a href='/thavma.xpi'>2. install extension</a>
                 <button type='button' onClick={() => verifyExt(assessment.id)}>
                   3. verify installation
                 </button>
@@ -217,8 +254,16 @@ export default function AssessmentsPage(): JSX.Element {
               <p>you’re almost all set; now, simply:</p>
               <ol>
                 <li>send your test link and pwd to a friend</li>
-                <li>click on THAVMA’s extension icon (the black box in the top right of Firefox) <b>a single time</b> (clicking multiple times can cause issues) after Schoology’s test questions have loaded</li>
-                <li>hover over the bottom left of Schoology to see your friend’s answers as they go</li>
+                <li>
+                  click on THAVMA’s extension icon (the black box in the top
+                  right of Firefox) <b>a single time</b> (clicking multiple
+                  times can cause issues) after Schoology’s test questions have
+                  loaded
+                </li>
+                <li>
+                  hover over the bottom left of Schoology to see your friend’s
+                  answers as they go
+                </li>
               </ol>
               <p>remember, with great pwr comes great responsibility:</p>
               <div className='buttons'>
@@ -230,15 +275,17 @@ export default function AssessmentsPage(): JSX.Element {
           </div>
         )}
         <ul className='assessments'>
-          {(!access || !loaded) && Array(5).fill(null).map((_, idx) => <TestLI key={idx} />)}
-          {access && assessments.map((a) => <TestLI key={a.id} {...a} />)}
+          {(!access || !loaded) &&
+            fallback.map((_, idx) => <AssessmentLI key={idx} />)}
+          {access && assessments.map((a) => <AssessmentLI key={a.id} {...a} />)}
           {access && loaded && !assessments.length && (
             <li>
               <div className='wrapper'>
                 <Empty>
                   <p>
-                    no assessments to show yet;<br />
-                    create one with the form above 
+                    no assessments to show yet;
+                    <br />
+                    create one with the form above
                   </p>
                 </Empty>
               </div>
@@ -250,7 +297,7 @@ export default function AssessmentsPage(): JSX.Element {
             padding: 0;
             margin: 0;
           }
-        
+
           ul li {
             border-top: 1px solid var(--accents-2);
             list-style: none;
