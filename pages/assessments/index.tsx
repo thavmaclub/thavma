@@ -119,8 +119,8 @@ const fallback = Array(5).fill(null);
 export default function AssessmentsPage(): JSX.Element {
   const [assessment, setAssessment] = useState<Assessment>();
   const [ext, setExt] = useState<boolean>();
-  const verifyExt = useCallback((assessmentId: number) => {
-    window.postMessage(assessmentId);
+  const verifyExt = useCallback(({ id, pwd }: Assessment) => {
+    window.postMessage({ id, pwd });
     const timeoutId = setTimeout(() => {
       setExt(false);
       /* eslint-disable-next-line @typescript-eslint/no-use-before-define */
@@ -168,7 +168,7 @@ export default function AssessmentsPage(): JSX.Element {
       } else {
         setName('');
         setAssessment(data[0]);
-        verifyExt(data[0].id);
+        verifyExt(data[0]);
         window.analytics?.track('Assessment Created', { id: data[0].id, name });
       }
     },
@@ -241,7 +241,7 @@ export default function AssessmentsPage(): JSX.Element {
                   1. install Firefox
                 </a>
                 <a href='/thavma.xpi'>2. install extension</a>
-                <button type='button' onClick={() => verifyExt(assessment.id)}>
+                <button type='button' onClick={() => verifyExt(assessment)}>
                   3. verify installation
                 </button>
               </div>
@@ -310,6 +310,7 @@ export default function AssessmentsPage(): JSX.Element {
             transform: translateY(-50%);
             pointer-events: none;
             padding: 12px;
+            z-index: 8;
           }
 
           .dialog article {
