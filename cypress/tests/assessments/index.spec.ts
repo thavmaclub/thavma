@@ -1,3 +1,5 @@
+import { Assessment } from 'lib/model';
+
 import assessment from 'cypress/fixtures/assessment.json';
 import codes from 'cypress/fixtures/codes.json';
 import user from 'cypress/fixtures/user.json';
@@ -21,7 +23,11 @@ describe('Assessments PG', () => {
     cy.intercept('GET', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments?select=*&order=date.desc.nullslast`).as('get-assessments');
     cy.seed();
     cy.login(user);
-    cy.visit('/assessments');
+    cy.visit('/assessments', {
+      onBeforeLoad(win: Window) {
+        cy.stub(win, 'postMessage');        
+      },
+    });
     cy.get('dt.loading').should('be.visible');
     cy.get('dd.loading').should('be.visible');
     cy.wait('@get-assessments');
@@ -45,7 +51,16 @@ describe('Assessments PG', () => {
       .should('be.disabled')
       .and('have.css', 'cursor', 'wait')
       .loading();
-    cy.wait('@create-assessment').its('response.statusCode').should('eq', 201);
+    cy.wait('@create-assessment').as('assessment');
+    cy.get('@assessment').its('response.statusCode').should('eq', 201);
+    cy.get('@assessment')
+      .its('response.body')
+      .then((body: Assessment[]) => {
+        cy.window()
+          .its('postMessage')
+          .should('be.calledOnce')
+          .and('be.calledWithExactly', body[0].id);
+      });
     cy.contains('no assessments to show').should('not.exist');
     cy.contains('dd', assessment.name).should('be.visible');
     cy.get('select[aria-label="Theme"]')

@@ -16,7 +16,7 @@ describe('Join PG', () => {
     cy.seed({ skipUser: true });
     cy.visit('/join', {
       onBeforeLoad(win: Window) {
-        cy.stub(win, 'open').as('redirect');
+        cy.stub(win, 'open');
       },
     });
     cy.percySnapshot('Join');
@@ -45,7 +45,8 @@ describe('Join PG', () => {
       .and('have.css', 'cursor', 'wait')
       .loading();
     cy.percySnapshot('Join Loading');
-    cy.get('@redirect')
+    cy.window()
+      .its('open')
       .should('be.calledOnce')
       .and('be.calledWithExactly', `http://localhost:3000/?code=${codes[0].id}`);
   });
