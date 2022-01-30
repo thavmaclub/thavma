@@ -1,8 +1,560 @@
 {
   "id": 1,
   "creator": "5709c13b-4cad-4b23-9d21-dd114803c256",
-  "name": "ap econ midterm",
+  "name": "chapter 6 psych test",
   "pwd": "_FqW57iusXAnZvYWvs_m3",
   "date": "2022-02-01T07:00:00.000Z",
-  "questions": []
+  "questions": [
+    {
+      "question": "The general function of the bones in the middle ear is to",
+      "answers": [
+        "convert the incoming sound from pounds per square inch to decibels",
+        "protect the cochlea",
+        "regulate change in the air pressure of the inner ear",
+        "transfer sound information from the tympanic membrane to the oval window",
+        "provide information to the vestibular system"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "A subliminal message is one that is presented:",
+      "answers": [
+        "while an individual is under hypnosis",
+        "below one's absolute threshold for awareness",
+        "in a manner that is unconsciously persuasive",
+        "with very soft background music",
+        "repetitiously"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "The local fire department sounds the 12 o'clock whistle. The process by which your ears convert the sound waves from the siren into neural impulses is an example of:",
+      "answers": [
+        "sensory adaptation",
+        "accommodation",
+        "parallel processing",
+        "transduction",
+        "sensory interaction"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Which psychological perspective highlights the manner in which people encode, process, store, and retrieve information?",
+      "answers": [
+        "cognitive",
+        "psychodynamic",
+        "behavioral",
+        "biological",
+        "evolutionary"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Random sampling is to ________ as random assignment is to ________. ",
+      "answers": [
+        "correlational studies; case studies",
+        "surveys; experiments",
+        "illusory correlation; false consensus ",
+        "replication; correlation ",
+        "description; prediction "
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Rats easily learn to associate nausea-producing radiation treatments with:",
+      "answers": [
+        "loud sounds",
+        "bright lights",
+        "novel tastes",
+        "high-pitched sounds",
+        "acrid smells"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Of the following, which is essential for operant conditioning to occur?",
+      "answers": [
+        "Partial reinforcement",
+        "A behavioral consequence",
+        "A stimulus substitution",
+        "Spontaneous recovery",
+        "Delayed conditioning"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "In classical conditioning, stimulus generalization occurs when an organism responds:",
+      "answers": [
+        "to stimuli that are similar to the conditioned stimulus",
+        "to stimuli that are similar to the unconditioned stimulus",
+        "to the conditioned stimulus the same way as to the unconditioned stimulus",
+        "with different types of responses to neutral stimuli",
+        "with different types of responses to the unconditioned stimulus"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "An axon is",
+      "answers": [
+        "a cell that serves as the basic building block of the nervous system",
+        "a layer of fatty tissue that encases the fibers of many neurons",
+        "an antagonist molecule that blocks neurotransmitter receptor sites",
+        "the extension of a neuron that carries messages away from the cell body",
+        "a junction between a sending and receiving neuron"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "REM sleep, generally an “active” state of sleep, is accompanied by which of the following paradoxical characteristics?",
+      "answers": [
+        "Slowed heart rate",
+        "Slowed respiration rate",
+        "Lowered blood pressure",
+        "Lowered muscle tone",
+        "Reduced eye movements"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Tim, a third-grader, learns the sentence “George Eats Old Gray Rats And Paints Houses Yellow” to help him remember the spelling of “geography.” Tim is using:",
+      "answers": [
+        "a mnemonic device",
+        "the “peg-word” system",
+        "the spacing effect",
+        "the method of loci",
+        "the next-in-line effect"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Taped information played during sleep is registered by the ears but is not remembered. This illustrates that the retention of information requires:",
+      "answers": [
+        "proactive interference",
+        "state-dependent memory",
+        "chunking",
+        "effortful processing",
+        "priming"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Our inability to remember information presented in the seconds just before we fall asleep is most likely due to:",
+      "answers": [
+        "motivated forgetting",
+        "the misinformation effect",
+        "retroactive interference",
+        "encoding failure",
+        "long-term potentiation"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Retrieval cues are most likely to facilitate a process known as:",
+      "answers": [
+        "automatic processing",
+        "repression",
+        "chunking",
+        "relearning",
+        "priming"
+      ],
+      "answer": 4
+    },
+    {
+      "question": "Craik and Tulving experimentally demonstrated that people effectively remember seeing a specific word after they decide whether that word fits into an incomplete sentence. This research highlighted the effectiveness of:",
+      "answers": [
+        "the method of loci",
+        "the “peg-word” system",
+        "automatic processing",
+        "semantic encoding",
+        "the next-in-line effect"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "In formulating his theory of psychosocial development, Erikson would have suggested that authoritarian parents are likely to inhibit young children's:",
+      "answers": [
+        "theory of mind",
+        "autonomy and initiative",
+        "assimilation and accommodation",
+        "conventional morality",
+        "habituation"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "When parents set few controls on their children’s television viewing, allowing the children freedom to set individual limits, make few demands, and do not punish for improper television viewing, the parents exemplify a parenting style referred to as",
+      "answers": [
+        "permissive",
+        "authoritative",
+        "authoritarian",
+        "rejecting-neglecting",
+        "pessimistic"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Pat is normally very restless and fidgety, whereas Shelley is usually quiet and easygoing. The two children most clearly differ in:",
+      "answers": [
+        "intelligence",
+        "gender schemas",
+        "temperament",
+        "physical health",
+        "introversion level"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Twin studies suggest that a strong influence on emotional instability comes from:",
+      "answers": [
+        "genetic predispositions",
+        "the Y chromosome",
+        "gender schemas",
+        "the X chromosome",
+        "testosterone"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "One would not observe unusually high rates of divorce in cultures that promote:",
+      "answers": [
+        "collectivism",
+        "ethnic diversity",
+        "personal privacy",
+        "individual human rights",
+        "political pluralism"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "The rooting reflex refers to a baby's tendency to:",
+      "answers": [
+        "withdraw a limb to escape pain",
+        "turn the head away from a cloth placed over the face",
+        "open the mouth in search of a nipple when touched on the cheek",
+        "be startled by a loud noise",
+        "look longer at human faces than at inanimate objects."
+      ],
+      "answer": 2
+    },
+    {
+      "question": "A conscientious objector refuses to engage in combat because he cannot support the taking of human life. His reasoning best illustrates which stage in Lawrence Kohlberg’s theory of moral development?",
+      "answers": [
+        "Authoritative",
+        "Postconventional",
+        "Concrete operational",
+        "Conventional",
+        "Egocentric"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Preschoolers often have trouble buttoning shirts due to less-developed",
+      "answers": [
+        "visual acuity",
+        "fine motor skills",
+        "balance",
+        "gross motor skills",
+        "hemispheric specialization"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Jeremy happily played with his colorful blocks while his mother was nearby. When his mother left the room, he became upset, but he quickly stopped crying and began to play with the blocks again. When his mother returned, he greeted her happily. Which of the following patterns of attachment reflects Jeremy’s actions?",
+      "answers": [
+        "Avoidant",
+        "Anxious ambivalent",
+        "Resistant",
+        "Secure",
+        "Disorganized disoriented"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Which developmental milestone must be reached before an infant experiences separation anxiety?",
+      "answers": [
+        "Imprinting",
+        "Theory of mind",
+        "Conservation",
+        "Egocentrism",
+        "Object permanence"
+      ],
+      "answer": 4
+    },
+    {
+      "question": "Henry disapproves of stealing jelly beans from his sister's Easter basket because he thinks his mother will spank him if he does. Henry best represents a(n) ________morality.",
+      "answers": [
+        "egocentric",
+        "conventional",
+        "preconventional",
+        "concrete operational",
+        "postconventional"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Which of the following is more associated with environmental effects than with genetic influence?",
+      "answers": [
+        "Fetal alcohol syndrome",
+        "Prenatal maturation",
+        "Temperament",
+        "Rooting reflex",
+        "Sequence of motor development"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Gender differences have most often been found in which of the following?",
+      "answers": [
+        "Aggression",
+        "Short-term memory",
+        "Auditory discrimination",
+        "Visual acuity",
+        "Pattern matching"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Children's tendency to classify toys and songs as either masculine or feminine is most likely to facilitate the process of:",
+      "answers": [
+        "behavior genetics",
+        "individualism",
+        "gender-typing",
+        "collectivism",
+        "natural selection"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "People living in a culture that promotes collectivism are more likely than those in individualist cultures to report experiencing:",
+      "answers": [
+        "happiness",
+        "family loyalty",
+        "personal freedom",
+        "marital romance",
+        "high self-esteem"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Social roles are especially likely to be central to people's self-identity in ________cultures.",
+      "answers": [
+        "individualist",
+        "ethnically diverse",
+        "collectivist",
+        "racially diverse",
+        "democratic"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "The results of Harry Harlow’s experiments with infant monkeys and surrogate mothers show that",
+      "answers": [
+        "contact comfort was the primary basis of attachment for the infant monkeys",
+        "female infant monkeys are more independent than male infant monkeys",
+        "female infant monkeys are more obedient than male infant monkeys",
+        "food outranked all other factors in the development of the infant monkeys’ attachment to the mother",
+        "infant monkeys mimic the surrogate mothers ’behavior"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Puberty is most closely related to the onset of:",
+      "answers": [
+        "menopause",
+        "menarche",
+        "crystallized intelligence",
+        "conventional morality",
+        "dementia"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Which of the following behaviors is most clearly associated with Jean Piaget’s concrete operational stage?",
+      "answers": [
+        "Sally thinks everyone’s favorite color is blue",
+        " because it is her favorite color.",
+        "Tom received the highest grade in his philosophy course.",
+        "Gracie forgets about her toy because it is under her blanket.",
+        "Nikos can consider both the height and width of a container.",
+        "Ava does not like being around unfamiliar people."
+      ],
+      "answer": 3
+    },
+    {
+      "question": "The fact that imprinting is most certain to occur if the opportunity for imprinting is presented to the organism at a very specific age indicates the existence of",
+      "answers": [
+        "a schema",
+        "a reflex",
+        "an archetype",
+        "a critical period",
+        "an unconscious inference"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Carol Gilligan’s critique of Lawrence Kohlberg’s stages of moral development focuses primarily on",
+      "answers": [
+        "the order in which stages of moral development occur",
+        "the key events that mark the transitions between stages of moral development",
+        "the number of stages in moral development",
+        "how the course of moral development might be altered within certain cultures",
+        "differences between males and females in the course of moral development"
+      ],
+      "answer": 4
+    },
+    {
+      "question": "At 16 months of age, Edmund is uncertain whether his busy parents will take time to feed him when he is hungry. This is most indicative of:",
+      "answers": [
+        "insecure attachment",
+        "egocentrism",
+        "conservation",
+        "habituation",
+        "the rooting reflex"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Seven-year-old Maria helps her mother wash the dishes, while her nine-year-old-brother helps their father with the yard work. This involvement of the children in helping activities directly illustrates the process of",
+      "answers": [
+        "identity diffusion",
+        "gender-role development",
+        "preconventional morality development",
+        "classical conditioning of sex roles",
+        "evolutionary determinism"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Developmental research on the formation of attachment indicates that a child’s secure attachment to its mother during infancy is predictive of which of the following during its toddler years?",
+      "answers": [
+        "Social rejection",
+        "Impulsive behavior",
+        "Social competence",
+        "Divergent thinking",
+        "Shyness"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "If research suggested that a pregnant mother's use of an artificial sweetener caused harm to the fetus, the artificial sweetener would be considered a(n):",
+      "answers": [
+        "FAS",
+        "form of DNA",
+        "depressant",
+        "teratogen",
+        "neurotransmitter"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Instead of happily exploring the attractive toys located in the pediatrician's waiting room, little Sandra tenaciously clings to her mother's skirt. Sandra most clearly shows signs of:",
+      "answers": [
+        "habituation",
+        "egocentrism",
+        "insecure attachment",
+        "the rooting reflex",
+        "object permanence"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "According to Jean Piaget, what is the earliest stage at which a child is capable of using simple logic to think about objects and events?",
+      "answers": [
+        "Sensorimotor",
+        "Preoperational",
+        "Symbolic",
+        "Concrete operational",
+        "Formal operational"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "During the course of successful prenatal development, a human organism begins as a(n):",
+      "answers": [
+        "embryo and finally develops into a zygote",
+        "zygote and finally develops into an embryo",
+        "embryo and finally develops into a fetus",
+        "zygote and finally develops into a fetus",
+        "fetus and finally develops into an embryo."
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Primary sex characteristics include which of the following?",
+      "answers": [
+        "Deepened voice in males",
+        "Breast development in females",
+        "Presence of ovaries",
+        "Body hair",
+        "Menopause"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Identical twins are most likely to share a similar prenatal environment if they share the same:",
+      "answers": [
+        "placenta",
+        "reproductive capacity",
+        "norms",
+        "gender schemas",
+        "predispositions"
+      ],
+      "answer": 0
+    },
+    {
+      "question": "Primary sex characteristics are to ________ as secondary sex characteristics are to ________.",
+      "answers": [
+        "male testes; adrenal glands",
+        "female ovaries; deepened male voice",
+        "female breasts; deepened male voice",
+        "male testes; female ovaries",
+        "adrenal glands; underarm hair"
+      ],
+      "answer": 1
+    },
+    {
+      "question": "Darien’s father dictated who Darien’s friends should be and what classes he should take, and he set an extremely early curfew. If Darien went against his father’s wishes, the repercussions were harsh and swift. What type of parenting did Darien experience?",
+      "answers": [
+        "Permissive",
+        "Rejecting-neglecting",
+        "Authoritative",
+        "Authoritarian",
+        "Self-regulation"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "The principle that properties such as mass, volume, and number remain the same despite changes in the forms of objects is called:",
+      "answers": [
+        "perceptual constancy",
+        "object equivalence",
+        "conservation",
+        "object permanence",
+        "accommodation"
+      ],
+      "answer": 2
+    },
+    {
+      "question": "Sabrina plays on a rugby team and collects antique dolls. Peter is on a football team and loves to cook. Both Sabrina and Peter demonstrate a high degree of",
+      "answers": [
+        "sex-role stereotyping",
+        "sex-role confusion",
+        "gender constancy",
+        "androgyny",
+        "sex-role identity"
+      ],
+      "answer": 3
+    },
+    {
+      "question": "Which of the following did Erik Erikson say was the primary conflict through which a teenager needs to work?",
+      "answers": [
+        "Autonomy versus shame and doubt",
+        "Initiative versus guilt",
+        "Identity versus role confusion",
+        "Intimacy versus isolation",
+        "Generativity versus stagnation"
+      ],
+      "answer": 2
+    }
+  ]
 }
