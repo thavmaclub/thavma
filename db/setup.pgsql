@@ -13,8 +13,8 @@ create type question as (
 create table assessments (
   "id" bigint generated always as identity primary key,
   "creator" uuid not null references auth.users(id),
-  "name" text not null,
-  "pwd" text not null,
+  "name" text not null check(length("name") > 1 and "name" !~ '^\s+$'),
+  "pwd" text not null check(length("pwd") = 21),
   "date" timestamptz not null,
   "questions" question[] not null
 );
