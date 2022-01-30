@@ -6,14 +6,14 @@ describe('Join PG', () => {
   });
   
   it('redirects to / when logged in', () => {
-    cy.task('seed', { skipUser: true });
+    cy.seed({ skipUser: true });
     cy.login(user);
     cy.visit('/join');
     cy.url().should('eq', 'http://localhost:3000/');
   });
 
   it('verifies invite codes', () => {
-    cy.task('seed', { skipUser: true });
+    cy.seed({ skipUser: true });
     cy.visit('/join', {
       onBeforeLoad(win: Window) {
         cy.stub(win, 'open').as('redirect');

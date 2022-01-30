@@ -9,7 +9,7 @@ describe('Index PG', () => {
   });
 
   it('redirects to /join for users w/out an invite', () => {
-    cy.task('seed', { skipUser: true, skipCodes: true });
+    cy.seed({ skipUser: true, skipCodes: true });
     cy.login(user);
     cy.visit('/');
     cy.url().should('eq', 'http://localhost:3000/join');
@@ -17,7 +17,7 @@ describe('Index PG', () => {
 
   it('redirects to /join for users w/ invalid invite', () => {
     cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[0].id}`).as('use-code');
-    cy.task('seed', { skipUser: true, skipCode: true });
+    cy.seed({ skipUser: true, skipCode: true });
     cy.login(user);
     cy.visit(`/?code=${codes[0].id}`);
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);
@@ -26,7 +26,7 @@ describe('Index PG', () => {
 
   it('collects phone for invite codes', () => {
     cy.intercept('POST', '/api/users').as('create-user');
-    cy.task('seed', { skipUser: true });
+    cy.seed({ skipUser: true });
     cy.login(user);
     cy.visit('/');
     cy.percySnapshot('Index Form');
@@ -56,7 +56,7 @@ describe('Index PG', () => {
 
   it('prevents duplicate phones', () => {
     cy.intercept('POST', '/api/users').as('create-user');
-    cy.task('seed', { skipUser: true });
+    cy.seed({ skipUser: true });
     cy.login(user);
     cy.visit('/');
     cy.get('input[placeholder="phone number"]')
@@ -71,7 +71,7 @@ describe('Index PG', () => {
   });
 
   it('filters tests by course', () => {
-    cy.task('seed');
+    cy.seed();
     cy.login(user);
     cy.visit('/?c=apc', {
       onBeforeLoad(win: Window) {
@@ -90,7 +90,6 @@ describe('Index PG', () => {
       .select('ap-calc-bc');
     cy.url().should('contain', 'c=ap-calc-bc');
     cy.contains('no contributions to show').should('not.exist');
-    cy.percySnapshot('Index Test');
     cy.get('select[aria-label="Theme"]')
       .as('theme-select')  
       .should('have.value', 'light')
@@ -102,7 +101,7 @@ describe('Index PG', () => {
   });
 
   it('shows fallback during login', () => {
-    cy.task('seed', { skipUser: true, skipCode: true });
+    cy.seed({ skipUser: true, skipCode: true });
     cy.visit(`/#access_token=l0R3m_1psUm-d035Nt_w0rK?code=${codes[1].id}`);
     cy.get('p.loading').should('be.visible');
     cy.get('h2.loading').should('be.visible');
@@ -111,7 +110,7 @@ describe('Index PG', () => {
 
   it('uses invite codes after login', () => {
     cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[2].id}`).as('use-code');
-    cy.task('seed', { skipUser: true, skipCode: true });
+    cy.seed({ skipUser: true, skipCode: true });
     cy.login(user);
     cy.visit(`/?c=apc&code=${codes[2].id}`);
     cy.get('p.loading').should('be.visible');
@@ -123,7 +122,7 @@ describe('Index PG', () => {
 
   it('reuses codes by email address', () => {
     cy.intercept('PATCH', `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/codes?id=eq.${codes[1].id}`).as('use-code');
-    cy.task('seed', { skipUser: true, skipCode: true });
+    cy.seed({ skipUser: true, skipCode: true });
     cy.login(user);
     cy.visit(`/?c=apc&code=${codes[1].id}`);
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);

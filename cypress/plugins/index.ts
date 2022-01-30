@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import codecov from '@cypress/code-coverage/task';
 import dotenv from 'dotenv';
 
-import { Code, User } from 'lib/model';
+import { Assessment, Code, User } from 'lib/model';
 
 import codes from 'cypress/fixtures/codes.json';
 import inviter from 'cypress/fixtures/inviter.json';
@@ -20,7 +20,6 @@ let env = {};
   path.resolve(__dirname, '../../.env'),
 ].forEach((dotfile: string) => {
   env = { ...env, ...dotenv.config({ path: dotfile }).parsed };
-  console.log(`Loaded env from ${dotfile}`);
 });
 
 type Overrides = { skipCode?: boolean; skipCodes?: boolean; skipUser?: boolean; skipInviter?: boolean };
@@ -63,6 +62,8 @@ export default function plugins(
         const { error } = await supabase.from<User>('users').insert({ id: inviter.id, phone: inviter.phone });
         if (error) throw new Error(`Error inserting inviter: ${error.message}`);
       }
+      const { error: errr } = await supabase.from<Assessment>('assessments').delete();
+      if (errr) throw new Error(`Error deleting assessments: ${errr.message}`);
       return null;
     },
   });
