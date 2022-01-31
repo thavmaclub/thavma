@@ -10,7 +10,7 @@ import useNProgress from 'lib/nprogress';
 import { useUser } from 'lib/context/user';
 
 export default function JoinPage(): JSX.Element {
-  const { user } = useUser({});
+  const { user } = useUser();
   const { loading, setLoading } = useNProgress();
   const { prefetch, replace, query } = useRouter();
   const [code, setCode] = useState('');

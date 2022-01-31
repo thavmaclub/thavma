@@ -20,7 +20,9 @@ export const UserContext = createContext<UserContextType>({
   setUser: () => {},
 });
 
-export function useUser({ access }: { access?: 'required' }): UserContextType {
+export function useUser({
+  access,
+}: { access?: 'required' } = {}): UserContextType {
   const { user, setUser } = useContext(UserContext);
   const { prefetch, replace, asPath } = useRouter();
   useEffect(() => {
