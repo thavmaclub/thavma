@@ -8,6 +8,7 @@ describe('Assessment PG', () => {
       cy.visit(url);
     });
     cy.wait('@get-assessment').its('response.statusCode').should('eq', 200);
+    cy.get('.loading').should('not.exist');
     cy.get('h2').should('contain', assessment.name);
     cy.getBySel('question').should('not.exist');
     cy.contains('waiting for questions...').should('be.visible');
@@ -30,6 +31,7 @@ describe('Assessment PG', () => {
     cy.get('header p.loading').should('be.visible').and('have.text', '');
     cy.percySnapshot('Assessment Fallback');
     cy.wait('@get-assessment').its('response.statusCode').should('eq', 200);
+    cy.get('.loading').should('not.exist');
     cy.get('h2').should('contain', assessment.name);
     cy.getBySel('question').should('have.length', assessment.questions.length);
     // Asserting about all 50 questions causes Cypress to stall so I'm only
@@ -75,6 +77,7 @@ describe('Assessment PG', () => {
   it('requires assessment password', () => {
     cy.seed().then((ids) => {
       cy.visit(`/assessments/${ids.assessment}`);
+      cy.get('.loading').should('not.exist');
       cy.contains('unauthorized - missing assessment pwd').should('be.visible');
       cy.get('h2').should('have.text', `assessment ${ids.assessment}`);
       cy.percySnapshot('Assessment Unauthorized');
@@ -87,6 +90,7 @@ describe('Assessment PG', () => {
       cy.intercept('GET', `/api${url}`).as('get-assessment');
       cy.visit(url);
       cy.wait('@get-assessment').its('response.statusCode').should('eq', 500);
+      cy.get('.loading').should('not.exist');
       cy.get('h2').should('have.text', `assessment ${ids.assessment}`);
       cy.contains('error (500) fetching assessment')
         .should('be.visible')

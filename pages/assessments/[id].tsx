@@ -52,6 +52,7 @@ export default function AssessmentPage(): JSX.Element {
           </header>
           {!data &&
             !error &&
+            !(query.id && !query.pwd) &&
             Array(10)
               .fill(null)
               .map((_, questionIdx) => (
