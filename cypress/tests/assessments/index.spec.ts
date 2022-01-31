@@ -60,7 +60,7 @@ describe('Assessments PG', () => {
               );
             cy.contains('a', 'install extension')
               .should('be.visible')
-              .and('have.attr', 'href', '/thavma.xpi');
+              .and('have.attr', 'href', '/ext/latest.xpi');
             cy.contains('button', 'verify installation')
               .should('be.visible')
               .click();

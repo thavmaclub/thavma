@@ -240,7 +240,7 @@ export default function AssessmentsPage(): JSX.Element {
                 >
                   1. install Firefox
                 </a>
-                <a href='/thavma.xpi'>2. install extension</a>
+                <a href='/ext/latest.xpi'>2. install extension</a>
                 <button type='button' onClick={() => verifyExt(assessment)}>
                   3. verify installation
                 </button>

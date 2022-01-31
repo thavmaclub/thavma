@@ -1,0 +1,20 @@
+{
+  "addons": {
+    "{30cb25e6-a25c-43db-8a5a-de7450952f62}": {
+      "updates": [
+        {
+          "version": "0.0.0",
+          "update_link": "https://thavma.club/ext/0.0.0.xpi"
+        },
+        {
+          "version": "0.0.1",
+          "update_link": "http://thavma.club/ext/0.0.1.xpi"
+        },
+        {
+          "version": "0.0.2",
+          "update_link": "https://thavma.club/ext/0.0.2.xpi"
+        }
+      ]
+    }
+  }
+}
