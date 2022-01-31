@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, createContext, useContext, useEffect, useMemo } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
 import { useRouter } from 'next/router';
 
 export interface AccessContextType {
@@ -11,15 +18,17 @@ export const AccessContext = createContext<AccessContextType>({
   setAccess: () => {},
 });
 
-export function useAccess({ required } = { required: false }): AccessContextType {
+export function useAccess(
+  { required } = { required: false }
+): AccessContextType {
   const { access, setAccess } = useContext(AccessContext);
-  const { prefetch, replace } = useRouter();
+  const { prefetch, replace, asPath } = useRouter();
   useEffect(() => {
     if (required) void prefetch('/join');
   }, [required, prefetch]);
   useEffect(() => {
-    if (required && (access === false || typeof access === 'string')) 
-      void replace(`/join${window.location.search}`);
-  }, [required, replace, access]);
+    if (required && (access === false || typeof access === 'string'))
+      void replace(`/join?r=${encodeURIComponent(asPath)}`);
+  }, [required, replace, access, asPath]);
   return useMemo(() => ({ access, setAccess }), [access, setAccess]);
 }

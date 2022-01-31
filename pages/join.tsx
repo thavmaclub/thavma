@@ -11,40 +11,51 @@ import useNProgress from 'lib/nprogress';
 export default function JoinPage(): JSX.Element {
   const { access } = useAccess();
   const { loading, setLoading } = useNProgress();
-  const { prefetch, replace } = useRouter();
+  const { prefetch, replace, query } = useRouter();
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
-  const onSubmit = useCallback(async (evt: FormEvent) => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    setLoading(true);
-    setError(false);
-    window.analytics?.track('Code Submitted', { code });
-    const { data: exists, error: e } = 
-      await supabase.rpc<boolean>('code_exists', { code });
-    if (!exists || e) {
-      window.analytics?.track('Code Errored', { code, error: e?.message });
-      setLoading(false);
-      setError(true);
-    } else {
-      window.analytics?.track('Code Worked', { code });
-      const url = `${window.location.protocol}//${window.location.host}`;
-      const redirectTo = `${url}/?code=${code}`;
-      if (process.env.NEXT_PUBLIC_APP_ENV === 'test') {
-        window.open(redirectTo); // @see {@link https://git.io/JP7d9}
+  const onSubmit = useCallback(
+    async (evt: FormEvent) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      setLoading(true);
+      setError(false);
+      window.analytics?.track('Code Submitted', { code });
+      const { data: exists, error: e } = await supabase.rpc<boolean>(
+        'code_exists',
+        { code }
+      );
+      if (!exists || e) {
+        window.analytics?.track('Code Errored', { code, error: e?.message });
+        setLoading(false);
+        setError(true);
       } else {
-        await supabase.auth.signIn({ provider: 'google' }, { redirectTo });
+        window.analytics?.track('Code Worked', { code });
+        const base = `${window.location.protocol}//${window.location.host}`;
+        const uri = typeof query.r === 'string' ? query.r : '/';
+        const url = new URL(decodeURIComponent(uri), base);
+        const redirectTo = `${base}${url.pathname}${
+          url.search ? `${url.search}&code=${code}` : `?code=${code}`
+        }`;
+        if (process.env.NEXT_PUBLIC_APP_ENV === 'test') {
+          window.open(redirectTo); // @see {@link https://git.io/JP7d9}
+        } else {
+          await supabase.auth.signIn({ provider: 'google' }, { redirectTo });
+        }
       }
-    }
-  }, [code, setLoading]);
+    },
+    [code, setLoading, query.r]
+  );
 
   useEffect(() => {
     void prefetch('/');
   }, [prefetch]);
   useEffect(() => {
-    if (access === true) void replace(`/${window.location.search}`);
-  }, [replace, access]);
-  
+    if (access !== true) return;
+    const uri = typeof query.r === 'string' ? query.r : '/';
+    void replace(decodeURIComponent(uri));
+  }, [replace, access, query.r]);
+
   return (
     <Page name='Join'>
       <main className='wrapper'>
@@ -88,7 +99,7 @@ export default function JoinPage(): JSX.Element {
           header {
             margin-bottom: 36px;
           }
-          
+
           h1 {
             font-size: 4rem;
             line-height: 1;
