@@ -29,7 +29,9 @@ export interface Test {
 
 export interface User {
   id: string;
-  phone: string;
+  cus: string;
+  sub: string;
+  phone: string | null;
 }
 
 export interface Code {

@@ -68,7 +68,9 @@ language sql stable security definer;
 create domain phone as text check (value ~ '^(\+\d{1,3})\d{10}$');
 create table users (
   "id" uuid not null references auth.users(id) primary key,
-  "phone" phone unique not null
+  "cus" text unique not null,
+  "sub" text unique not null,
+  "phone" phone unique
 );
 alter table users enable row level security;
 create policy "Users can view their own profiles"
