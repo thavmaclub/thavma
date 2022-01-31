@@ -12,13 +12,13 @@
   <a aria-label='Maintainability' href='https://codeclimate.com/github/t1v1/thavma'>
     <img src='https://img.shields.io/codeclimate/maintainability/t1v1/thavma?style=flat-square&labelColor=000000'>
   </a>
+  <a aria-label='Dependencies' href='https://depfu.com/repos/github/t1v1/thavma'>
+    <img src='https://img.shields.io/depfu/dependencies/github/t1v1/thavma?style=flat-square&labelColor=000000'>
+  </a>
   <a aria-label='Integration tests' href='https://dashboard.cypress.io/projects/936nmz/runs'>
     <img src='https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/936nmz&style=flat-square&labelColor=000000'>
   </a>
   <a aria-label='Coverage status' href='https://codecov.io/gh/t1v1/thavma'>
     <img src='https://img.shields.io/codecov/c/gh/t1v1/thavma?style=flat-square&labelColor=000000'>
-  </a>
-  <a aria-label='Dependencies' href='https://libraries.io/github/t1v1/thavma'>
-    <img src='https://img.shields.io/librariesio/github/t1v1/thavma?style=flat-square&labelColor=000000'>
   </a>
 </p>
