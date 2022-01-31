@@ -7,7 +7,6 @@ import NProgress from 'components/nprogress';
 
 import { Code, User } from 'lib/model';
 import { Theme, ThemeContext } from 'lib/context/theme';
-import { AccessContext } from 'lib/context/access';
 import { UserContext } from 'lib/context/user';
 import supabase from 'lib/supabase';
 
@@ -80,43 +79,49 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const [user, setUser] = useState<User>();
-  const [access, setAccess] = useState<boolean | string>();
+  const {
+    query: { code },
+  } = useRouter();
+  // null - User does not exist (code invalid; redirect to /join).
+  // undefined - User has yet to be loaded (show fallback state).
+  // user - User exists (redirect to /pay if user.access = false).
+  const [user, setUser] = useState<User | null>();
   const getUser = useCallback(async () => {
     const uid = supabase.auth.user()?.id;
-    if (!uid) {
+    if (!uid && window.location.href.includes('#access')) {
+      // Login in process... Supabase has yet to login (show fallback state).
       setUser(undefined);
+    } else if (!uid) {
+      // Not logged in and not in process of logging in (redirect to /join).
+      setUser(null);
     } else {
       const { data } = await supabase
         .from<User>('users')
         .select()
         .eq('id', uid);
-      setUser(data ? data[0] : undefined);
-    }
-  }, []);
-  const { query: { code } } = useRouter();
-  const getAccess = useCallback(async () => {
-    const uid = supabase.auth.user()?.id;
-    if (!uid && window.location.href.includes('#access')) {
-      setAccess(undefined);
-      window.analytics?.track('Login Started');
-    } else if (!uid) {
-      setAccess(false);
-      window.analytics?.track('Login Failed');
-    } else if (typeof code === 'string') {
-      const { error } = await supabase
-        .from<Code>('codes')
-        .update({ user: uid })
-        .eq('id', code);
-      setAccess(error ? 'The invite code you used was invalid or had already been used by another email address. Try logging in again with a different Google account.' : true);
-      window.analytics?.track(error ? 'Code Denied' : 'Code Used', { code, error });
-    } else {
-      const { data } = await supabase
-        .from<Code>('codes')
-        .select()
-        .eq('user', uid);
-      setAccess(!!data?.length);
-      window.analytics?.track(data?.length ? 'Code Found' : 'Code Lost', { data }); 
+      if (data?.length) {
+        // Logged in and user exists (redirect to /pay if user.access = false).
+        setUser(data[0]);
+      } else if (typeof code !== 'string') {
+        // Logged in but user and code missing (redirect to /join to set code).
+        setUser(null);
+      } else {
+        // User is signing up... verify their invite code and create user row.
+        const { error } = await supabase
+          .from<Code>('codes')
+          .update({ user: uid })
+          .eq('id', code);
+        if (error) {
+          // Invite code was invalid or already used (redirect to /join).
+          setUser(null);
+        } else {
+          // Invite code worked... create user row (redirect to /pay maybe).
+          const { data: created } = await supabase
+            .from<User>('users')
+            .insert({ id: uid, access: false });
+          setUser(created?.length ? created[0] : undefined);
+        }
+      }
     }
   }, [code]);
   const prevIdentity = useRef<Record<string, unknown>>();
@@ -135,7 +140,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       name: usr?.user_metadata.name as string,
     };
     if (dequal(prevIdentity.current, identity)) return;
-    if (identity.id && identity.id !== prevIdentity.current?.id) 
+    if (identity.id && identity.id !== prevIdentity.current?.id)
       window.analytics?.alias(identity.id);
     window.analytics?.identify(identity.id, identity);
     prevIdentity.current = identity;
@@ -144,131 +149,125 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     void getUser();
   }, [getUser]);
   useEffect(() => {
-    void getAccess();
-  }, [getAccess]);
-  useEffect(() => {
     void identify();
   }, [identify]);
   useEffect(
     () =>
       supabase.auth.onAuthStateChange(() => {
-        void Promise.all([getUser(), getAccess(), identify()]);
+        void Promise.all([getUser(), identify()]);
       }).data?.unsubscribe,
-    [getUser, getAccess, identify]
+    [getUser, identify]
   );
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <AccessContext.Provider value={{ access, setAccess }}>
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-          <NProgress />
-          <Component {...pageProps} />
-          <style jsx global>{`
-            ::selection {
-              background-color: var(--selection);
-              color: var(--on-selection);
-            }
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <NProgress />
+        <Component {...pageProps} />
+        <style jsx global>{`
+          ::selection {
+            background-color: var(--selection);
+            color: var(--on-selection);
+          }
 
-            *,
-            *:before,
-            *:after {
-              box-sizing: inherit;
-            }
+          *,
+          *:before,
+          *:after {
+            box-sizing: inherit;
+          }
 
-            html {
-              height: 100%;
-              box-sizing: border-box;
-              touch-action: manipulation;
-              font-feature-settings: 'kern';
-            }
+          html {
+            height: 100%;
+            box-sizing: border-box;
+            touch-action: manipulation;
+            font-feature-settings: 'kern';
+          }
 
-            body {
-              margin: 0;
-              padding: 0;
-            }
+          body {
+            margin: 0;
+            padding: 0;
+          }
 
-            html,
-            body {
-              font-size: 12px;
-              line-height: 1.5;
-              font-family: var(--font-mono);
-              text-rendering: optimizeLegibility;
-              -webkit-font-smoothing: subpixel-antialiased;
-              -moz-osx-font-smoothing: grayscale;
-              background-color: var(--background);
-              color: var(--on-background);
-            }
+          html,
+          body {
+            font-size: 12px;
+            line-height: 1.5;
+            font-family: var(--font-mono);
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: subpixel-antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--background);
+            color: var(--on-background);
+          }
 
-            .wrapper {
-              max-width: calc(var(--page-width) + 48px);
-              padding: 0 24px;
-              margin: 0 auto;
-            }
+          .wrapper {
+            max-width: calc(var(--page-width) + 48px);
+            padding: 0 24px;
+            margin: 0 auto;
+          }
 
-            .nowrap {
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-            }
+          .nowrap {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
 
-            .loading {
-              border-radius: var(--radius);
-              background-image: linear-gradient(
-                270deg,
-                var(--accents-1),
-                var(--accents-2),
-                var(--accents-2),
-                var(--accents-1)
-              );
-              background-size: 400% 100%;
-              -webkit-animation: loadingAnimation 8s ease-in-out infinite;
-              animation: loadingAnimation 8s ease-in-out infinite;
-              cursor: wait;
-            }
+          .loading {
+            border-radius: var(--radius);
+            background-image: linear-gradient(
+              270deg,
+              var(--accents-1),
+              var(--accents-2),
+              var(--accents-2),
+              var(--accents-1)
+            );
+            background-size: 400% 100%;
+            -webkit-animation: loadingAnimation 8s ease-in-out infinite;
+            animation: loadingAnimation 8s ease-in-out infinite;
+            cursor: wait;
+          }
 
-            @keyframes loadingAnimation {
-              0% {
-                background-position: 200% 0;
-              }
-              to {
-                background-position: -200% 0;
-              }
+          @keyframes loadingAnimation {
+            0% {
+              background-position: 200% 0;
             }
-          `}</style>
-          <style jsx global>{`
+            to {
+              background-position: -200% 0;
+            }
+          }
+        `}</style>
+        <style jsx global>{`
+          :root {
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+              'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+              'Droid Sans', 'Helvetica Neue', sans-serif;
+            --font-mono: 'Hack', Menlo, Monaco, Lucida Console, Liberation Mono,
+              DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+
+            --page-width: 800px;
+            --radius: 6px;
+            --margin: 12px;
+
+            ${light}
+          }
+          @media (prefers-color-scheme: light) {
             :root {
-              --font-sans: 'Inter', -apple-system, BlinkMacSystemFont,
-                'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-                'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-              --font-mono: 'Hack', Menlo, Monaco, Lucida Console,
-                Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-                Courier New, monospace;
-
-              --page-width: 800px;
-              --radius: 6px;
-              --margin: 12px;
-
               ${light}
             }
-            @media (prefers-color-scheme: light) {
-              :root {
-                ${light}
-              }
-            }
-            @media (prefers-color-scheme: dark) {
-              :root {
-                ${dark}
-              }
-            }
-            .light {
-              ${light}
-            }
-            .dark {
+          }
+          @media (prefers-color-scheme: dark) {
+            :root {
               ${dark}
             }
-          `}</style>
-        </ThemeContext.Provider>
-      </AccessContext.Provider>
+          }
+          .light {
+            ${light}
+          }
+          .dark {
+            ${dark}
+          }
+        `}</style>
+      </ThemeContext.Provider>
     </UserContext.Provider>
   );
 }

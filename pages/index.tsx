@@ -15,7 +15,6 @@ import ThemeSelect from 'components/theme-select';
 import { Test } from 'lib/model';
 import dateString from 'lib/date';
 import supabase from 'lib/supabase';
-import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
 import { useUser } from 'lib/context/user';
 
@@ -108,7 +107,6 @@ function TestSection({
 }
 
 export default function IndexPage(): JSX.Element {
-  const { access } = useAccess({ required: true });
   const {
     push,
     query: { s, c },
@@ -119,7 +117,7 @@ export default function IndexPage(): JSX.Element {
     [c]
   );
 
-  const { user, setUser } = useUser();
+  const { user, setUser } = useUser({ access: 'required' });
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
   const [phone, setPhone] = useState('');
@@ -212,18 +210,18 @@ export default function IndexPage(): JSX.Element {
             </li>
           </ol>
         </section>
-        {!access &&
+        {!user?.access &&
           Array(5)
             .fill(null)
             .map((_, idx) => <TestSection key={idx} />)}
-        {access &&
+        {user?.access &&
           tests
             .filter((t) => t.course === course)
             .sort(
               (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
             )
             .map((t) => <TestSection key={t.id} {...t} />)}
-        {access && !tests.some((t) => t.course === course) && (
+        {user?.access && !tests.some((t) => t.course === course) && (
           <section>
             <div className='wrapper'>
               <Empty>
