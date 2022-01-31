@@ -10,7 +10,7 @@ export interface Assessment {
 export interface Question {
   question: string;
   answers: string[];
-  answer?: number;
+  answer: number | null;
 }
 
 export interface Course {
