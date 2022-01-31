@@ -1,5 +1,4 @@
 console.log('Installing background extension script...');
-const url = 'http://localhost:3000';
 const sendActiveTabMessage = (message) => {
   browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
     console.log('Sending active tab message...', message);
@@ -7,6 +6,11 @@ const sendActiveTabMessage = (message) => {
   });
 };
 let intervalId;
+let url = 'https://thavma.club';
+browser.runtime.onInstalled.addListener(({ temporary }) => {
+  console.log('Browser extension installed...', { temporary });
+  url = temporary ? 'http://localhost:3000' : 'https://thavma.club';
+});
 browser.browserAction.onClicked.addListener(() => {
   console.log('Browser action clicked...');
   sendActiveTabMessage('THAVMA_EXT_CLICK');
