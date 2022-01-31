@@ -69,7 +69,7 @@ create domain phone as text check (value ~ '^(\+\d{1,3})\d{10}$');
 create table users (
   "id" uuid not null references auth.users(id) primary key,
   "cus" text unique not null,
-  "sub" text unique not null,
+  "sub" text unique,
   "phone" phone unique
 );
 alter table users enable row level security;

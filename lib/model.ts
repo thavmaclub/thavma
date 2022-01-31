@@ -30,7 +30,7 @@ export interface Test {
 export interface User {
   id: string;
   cus: string;
-  sub: string;
+  sub: string | null;
   phone: string | null;
 }
 
