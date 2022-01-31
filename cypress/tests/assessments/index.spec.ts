@@ -120,11 +120,12 @@ describe('Assessments PG', () => {
     cy.get('@assessment')
       .its('response.body')
       .then((body: Assessment[]) => {
+        cy.window()
+          .its('postMessage')
+          .should('be.calledOnce')
+          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
         /* eslint-disable-next-line promise/no-nesting */
         cy.window().then((win) => {
-          const { id, pwd } = body[0];
-          expect(win.postMessage).to.be.calledOnce;
-          expect(win.postMessage).to.be.calledWithExactly({ id, pwd });
           const listener = cy.stub().as('message');
           win.addEventListener('message', (evt) => listener(evt.data));
         });
