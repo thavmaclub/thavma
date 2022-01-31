@@ -26,9 +26,8 @@ export function useUser({
   const { user, setUser } = useContext(UserContext);
   const { prefetch, replace, asPath } = useRouter();
   useEffect(() => {
-    if (!access) return;
-    void prefetch('/join');
-    void prefetch('/pay');
+    if (access) void prefetch('/join');
+    if (access) void prefetch('/pay');
   }, [access, prefetch]);
   useEffect(() => {
     if (access && user === null)
