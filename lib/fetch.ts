@@ -5,7 +5,7 @@ import { APIError } from 'lib/model';
 
 export async function fetcher<T, D = T>(
   url: string,
-  method: 'get' | 'put' | 'post' | 'patch' | 'delete' = 'get',
+  method: 'GET' | 'PUT' | 'POST' | 'PATCH' | 'DELETE' = 'GET',
   data?: D
 ): Promise<T> {
   const body = data ? JSON.stringify(data) : undefined;

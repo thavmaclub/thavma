@@ -59,7 +59,7 @@ export default function AssessmentPage(): JSX.Element {
                 </section>
               ))}
           {data?.questions.map((question, questionIdx) => (
-            <section className='wrapper' key={questionIdx}>
+            <section className='wrapper' key={questionIdx} data-cy='question'>
               <p>
                 <b>{questionIdx + 1}. </b>
                 {question.question}
@@ -77,7 +77,7 @@ export default function AssessmentPage(): JSX.Element {
                         const updated = clone(data);
                         updated.questions[questionIdx].answer = answerIdx;
                         await mutate(updated, false);
-                        if (url) await mutate(fetcher(url, 'patch', updated));
+                        if (url) await mutate(fetcher(url, 'PATCH', updated));
                       }}
                     />
                     <label htmlFor={`${questionIdx}-${answerIdx}`}>
