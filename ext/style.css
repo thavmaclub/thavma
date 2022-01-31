@@ -1,4 +1,4 @@
-#t1v1 {
+#thavma {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -15,6 +15,6 @@
   opacity: 0;
 }
 
-#t1v1:hover {
+#thavma:hover {
   opacity: 1;
 }

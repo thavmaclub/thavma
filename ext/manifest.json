@@ -21,7 +21,8 @@
         "http://localhost/schoology"
       ],
       "js": ["content.js"],
-      "css": ["style.css"]
+      "css": ["style.css"],
+      "all_frames": true
     },
     {
       "matches": [
