@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import { Assessment, Code, User } from 'lib/model';
 
+import assessment from 'cypress/fixtures/assessment.json';
 import codes from 'cypress/fixtures/codes.json';
 import inviter from 'cypress/fixtures/inviter.json';
 import user from 'cypress/fixtures/user.json';
@@ -22,12 +23,14 @@ let env = {};
   env = { ...env, ...dotenv.config({ path: dotfile }).parsed };
 });
 
-type Overrides = {
+interface Overrides {
   skipCode?: boolean;
   skipCodes?: boolean;
   skipUser?: boolean;
   skipInviter?: boolean;
-};
+  skipAssessment?: boolean;
+  skipQuestions?: boolean;
+}
 
 declare global {
   namespace Cypress {
@@ -53,7 +56,10 @@ export default function plugins(
       skipCodes,
       skipUser,
       skipInviter,
-    }: Overrides = {}): Promise<null> {
+      skipAssessment,
+      skipQuestions,
+    }: Overrides = {}) {
+      const ids: { assessment?: number } = {};
       const { error: e } = await supabase.from<Code>('codes').delete();
       if (e) throw new Error(`Error deleting codes: ${e.message}`);
       if (!skipCodes) {
@@ -80,7 +86,21 @@ export default function plugins(
         .from<Assessment>('assessments')
         .delete();
       if (errr) throw new Error(`Error deleting assessments: ${errr.message}`);
-      return null;
+      if (!skipAssessment) {
+        const { error, data } = await supabase
+          .from<Assessment>('assessments')
+          .insert({
+            ...assessment,
+            id: undefined,
+            date: new Date(assessment.date),
+            questions: skipQuestions ? [] : assessment.questions,
+          });
+        if (error)
+          throw new Error(`Error inserting assessment: ${error.message}`);
+        if (!data?.length) throw new Error('No assessment response data');
+        ids.assessment = data[0].id;
+      }
+      return ids;
     },
   });
   on('before:browser:launch', (browser, launchOptions) => {

@@ -12,9 +12,7 @@ describe('Assessments PG', () => {
 
   it('shows fallback during login', () => {
     cy.seed({ skipUser: true, skipCode: true });
-    cy.visit(
-      `/assessments#access_token=l0R3m_1psUm-d035Nt_w0rK?code=${codes[1].id}`
-    );
+    cy.visit(`/assessments#access_token=l0R3m_1psUm?code=${codes[1].id}`);
     cy.get('dt.loading').should('be.visible');
     cy.get('dd.loading').should('be.visible');
     cy.percySnapshot('Assessments Fallback');
@@ -25,7 +23,7 @@ describe('Assessments PG', () => {
       'POST',
       `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
     ).as('create-assessment');
-    cy.seed();
+    cy.seed({ skipAssessment: true });
     cy.login(user);
     cy.visit('/assessments', {
       onBeforeLoad(win: Window) {
@@ -87,7 +85,7 @@ describe('Assessments PG', () => {
         Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string
       }/rest/v1/assessments?select=*&order=date.desc.nullslast`
     ).as('get-assessments');
-    cy.seed();
+    cy.seed({ skipAssessment: true });
     cy.login(user);
     cy.visit('/assessments', {
       onBeforeLoad(win: Window) {
@@ -122,10 +120,15 @@ describe('Assessments PG', () => {
     cy.get('@assessment')
       .its('response.body')
       .then((body: Assessment[]) => {
-        cy.window()
-          .its('postMessage')
-          .should('be.calledOnce')
-          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+        /* eslint-disable-next-line promise/no-nesting */
+        cy.window().then((win) => {
+          const { id, pwd } = body[0];
+          expect(win.postMessage).to.be.calledOnce;
+          expect(win.postMessage).to.be.calledWithExactly({ id, pwd });
+          const listener = cy.stub().as('message');
+          win.addEventListener('message', (evt) => listener(evt.data));
+        });
+        cy.get('@message').should('be.calledWithExactly', 'THAVMA_EXT_ACTIVE');
       });
     cy.contains('no assessments to show').should('not.exist');
     cy.contains('dd', assessment.name).should('be.visible');
@@ -141,7 +144,7 @@ describe('Assessments PG', () => {
     cy.get('@theme-select').select('light');
     cy.percySnapshot('Assessments Light');
     cy.get('@theme-select').select('system');
-    cy.seed();
+    cy.seed({ skipAssessment: true });
     cy.contains('dd').should('not.exist');
     cy.contains('no assessments to show').should('be.visible');
   });
