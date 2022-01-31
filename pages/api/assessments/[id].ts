@@ -29,7 +29,7 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
         logger.info(`Updating assessment (${req.query.id})...`);
         const { data, error } = await supabase
           .from<Assessment>('assessments')
-          .update(req.body)
+          .update({ questions: (req.body as Assessment).questions })
           .eq('id', Number(req.query.id))
           .eq('pwd', req.query.pwd);
         if (error) throw new APIError(error.message, 500);
