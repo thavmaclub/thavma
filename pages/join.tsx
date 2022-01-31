@@ -32,11 +32,8 @@ export default function JoinPage(): JSX.Element {
       } else {
         window.analytics?.track('Code Worked', { code });
         const base = `${window.location.protocol}//${window.location.host}`;
-        const uri = typeof query.r === 'string' ? query.r : '/';
-        const url = new URL(decodeURIComponent(uri), base);
-        const redirectTo = `${base}${url.pathname}${
-          url.search ? `${url.search}&code=${code}` : `?code=${code}`
-        }`;
+        const uri = typeof query.r === 'string' ? query.r : '';
+        const redirectTo = `${base}/api/auth?r=${uri}&code=${code}`;
         if (process.env.NEXT_PUBLIC_APP_ENV === 'test') {
           window.open(redirectTo); // @see {@link https://git.io/JP7d9}
         } else {
