@@ -37,10 +37,18 @@ export default function AssessmentPage(): JSX.Element {
               })}
             >
               {data?.name}
-              {data && <i> - {dateString(data.date)}</i>}
               {((!data && error) || (query.id && !query.pwd)) &&
                 `assessment ${data?.id || query.id || 0}`}
             </h2>
+            <p
+              className={cn('nowrap', {
+                loading: !data && !error && !(query.id && !query.pwd),
+              })}
+            >
+              {data && dateString(data.date)}
+              {((!data && error) || (query.id && !query.pwd)) &&
+                dateString(new Date())}
+            </p>
           </header>
           {!data &&
             !error &&
@@ -127,7 +135,6 @@ export default function AssessmentPage(): JSX.Element {
         <style jsx>{`
           article {
             border-top: 1px solid var(--accents-2);
-            padding: 48px 0 0;
           }
 
           h2 {
@@ -136,19 +143,40 @@ export default function AssessmentPage(): JSX.Element {
             line-height: 1;
             height: 24px;
             text-transform: lowercase;
-            margin: 0;
+            margin: 0 0 12px;
           }
 
           h2.loading {
-            max-width: 500px;
+            max-width: 220px;
           }
 
           h2 i {
             color: var(--accents-5);
           }
 
-          p {
+          header p {
+            text-transform: lowercase;
+            color: var(--accents-5);
+            margin: 0;
+          }
+
+          header p.loading {
+            margin-top: 14px;
+            min-height: 16px;
+            max-width: 175px;
+          }
+
+          header {
+            margin: 48px auto;
+          }
+
+          section p {
             margin: 0 0 8px;
+          }
+
+          section p.loading {
+            min-height: 30px;
+            margin: 0 0 14px;
           }
 
           .empty p {
@@ -168,6 +196,31 @@ export default function AssessmentPage(): JSX.Element {
           li {
             list-style: none;
             margin: 4px 0;
+          }
+
+          li.loading {
+            min-height: 16px;
+            margin: 8px 0;
+          }
+
+          li.loading:nth-of-type(1) {
+            max-width: 500px;
+          }
+
+          li.loading:nth-of-type(2) {
+            max-width: 350px;
+          }
+
+          li.loading:nth-of-type(3) {
+            max-width: 450px;
+          }
+
+          li.loading:nth-of-type(4) {
+            max-width: 475px;
+          }
+
+          li.loading:nth-of-type(5) {
+            max-width: 400px;
           }
 
           label {

@@ -17,10 +17,18 @@ describe('Assessment PG', () => {
   it('answers assessment questions', () => {
     cy.seed().then((ids) => {
       const url = `/assessments/${ids.assessment}?pwd=${assessment.pwd}`;
-      cy.intercept('GET', `/api${url}`).as('get-assessment');
+      cy.intercept('GET', `/api${url}`, (req) => {
+        req.on('before:response', (res) => {
+          res.setDelay(500); // Give us time to screenshot fallback state.
+        });
+      }).as('get-assessment');
       cy.intercept('PATCH', `/api${url}`).as('update-assessment');
       cy.visit(url);
     });
+    cy.get('section p.loading').should('be.visible').and('have.length', 10);
+    cy.get('header h2.loading').should('be.visible').and('have.text', '');
+    cy.get('header p.loading').should('be.visible').and('have.text', '');
+    cy.percySnapshot('Assessment Fallback');
     cy.wait('@get-assessment').its('response.statusCode').should('eq', 200);
     cy.get('h2').should('contain', assessment.name);
     cy.getBySel('question').should('have.length', assessment.questions.length);
