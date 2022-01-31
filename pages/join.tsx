@@ -50,7 +50,8 @@ export default function JoinPage(): JSX.Element {
 
   useEffect(() => {
     void prefetch('/pay');
-  }, [prefetch]);
+    void prefetch(decodeURIComponent(uri));
+  }, [uri, prefetch]);
   useEffect(() => {
     if (user?.access === true) void replace(decodeURIComponent(uri));
     if (user?.access === false) void replace(`/pay?r=${uri}`);
