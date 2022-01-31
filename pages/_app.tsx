@@ -79,9 +79,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const {
-    query: { code },
-  } = useRouter();
+  const { query } = useRouter();
   // null - User does not exist (code invalid; redirect to /join).
   // undefined - User has yet to be loaded (show fallback state).
   // user - User exists (redirect to /pay if user.access = false).
@@ -102,7 +100,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       if (data?.length) {
         // Logged in and user exists (redirect to /pay if user.access = false).
         setUser(data[0]);
-      } else if (typeof code !== 'string') {
+      } else if (typeof query.code !== 'string') {
         // Logged in but user and code missing (redirect to /join to set code).
         setUser(null);
       } else {
@@ -110,7 +108,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         const { error } = await supabase
           .from<Code>('codes')
           .update({ user: uid })
-          .eq('id', code);
+          .eq('id', query.code);
         if (error) {
           // Invite code was invalid or already used (redirect to /join).
           setUser(null);
@@ -123,7 +121,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         }
       }
     }
-  }, [code]);
+  }, [query.code]);
   const prevIdentity = useRef<Record<string, unknown>>();
   const identify = useCallback(() => {
     const usr = supabase.auth.user();
