@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import { dequal } from 'dequal/lite';
+import log from 'loglevel';
 import { useRouter } from 'next/router';
 
 import NProgress from 'components/nprogress';
@@ -11,6 +12,8 @@ import { UserContext } from 'lib/context/user';
 import supabase from 'lib/supabase';
 
 import 'fonts/hack-subset.css';
+
+log.setLevel('debug');
 
 const light = `
   --primary: #000;
@@ -87,10 +90,10 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const getUser = useCallback(async () => {
     const uid = supabase.auth.user()?.id;
     if (!uid && window.location.href.includes('#access')) {
-      // Login in process... Supabase has yet to login (show fallback state).
       setUser(undefined);
+      log.debug('Logging in... (show fallback)');
     } else if (!uid) {
-      // Not logged in and not in process of logging in (redirect to /join).
+      log.debug('Not logged in and not logging in (go to /join)');
       setUser(null);
     } else {
       const { data } = await supabase
@@ -98,22 +101,22 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         .select()
         .eq('id', uid);
       if (data?.length) {
-        // Logged in and user exists (redirect to /pay if user.access = false).
+        log.debug('Logged in and user exists (go to /pay if !access)');
         setUser(data[0]);
       } else if (typeof query.code !== 'string') {
-        // Logged in but user and code missing (redirect to /join to set code).
+        log.debug('Logged in but user and code missing (go to /join)');
         setUser(null);
       } else {
-        // User is signing up... verify their invite code and create user row.
+        log.debug('Signing up... (verify invite code and create user row)');
         const { error } = await supabase
           .from<Code>('codes')
           .update({ user: uid })
           .eq('id', query.code);
         if (error) {
-          // Invite code was invalid or already used (redirect to /join).
+          log.debug('Code invalid or already used (go to /join)');
           setUser(null);
         } else {
-          // Invite code worked... create user row (redirect to /pay maybe).
+          log.debug('Code worked; create user row (go to /pay if !access)');
           const { data: created } = await supabase
             .from<User>('users')
             .insert({ id: uid, access: false });
