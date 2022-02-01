@@ -7,7 +7,6 @@ import {
   useState,
 } from 'react';
 import { StripeCardElement, StripeElementStyle } from '@stripe/stripe-js';
-import Script from 'next/script';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
@@ -52,7 +51,7 @@ function getElementStyle(): StripeElementStyle {
 }
 
 export default function PayPage(): JSX.Element {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { prefetch, replace, query } = useRouter();
   const uri = useMemo(
     () => (typeof query.r === 'string' ? query.r : '%2F'),
@@ -112,20 +111,19 @@ export default function PayPage(): JSX.Element {
           },
         });
         if (e) throw new Error(`Error confirming payment: ${e.message ?? ''}`);
-        await supabase.auth.update({}); // Trigger onAuthStateChange() in app.
-        await replace(decodeURIComponent(uri));
+        setUser((prev) => (prev ? { ...prev, access: true } : prev));
+        await replace(decodeURIComponent(uri)); // Page change calls getUser()
       } catch (e) {
         setLoading(false);
         card.current?.update({ disabled: false });
         setError(`Payment error: ${(e as Error).message}`);
       }
     },
-    [user, setLoading, replace, uri]
+    [user, setUser, setLoading, replace, uri]
   );
 
   return (
     <Page name='Pay'>
-      <Script src='https://js.stripe.com/v3' />
       <Join error={error}>
         <Input
           error={!!error}
