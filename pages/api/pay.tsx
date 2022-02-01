@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 
 import { APIError, User } from 'lib/model';
 import handle from 'lib/api/handle';
-import logger from 'lib/api/logger';
+import log from 'lib/log';
 import stripe from 'lib/api/stripe';
 import supabase from 'lib/api/supabase';
 
@@ -13,14 +13,14 @@ export default async function payAPI(req: Req, res: Res): Promise<void> {
     res.status(405).end(`Method ${req.method as string} Not Allowed`);
   } else {
     try {
-      logger.info('Verifying authentication...');
+      log.info('Verifying authentication...');
       if (!req.headers.authorization) throw new APIError('Invalid JWT', 401);
       const jwt = req.headers.authorization.replace('Bearer ', '');
       const { user, error: e } = await supabase.auth.api.getUser(jwt);
       if (e) throw new APIError(e.message, 401);
       if (!user) throw new APIError('Invalid user', 401);
 
-      logger.info(`Selecting user (${user.id}) row...`);
+      log.info(`Selecting user (${user.id}) row...`);
       const { data, error: er } = await supabase
         .from<User>('users')
         .select()
@@ -30,7 +30,7 @@ export default async function payAPI(req: Req, res: Res): Promise<void> {
       let secret: string | null = null;
 
       const update = async (d: Partial<User>) => {
-        logger.info(`Updating user (${user.id}) row... ${JSON.stringify(d)}`);
+        log.info(`Updating user (${user.id}) row... ${JSON.stringify(d)}`);
         const { error: err } = await supabase
           .from<User>('users')
           .update(d)
@@ -39,7 +39,7 @@ export default async function payAPI(req: Req, res: Res): Promise<void> {
       };
 
       if (!row.cus) {
-        logger.info(`Creating Stripe customer for user (${user.id})...`);
+        log.info(`Creating Stripe customer for user (${user.id})...`);
         const cus = await stripe.customers.create({
           email: user.email,
           phone: user.phone,
@@ -48,7 +48,7 @@ export default async function payAPI(req: Req, res: Res): Promise<void> {
         row.cus = cus.id;
       }
       if (!row.sub) {
-        logger.info(`Creating Stripe subscription for user (${user.id})...`);
+        log.info(`Creating Stripe subscription for user (${user.id})...`);
         const sub = await stripe.subscriptions.create({
           customer: row.cus,
           items: [{ price: process.env.STRIPE_PRICE_ID }],

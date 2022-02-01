@@ -1,7 +1,7 @@
 import { ServerResponse } from 'http';
 
 import { APIError } from 'lib/model';
-import logger from 'lib/api/logger';
+import log from 'lib/log';
 
 function send(e: APIError, res: ServerResponse): void {
   const stringified = JSON.stringify({ message: e.message, code: e.code });
@@ -13,9 +13,9 @@ function send(e: APIError, res: ServerResponse): void {
 
 export default function handle(e: unknown, res: ServerResponse): void {
   if (!(e instanceof APIError) || e.code !== 401) {
-    logger.error(`API: ${(e as Error)?.stack || ''}`);
+    log.error(`API: ${(e as Error)?.stack || ''}`);
   } else {
-    logger.error(`API ${e.code}: ${e.toString()}`);
+    log.error(`API ${e.code}: ${e.toString()}`);
   }
   if (e instanceof APIError) return send(e, res);
   if (e instanceof Error) return send(new APIError(e.message, 500), res);

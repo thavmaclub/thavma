@@ -3,7 +3,7 @@ import cors from 'cors';
 
 import { APIError, Assessment } from 'lib/model';
 import handle from 'lib/api/handle';
-import logger from 'lib/api/logger';
+import log from 'lib/log';
 import middleware from 'lib/api/middleware';
 import supabase from 'lib/api/supabase';
 
@@ -14,7 +14,7 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
     if (typeof req.query.pwd !== 'string') throw new APIError('No PWD', 401);
     switch (req.method) {
       case 'GET': {
-        logger.info(`Selecting assessment (${req.query.id})...`);
+        log.info(`Selecting assessment (${req.query.id})...`);
         const { data, error } = await supabase
           .from<Assessment>('assessments')
           .select()
@@ -26,7 +26,7 @@ export default async function assessmentAPI(req: Req, res: Res): Promise<void> {
         break;
       }
       case 'PATCH': {
-        logger.info(`Updating assessment (${req.query.id})...`);
+        log.info(`Updating assessment (${req.query.id})...`);
         const { data, error } = await supabase
           .from<Assessment>('assessments')
           .update({ questions: (req.body as Assessment).questions })

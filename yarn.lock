@@ -9132,13 +9132,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loglevel@npm:^1.8.0":
-  version: 1.8.0
-  resolution: "loglevel@npm:1.8.0"
-  checksum: 41aeea17de24aba8dba68084a31fe9189648bce4f39c1277e021bb276c3c53a75b0d337395919cf271068ad40ecefabad0e4fdeb4a8f11908beee532b898f4a7
-  languageName: node
-  linkType: hard
-
 "loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -12623,7 +12616,6 @@ __metadata:
     eslint-plugin-react-hooks: ^4.3.0
     husky: ^7.0.4
     istanbul-lib-coverage: ^3.2.0
-    loglevel: ^1.8.0
     nanoid: ^3.2.0
     next: ^12.0.9
     nprogress: ^0.2.0

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppProps } from 'next/app';
 import { dequal } from 'dequal/lite';
-import log from 'loglevel';
 import { useRouter } from 'next/router';
 
 import NProgress from 'components/nprogress';
@@ -9,11 +8,10 @@ import NProgress from 'components/nprogress';
 import { Code, User } from 'lib/model';
 import { Theme, ThemeContext } from 'lib/context/theme';
 import { UserContext } from 'lib/context/user';
+import log from 'lib/log';
 import supabase from 'lib/supabase';
 
 import 'fonts/hack-subset.css';
-
-log.setLevel('debug');
 
 const light = `
   --primary: #000;
