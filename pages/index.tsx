@@ -133,7 +133,7 @@ export default function IndexPage(): JSX.Element {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${supabase.auth.session()?.access_token || ''}`,
       };
-      const res = await fetch('/api/users', { method: 'post', body, headers });
+      const res = await fetch('/api/users', { method: 'POST', body, headers });
       setLoading(false);
       if (res.status !== 201) {
         setError(true);
