@@ -30,4 +30,6 @@ export class Logger {
   }
 }
 
-export default new Logger(LogLevel.Info);
+export default new Logger(
+  process.env.NODE_ENV === 'development' ? LogLevel.Debug : LogLevel.Info
+);
