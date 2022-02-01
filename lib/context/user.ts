@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/router';
 
 import { User } from 'lib/model';
+import log from 'lib/log';
 
 export interface UserContextType {
   user?: User | null;
@@ -30,10 +31,14 @@ export function useUser({
     if (access) void prefetch('/pay');
   }, [access, prefetch]);
   useEffect(() => {
-    if (access && user === null)
+    if (access && user === null) {
+      log.debug('User is null, redirecting to /join...');
       void replace(`/join?r=${encodeURIComponent(asPath)}`);
-    if (access && user?.access === false)
+    }
+    if (access && user?.access === false) {
+      log.debug('Access is false, redirecting to /pay...');
       void replace(`/pay?r=${encodeURIComponent(asPath)}`);
+    }
   }, [access, user, replace, asPath]);
   return useMemo(() => ({ user, setUser }), [user, setUser]);
 }
