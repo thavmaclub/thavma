@@ -30,7 +30,7 @@ export default async function payAPI(req: Req, res: Res): Promise<void> {
       let secret: string | null = null;
 
       const update = async (d: Partial<User>) => {
-        log.info(`Updating user (${user.id}) row... ${JSON.stringify(d)}`);
+        log.debug(`Updating user (${user.id}) row... ${JSON.stringify(d)}`);
         const { error: err } = await supabase
           .from<User>('users')
           .update(d)
