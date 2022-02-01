@@ -14,8 +14,8 @@ import ThemeSelect from 'components/theme-select';
 import { Assessment } from 'lib/model';
 import dateString from 'lib/date';
 import supabase from 'lib/supabase';
-import { useUser } from 'lib/context/user';
 import useNProgress from 'lib/nprogress';
+import { useUser } from 'lib/context/user';
 
 function AssessmentLI({
   id,
