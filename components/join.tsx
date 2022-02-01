@@ -26,6 +26,7 @@ export default function Join({ error, children }: JoinProps): JSX.Element {
 
         .centered {
           margin: 48px 0;
+          position: relative;
         }
 
         .centered > :global(form button) {
@@ -49,6 +50,8 @@ export default function Join({ error, children }: JoinProps): JSX.Element {
           width: 0;
           min-width: 100%;
           max-width: 100%;
+          position: absolute;
+          top: ${48 + 36 + 61.75}px;
         }
       `}</style>
     </main>
