@@ -174,7 +174,7 @@ export default function IndexPage(): JSX.Element {
             }}
           />
           <ThemeSelect />
-          {!user && (
+          {!user?.phone && (
             <TextField
               id='phone'
               label='[get invite codes]'
