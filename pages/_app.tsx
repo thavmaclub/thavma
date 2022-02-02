@@ -4,6 +4,7 @@ import { dequal } from 'dequal/lite';
 import { useRouter } from 'next/router';
 
 import NProgress from 'components/nprogress';
+import Nav from 'components/nav';
 
 import { Code, User } from 'lib/model';
 import { Theme, ThemeContext } from 'lib/context/theme';
@@ -161,10 +162,16 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     [getUser, identify]
   );
 
+  const [active, setActive] = useState<{ x: number; width: number }>({
+    x: 0,
+    width: 0,
+  });
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <NProgress />
+        <Nav active={active} setActive={setActive} />
         <Component {...pageProps} />
         <style jsx global>{`
           ::selection {
