@@ -16,10 +16,7 @@ export interface PageProps {
   children: ReactNode;
 }
 
-export default function Page({
-  name,
-  children,
-}: PageProps): JSX.Element {
+export default function Page({ name, children }: PageProps): JSX.Element {
   // Log the analytics page event specifying a name for easier grouping (e.g. it
   // is practically impossible to identify a page by dynamic URL alone).
   useEffect(() => {
@@ -44,7 +41,7 @@ export default function Page({
         />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@thavmaclub' />
-        <meta property='twitter:title' content='THAVMA'/>
+        <meta property='twitter:title' content='THAVMA' />
         <meta
           property='twitter:description'
           content='CLOSED BETA - INVITE ONLY - DM @thavmaclub for access'
@@ -130,8 +127,8 @@ export default function Page({
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='application-name' content='Hammock' />
         <meta name='theme-color' content='#000000' />
-        <link rel='preconnect' href='https://segment.thavma.club' />
-        <link rel='preconnect' href='https://track.thavma.club' />
+        <link rel='preconnect' href='https://segment.thavma.io' />
+        <link rel='preconnect' href='https://track.thavma.io' />
       </Head>
       <Script id='segment'>{segmentSnippet}</Script>
       {children}

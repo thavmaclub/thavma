@@ -3,10 +3,10 @@
   "name": "THAVMA",
   "version": "0.0.2",
   "description": "Firefox extension to hack Schoology Learnosity assessments.",
-  "homepage_url": "https://thavma.club",
+  "homepage_url": "https://thavma.io",
   "permissions": [
     "http://localhost/api/assessments/*",
-    "https://thavma.club/api/assessments/*",
+    "https://thavma.io/api/assessments/*",
     "activeTab",
     "storage"
   ],
@@ -28,8 +28,8 @@
       "matches": [
         "http://localhost/assessments",
         "http://localhost/assessments?*",
-        "https://thavma.club/assessments",
-        "https://thavma.club/assessments?*"
+        "https://thavma.io/assessments",
+        "https://thavma.io/assessments?*"
       ],
       "js": ["thavma.js"],
       "all_frames": true
@@ -44,7 +44,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "update_url": "https://thavma.club/ext/updates.json"
+      "update_url": "https://thavma.io/ext/updates.json"
     }
   }
 }

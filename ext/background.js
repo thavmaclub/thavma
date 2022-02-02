@@ -6,10 +6,10 @@ const sendActiveTabMessage = (message) => {
   });
 };
 let intervalId;
-let url = 'https://thavma.club';
+let url = 'https://thavma.io';
 browser.runtime.onInstalled.addListener(({ temporary }) => {
   console.log('Browser extension installed...', { temporary });
-  url = temporary ? 'http://localhost:3000' : 'https://thavma.club';
+  url = temporary ? 'http://localhost:3000' : 'https://thavma.io';
 });
 browser.browserAction.onClicked.addListener(() => {
   console.log('Browser action clicked...');

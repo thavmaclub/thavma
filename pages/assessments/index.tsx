@@ -45,7 +45,7 @@ function AssessmentLI({
           {!loading && id && pwd && (
             <Link href={`/assessments/${id}?pwd=${pwd}`}>
               <a>
-                thavma.club/assessments/{id}
+                thavma.io/assessments/{id}
                 <i>?pwd={pwd}</i>
               </a>
             </Link>

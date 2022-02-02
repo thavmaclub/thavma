@@ -4,15 +4,15 @@
       "updates": [
         {
           "version": "0.0.0",
-          "update_link": "https://thavma.club/ext/0.0.0.xpi"
+          "update_link": "https://thavma.io/ext/0.0.0.xpi"
         },
         {
           "version": "0.0.1",
-          "update_link": "http://thavma.club/ext/0.0.1.xpi"
+          "update_link": "http://thavma.io/ext/0.0.1.xpi"
         },
         {
           "version": "0.0.2",
-          "update_link": "https://thavma.club/ext/0.0.2.xpi"
+          "update_link": "https://thavma.io/ext/0.0.2.xpi"
         }
       ]
     }
