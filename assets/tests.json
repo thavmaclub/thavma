@@ -227,5 +227,22 @@
       "Erik Erikson's state of identity v.s. role confusion",
       "secondary sex characteristics"
     ]
+  },
+  {
+    "id": 15,
+    "course": "ap-calc-bc",
+    "name": "Chapter 8 Quiz",
+    "date": "2022-02-01T07:00:00.000Z",
+    "difficulty": "easy; calculator allowed",
+    "content": [
+      "first page shows two polar curves r = f(theta) = 1 + sin(theta)cos(2 * theta) and r = g(theta) = 2cos(theta) over the domain 0 < theta < pi/2",
+      "find the area of the space bounded by g(theta) and f(theta). round to three decimals... i got 0.922382",
+      "find the slope of the tangent line to g(theta) at theta = pi/3... i got (4cos^2(pi/3) - 2)/(-4sin(pi/3)cos(pi/3)",
+      "find the distance between f(theta) and g(theta) at theta = pi/4",
+      "find the rate of change of the distance between f(theta) and g(theta) at theta = pi/4... i got 0 b/c both functions have the same rate of change (dr/dtheta = -sqrt(2)) at theta = pi/4 and thus the distance between them isn't changing",
+      "second page has a volume using shells problem and an arc length problem using a parametric function",
+      "find the volume of the figure bounded by the x-axis, x = 1, y = x^2, y = 3 - x and rotated around x = -2... u have to set the height to the difference of the y = x^2 and y = 3 - x and then account for the x-axis translation by 2 in your radius",
+      "find the arc length of the parametric function x(t) = 2t^2 + C and y(t) = t^3 + C from t = 1 to t = 4"
+    ]
   }
 ]
