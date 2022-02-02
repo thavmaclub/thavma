@@ -1,5 +1,4 @@
 import { NextApiRequest as Req, NextApiResponse as Res } from 'next';
-import Stripe from 'stripe';
 
 import { APIError, User } from 'lib/model';
 import handle from 'lib/api/handle';

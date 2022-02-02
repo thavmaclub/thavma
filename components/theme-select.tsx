@@ -9,7 +9,7 @@ export default function ThemeSelect(): JSX.Element {
   const { theme, setTheme } = useTheme();
   return (
     <Select
-      value={theme}
+      value={theme ?? 'system'}
       onChange={(v) => {
         window.analytics?.track('Theme Selected', { theme: v });
         setTheme(v);
