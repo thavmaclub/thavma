@@ -1,4 +1,11 @@
-import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  FormEvent,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
@@ -22,8 +29,17 @@ import { useUser } from 'lib/context/user';
 import courses from 'assets/courses.json';
 import tests from 'assets/tests.json';
 
-function TestSection({ name, date, difficulty, content, children }: Partial<Test> & { children?: ReactNode }): JSX.Element {
-  const loading = useMemo(() => !name && !date && !difficulty && !content, [name, date, difficulty, content]);
+function TestSection({
+  name,
+  date,
+  difficulty,
+  content,
+  children,
+}: Partial<Test> & { children?: ReactNode }): JSX.Element {
+  const loading = useMemo(
+    () => !name && !date && !difficulty && !content,
+    [name, date, difficulty, content]
+  );
   useEffect(() => {
     if (!name || !date || !difficulty || !content) return;
     window.analytics?.track('Test Viewed', { name, date, difficulty, content });
@@ -33,15 +49,20 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
       <header className='wrapper'>
         <h2 className={cn({ loading })}>{!loading && name}</h2>
         <p className={cn({ loading })}>
-          {!loading && date && `${dateString(date)}${difficulty ? ` - ${difficulty}` : ''}`}
+          {!loading &&
+            date &&
+            `${dateString(date)}${difficulty ? ` - ${difficulty}` : ''}`}
         </p>
       </header>
       {!children && (
         <ol className='wrapper'>
-          {loading && Array(5).fill(null).map((_, idx) => <li key={idx} className='loading' />)}
-          {!loading && content && content.map((c, idx) => (
-            <li key={idx}>{c}</li>
-          ))}
+          {loading &&
+            Array(5)
+              .fill(null)
+              .map((_, idx) => <li key={idx} className='loading' />)}
+          {!loading &&
+            content &&
+            content.map((c, idx) => <li key={idx}>{c}</li>)}
         </ol>
       )}
       {children}
@@ -101,36 +122,45 @@ function TestSection({ name, date, difficulty, content, children }: Partial<Test
 
 export default function IndexPage(): JSX.Element {
   const { access } = useAccess({ required: true });
-  const { push, query: { s, c } } = useRouter();
-  const school = useMemo(() => typeof s === 'string' ? s : 'gunn', [s]);
-  const course = useMemo(() => typeof c === 'string' ? c : courses[0].id, [c]);
- 
+  const {
+    push,
+    query: { s, c },
+  } = useRouter();
+  const school = useMemo(() => (typeof s === 'string' ? s : 'gunn'), [s]);
+  const course = useMemo(
+    () => (typeof c === 'string' ? c : courses[0].id),
+    [c]
+  );
+
   const { user, setUser } = useUser();
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
   const [phone, setPhone] = useState('');
-  const onSubmit = useCallback(async (evt: FormEvent) => {
-    evt.preventDefault();
-    evt.stopPropagation();
-    setLoading(true);
-    setError(false);
-    window.analytics?.track('Phone Submitted', { phone });
-    const body = JSON.stringify({ phone });
-    const headers = { 
-      'Content-Type': 'application/json', 
-      'Authorization': `Bearer ${supabase.auth.session()?.access_token || ''}` 
-    };
-    const res = await fetch('/api/users', { method: 'post', body, headers });
-    setLoading(false);
-    if (res.status !== 201) {
-      setError(true);
-      const { message } = (await res.json()) as { message: string };
-      window.analytics?.track('Phone Errored', { phone, error: message });
-    } else {
-      setUser(await res.json());
-      window.analytics?.track('Phone Saved', { phone });
-    }
-  }, [phone, setLoading, setUser]);
+  const onSubmit = useCallback(
+    async (evt: FormEvent) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      setLoading(true);
+      setError(false);
+      window.analytics?.track('Phone Submitted', { phone });
+      const body = JSON.stringify({ phone });
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${supabase.auth.session()?.access_token || ''}`,
+      };
+      const res = await fetch('/api/users', { method: 'post', body, headers });
+      setLoading(false);
+      if (res.status !== 201) {
+        setError(true);
+        const { message } = (await res.json()) as { message: string };
+        window.analytics?.track('Phone Errored', { phone, error: message });
+      } else {
+        setUser(await res.json());
+        window.analytics?.track('Phone Saved', { phone });
+      }
+    },
+    [phone, setLoading, setUser]
+  );
 
   return (
     <Page name='Index'>
@@ -143,7 +173,7 @@ export default function IndexPage(): JSX.Element {
             icon={<PinIcon />}
             value={school}
             onChange={(v) => {
-              window.analytics?.track('School Selected', { school: v }); 
+              window.analytics?.track('School Selected', { school: v });
               return push(`/?s=${v}&c=${course}`, undefined, { shallow: true });
             }}
             disabled
@@ -176,31 +206,53 @@ export default function IndexPage(): JSX.Element {
             />
           )}
         </Form>
-        {!access && Array(5).fill(null).map((_, idx) => <TestSection key={idx} />)}
+        {!access &&
+          Array(5)
+            .fill(null)
+            .map((_, idx) => <TestSection key={idx} />)}
         {access && (
-          <TestSection
-            name='how it works'
-            date={new Date().toISOString()}
-          >
+          <TestSection name='how it works' date={new Date().toISOString()}>
             <ol className='wrapper'>
-              <li>make a contribution: whenever u ask someone about a test, dm <a href='https://instagram.com/thavmaclub' target='_blank' rel='noopener noreferrer'>@thavmaclub</a> with whatever they tell u about it</li>
-              <li>rely on others’s contributions: then, whenever u need info and no one’s awake at 1am the night before a test, login here and it’ll be waiting for u</li>
+              <li>
+                make a contribution: whenever u ask someone about a test, dm{' '}
+                <a
+                  href='https://instagram.com/thavmaclub'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  @thavmaclub
+                </a>{' '}
+                with whatever they tell u about it
+              </li>
+              <li>
+                then, whenever u need info and no one’s awake at 1am the night
+                before a test, login and it’ll be here
+              </li>
             </ol>
           </TestSection>
         )}
-        {access && tests
-          .filter((t) => t.course === course)
-          .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-          .map((t) => (
-            <TestSection key={t.id} {...t} />
-          ))}
-        {access && !tests.some((t) => t.course === course) && ( 
+        {access &&
+          tests
+            .filter((t) => t.course === course)
+            .sort(
+              (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
+            )
+            .map((t) => <TestSection key={t.id} {...t} />)}
+        {access && !tests.some((t) => t.course === course) && (
           <section>
             <div className='wrapper'>
               <Empty>
                 <p>
-                  no contributions to show yet;<br />
-                  dm test info to <a href='https://instagram.com/thavmaclub' target='_blank' rel='noopener noreferrer'>@thavmaclub</a>
+                  no contributions to show yet;
+                  <br />
+                  dm test info to{' '}
+                  <a
+                    href='https://instagram.com/thavmaclub'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    @thavmaclub
+                  </a>
                 </p>
               </Empty>
             </div>
@@ -211,7 +263,7 @@ export default function IndexPage(): JSX.Element {
             border-top: 1px solid var(--accents-2);
             padding: var(--margin) 0;
           }
-         
+
           main :global(a) {
             color: inherit;
           }
