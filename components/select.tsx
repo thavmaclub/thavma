@@ -90,7 +90,6 @@ export default function Select<T extends string>({
           color: var(--on-background);
           padding: 0 12px;
           padding-right: 36px;
-          transition: border-color 0.15s ease;
         }
 
         select:disabled {
