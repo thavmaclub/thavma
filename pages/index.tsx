@@ -155,7 +155,7 @@ export default function IndexPage(): JSX.Element {
         <Header />
         <Form>
           <Select
-            options={[{ value: 'gunn', label: 'Gunn High School [beta]' }]}
+            options={[{ value: 'gunn', label: 'Gunn HS [beta]' }]}
             label='School'
             icon={<PinIcon />}
             value={school}
