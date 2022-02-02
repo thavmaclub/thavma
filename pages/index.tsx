@@ -34,8 +34,7 @@ function TestSection({
   date,
   difficulty,
   content,
-  children,
-}: Partial<Test> & { children?: ReactNode }): JSX.Element {
+}: Partial<Test>): JSX.Element {
   const loading = useMemo(
     () => !name && !date && !difficulty && !content,
     [name, date, difficulty, content]
@@ -54,18 +53,13 @@ function TestSection({
             `${dateString(date)}${difficulty ? ` - ${difficulty}` : ''}`}
         </p>
       </header>
-      {!children && (
-        <ol className='wrapper'>
-          {loading &&
-            Array(5)
-              .fill(null)
-              .map((_, idx) => <li key={idx} className='loading' />)}
-          {!loading &&
-            content &&
-            content.map((c, idx) => <li key={idx}>{c}</li>)}
-        </ol>
-      )}
-      {children}
+      <ol className='wrapper'>
+        {loading &&
+          Array(5)
+            .fill(null)
+            .map((_, idx) => <li key={idx} className='loading' />)}
+        {!loading && content && content.map((c, idx) => <li key={idx}>{c}</li>)}
+      </ol>
       <style jsx>{`
         section {
           border-top: 1px solid var(--accents-2);
@@ -101,17 +95,17 @@ function TestSection({
           margin: 48px auto;
         }
 
-        section :global(li) {
+        section li {
           margin: 24px 0;
         }
 
-        section :global(li.loading) {
+        section li.loading {
           height: 54px;
           margin-left: -24px;
           list-style: none;
         }
 
-        section :global(ol) {
+        section ol {
           padding-left: 48px;
           margin: 48px auto;
         }
@@ -206,31 +200,29 @@ export default function IndexPage(): JSX.Element {
             />
           )}
         </Form>
+        <section>
+          <ol className='wrapper'>
+            <li>
+              make a contribution: whenever u ask someone about a test, dm{' '}
+              <a
+                href='https://instagram.com/thavmaclub'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                @thavmaclub
+              </a>{' '}
+              with whatever they tell u about it
+            </li>
+            <li>
+              then, whenever u need info and no one’s awake at 1am the night
+              before a test, login and it’ll be here
+            </li>
+          </ol>
+        </section>
         {!access &&
           Array(5)
             .fill(null)
             .map((_, idx) => <TestSection key={idx} />)}
-        {access && (
-          <TestSection name='how it works' date={new Date().toISOString()}>
-            <ol className='wrapper'>
-              <li>
-                make a contribution: whenever u ask someone about a test, dm{' '}
-                <a
-                  href='https://instagram.com/thavmaclub'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  @thavmaclub
-                </a>{' '}
-                with whatever they tell u about it
-              </li>
-              <li>
-                then, whenever u need info and no one’s awake at 1am the night
-                before a test, login and it’ll be here
-              </li>
-            </ol>
-          </TestSection>
-        )}
         {access &&
           tests
             .filter((t) => t.course === course)
@@ -262,6 +254,22 @@ export default function IndexPage(): JSX.Element {
           section {
             border-top: 1px solid var(--accents-2);
             padding: var(--margin) 0;
+          }
+
+          section li {
+            margin: 8px 0;
+            font-style: italic;
+            color: var(--accents-5);
+          }
+
+          section li.loading {
+            height: 54px;
+            margin-left: -24px;
+            list-style: none;
+          }
+
+          section ol {
+            padding-left: 48px;
           }
 
           main :global(a) {
