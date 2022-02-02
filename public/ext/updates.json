@@ -13,6 +13,10 @@
         {
           "version": "0.0.2",
           "update_link": "https://thavma.io/ext/0.0.2.xpi"
+        },
+        {
+          "version": "0.0.3",
+          "update_link": "https://thavma.io/ext/0.0.3.xpi"
         }
       ]
     }
