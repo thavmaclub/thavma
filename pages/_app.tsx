@@ -84,7 +84,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     if (theme) localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const { query, isReady } = useRouter();
+  const { pathname, query, isReady } = useRouter();
   // null - User does not exist (code invalid; redirect to /join).
   // undefined - User has yet to be loaded (show fallback state).
   // user - User exists (redirect to /pay if user.access = false).
@@ -171,7 +171,9 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <NProgress />
-        <Nav active={active} setActive={setActive} />
+        {pathname !== '/join' && pathname !== '/pay' && (
+          <Nav active={active} setActive={setActive} />
+        )}
         <Component {...pageProps} />
         <style jsx global>{`
           ::selection {
