@@ -57,17 +57,20 @@ const dark = `
 `;
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-  const [theme, setTheme] = useState<Theme>('system');
+  const [theme, setTheme] = useState<Theme>();
   useEffect(() => {
     if (theme === 'dark') {
+      log.debug('Setting document theme to dark...');
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
       document.documentElement.classList.remove('system');
     } else if (theme === 'light') {
+      log.debug('Setting document theme to light...');
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.remove('system');
-    } else {
+    } else if (theme === 'system') {
+      log.debug('Setting document theme to system...');
       document.documentElement.classList.add('system');
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.remove('light');
@@ -77,7 +80,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     setTheme((prev) => (localStorage.getItem('theme') as Theme) || prev);
   }, []);
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('theme', theme ?? 'system');
   }, [theme]);
 
   const { query, isReady } = useRouter();
