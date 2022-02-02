@@ -119,13 +119,13 @@ export default function Page({ name, children }: PageProps): JSX.Element {
         <meta name='msapplication-TileColor' content='#000000' />
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
-        <meta name='apple-mobile-web-app-title' content='Hammock' />
+        <meta name='apple-mobile-web-app-title' content='THAVMA' />
         <meta
           name='apple-mobile-web-app-status-bar-style'
           content='black-translucent'
         />
         <meta name='mobile-web-app-capable' content='yes' />
-        <meta name='application-name' content='Hammock' />
+        <meta name='application-name' content='THAVMA' />
         <meta name='theme-color' content='#000000' />
         <link rel='preconnect' href='https://segment.thavma.io' />
         <link rel='preconnect' href='https://track.thavma.io' />
