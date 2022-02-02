@@ -3571,13 +3571,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"await-to-js@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "await-to-js@npm:3.0.0"
-  checksum: b6e9dcf9f0990312d2ae28fcfa0a2c2d1ba48baaa161591fba61d3accf97072ce8a7187ee4e889f3148e1707a7ed1d174b9dd04ce4f79f02d7f8c9e017e90f8e
-  languageName: node
-  linkType: hard
-
 "aws-sign2@npm:~0.7.0":
   version: 0.7.0
   resolution: "aws-sign2@npm:0.7.0"
@@ -12715,7 +12708,6 @@ __metadata:
     "@types/source-map-support": ^0.5.4
     "@typescript-eslint/eslint-plugin": ^4.33.0
     "@typescript-eslint/parser": ^4.33.0
-    await-to-js: ^3.0.0
     babel-plugin-istanbul: ^6.1.1
     classnames: ^2.3.1
     cors: ^2.8.5

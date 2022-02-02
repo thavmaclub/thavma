@@ -27,7 +27,6 @@
     "@segment/analytics.js-core": "^4.1.11",
     "@stripe/stripe-js": "^1.22.0",
     "@supabase/supabase-js": "^1.29.4",
-    "await-to-js": "^3.0.0",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
     "dequal": "^2.0.2",
