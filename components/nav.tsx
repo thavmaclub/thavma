@@ -60,10 +60,6 @@ function NavLink({ href, children, setActive }: NavLinkProps): JSX.Element {
           color: var(--on-background);
         }
 
-        a.active {
-          cursor: not-allowed;
-        }
-
         @media (max-width: 800px) {
           li {
             white-space: nowrap;
