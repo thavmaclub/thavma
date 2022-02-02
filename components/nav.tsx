@@ -1,7 +1,19 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
+
+import fetcher from 'lib/fetch';
+import useNProgress from 'lib/nprogress';
+import { useUser } from 'lib/context/user';
 
 interface NavLinkProps {
   href: string;
@@ -45,12 +57,10 @@ function NavLink({ href, children, setActive }: NavLinkProps): JSX.Element {
 
         a {
           display: block;
-          font-size: var(--link-size);
           line-height: 24px;
           padding: 0.5rem 0;
           cursor: pointer;
           text-decoration: none;
-          text-transform: lowercase;
           color: var(--accents-5);
           transition: color 0.2s ease 0s;
         }
@@ -86,7 +96,6 @@ export interface NavProps {
 export default function Nav({ active, setActive }: NavProps): JSX.Element {
   const [visible, setVisible] = useState<boolean>(true);
   const lastScrollPosition = useRef<number>(0);
-  const { pathname } = useRouter();
 
   useEffect(() => {
     function handleScroll(): void {
@@ -102,6 +111,37 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const { setUser } = useUser();
+  const { replace, pathname } = useRouter();
+  const { loading, setLoading } = useNProgress();
+  const onClick = useCallback(
+    async (evt: FormEvent) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      setLoading(true);
+      const msg =
+        'Do you really want to cancel your THAVMA subscription? If you do, you ' +
+        'will immediately lose access to all of THAVMA and will have to ' +
+        'restart your subscription—paying yet another $10—to regain access. ' +
+        '\n\nClick "OK" to cancel or "CANCEL" to keep your subscription:';
+      if (window.confirm(msg)) {
+        try {
+          await fetcher('/api/cancel');
+          setUser((prev) => (prev ? { ...prev, access: false } : prev));
+          await replace('/pay'); // Page change calls getUser()
+        } catch (e) {
+          setLoading(false);
+          window.alert(
+            `Could not cancel subscription: ${(e as Error).message}`
+          );
+        }
+      } else {
+        setLoading(false);
+      }
+    },
+    [setLoading, setUser, replace]
+  );
 
   return (
     <nav className={cn({ visible })}>
@@ -121,13 +161,39 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
         <NavLink href='/assessments' setActive={setActive}>
           assessments
         </NavLink>
+        <button type='button' disabled={loading} onClick={onClick}>
+          cancel subscription
+        </button>
       </ul>
       <style jsx>{`
+        button {
+          border: unset;
+          appearance: unset;
+          cursor: pointer;
+          margin: 0 0.5rem;
+          font: inherit;
+          background: unset;
+          padding: unset;
+          color: var(--accents-5);
+          transition: color 0.2s ease 0s;
+        }
+
+        button:hover,
+        button:focus {
+          color: var(--on-background);
+        }
+
+        button:first-of-type {
+          margin-left: auto;
+        }
+
+        button:last-of-type {
+          margin-right: 0;
+        }
+
         nav {
           box-shadow: inset 0 -1px var(--accents-2);
           backdrop-filter: saturate(180%) blur(2px);
-          display: flex;
-          align-items: center;
           position: fixed;
           z-index: 4;
           top: -20px;
@@ -161,6 +227,7 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
           margin: 0 auto;
           position: relative;
           width: 100%;
+          display: flex;
         }
 
         .bar {
