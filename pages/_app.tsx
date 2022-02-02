@@ -81,7 +81,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     setTheme((prev) => (localStorage.getItem('theme') as Theme) || prev);
   }, []);
   useEffect(() => {
-    localStorage.setItem('theme', theme ?? 'system');
+    if (theme) localStorage.setItem('theme', theme);
   }, [theme]);
 
   const { query, isReady } = useRouter();
