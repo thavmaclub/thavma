@@ -121,10 +121,10 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
       evt.stopPropagation();
       setLoading(true);
       const msg =
-        'Do you really want to cancel your THAVMA subscription? If you do, you ' +
+        'Do you really want to cancel your THAVMA membership? If you do, you ' +
         'will immediately lose access to all of THAVMA and will have to ' +
-        'restart your subscription—paying yet another $10—to regain access. ' +
-        '\n\nClick "OK" to cancel or "CANCEL" to keep your subscription:';
+        'restart your membership—paying yet another $10—to regain access. ' +
+        '\n\nClick "OK" to cancel or "CANCEL" to keep your membership:';
       if (window.confirm(msg)) {
         try {
           await fetcher('/api/cancel');
@@ -132,9 +132,7 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
           await replace('/pay'); // Page change calls getUser()
         } catch (e) {
           setLoading(false);
-          window.alert(
-            `Could not cancel subscription: ${(e as Error).message}`
-          );
+          window.alert(`Could not cancel membership: ${(e as Error).message}`);
         }
       } else {
         setLoading(false);
@@ -162,7 +160,7 @@ export default function Nav({ active, setActive }: NavProps): JSX.Element {
           assessments
         </NavLink>
         <button type='button' disabled={loading} onClick={onClick}>
-          cancel subscription
+          cancel membership
         </button>
       </ul>
       <style jsx>{`
