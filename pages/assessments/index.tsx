@@ -165,12 +165,14 @@ export default function AssessmentsPage(): JSX.Element {
       } else {
         setName('');
         setAssessment(data[0]);
-        verifyExt(data[0]);
         window.analytics?.track('Assessment Created', { id: data[0].id, name });
       }
     },
-    [name, setLoading, verifyExt]
+    [name, setLoading]
   );
+  useEffect(() => {
+    if (assessment) verifyExt(assessment);
+  }, [assessment, verifyExt]);
 
   const [loaded, setLoaded] = useState(false);
   const [assessments, setAssessments] = useState<Assessment[]>([]);
@@ -199,6 +201,13 @@ export default function AssessmentsPage(): JSX.Element {
       .subscribe();
     return () => void supabase.removeSubscription(subscription);
   }, []);
+  useEffect(() => {
+    setAssessment((prev) => {
+      if (prev) return prev;
+      if (assessments.length) return assessments[0];
+      return prev;
+    });
+  }, [assessments]);
 
   return (
     <Page name='Assessments'>
@@ -264,7 +273,9 @@ export default function AssessmentsPage(): JSX.Element {
         {ext === true && assessment && (
           <div className='dialog'>
             <article>
-              <p>you’re almost setup; now, simply:</p>
+              <p>
+                you’re all setup for ur <i>{assessment.name}</i>; now:
+              </p>
               <ol>
                 <li>send ur test link and pwd to a trustworthy friend</li>
                 <li>
