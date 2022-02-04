@@ -5,7 +5,7 @@ export default function Header(): JSX.Element {
       <style jsx>{`
         header {
           text-align: center;
-          margin: 48px auto;
+          margin: ${48 + 36}px auto 48px;
         }
 
         h1 {

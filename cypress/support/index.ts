@@ -1,22 +1,24 @@
 import '@cypress/code-coverage/support';
 import '@percy/cypress';
 
+import { StripeElementType } from '@stripe/stripe-js';
 import { createClient } from '@supabase/supabase-js';
+
+import { Overrides } from 'cypress/plugins';
 
 const supabase = createClient(
   Cypress.env().NEXT_PUBLIC_SUPABASE_URL,
   Cypress.env().NEXT_PUBLIC_SUPABASE_KEY
 );
 
-interface Overrides {
-  skipCode?: boolean;
-  skipCodes?: boolean;
-  skipUser?: boolean;
-  skipInviter?: boolean;
-  skipAssessment?: boolean;
-  skipQuestions?: boolean;
-}
-
+Cypress.Commands.add('getStripeEl', (type: StripeElementType | 'postalCode') =>
+  cy
+    .get('iframe')
+    .its('0.contentDocument.body')
+    .should('not.be.empty')
+    .then((el) => cy.wrap(el))
+    .find(`input[data-elements-stable-field-name="${type}"]`)
+);
 Cypress.Commands.add(
   'seed',
   (overrides?: Overrides) =>
@@ -48,6 +50,9 @@ declare global {
       getBySel: (
         selector: string,
         args?: any
+      ) => Chainable<JQuery<HTMLElement>>;
+      getStripeEl: (
+        type: StripeElementType | 'postalCode'
       ) => Chainable<JQuery<HTMLElement>>;
       loading: (isLoading?: boolean, args?: any) => Chainable<undefined>;
       login: (user: { email: string; password: string }) => Chainable<null>;

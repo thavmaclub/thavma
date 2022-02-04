@@ -14,8 +14,8 @@ import ThemeSelect from 'components/theme-select';
 import { Assessment } from 'lib/model';
 import dateString from 'lib/date';
 import supabase from 'lib/supabase';
-import { useAccess } from 'lib/context/access';
 import useNProgress from 'lib/nprogress';
+import { useUser } from 'lib/context/user';
 
 function AssessmentLI({
   id,
@@ -135,7 +135,7 @@ export default function AssessmentsPage(): JSX.Element {
     window.addEventListener('message', listener);
   }, []);
 
-  const { access } = useAccess({ required: true });
+  const { user } = useUser({ access: 'required' });
   const { loading, setLoading } = useNProgress();
   const [error, setError] = useState(false);
   const [name, setName] = useState('');
@@ -275,10 +275,11 @@ export default function AssessmentsPage(): JSX.Element {
           </div>
         )}
         <ul className='assessments'>
-          {(!access || !loaded) &&
+          {(!user?.access || !loaded) &&
             fallback.map((_, idx) => <AssessmentLI key={idx} />)}
-          {access && assessments.map((a) => <AssessmentLI key={a.id} {...a} />)}
-          {access && loaded && !assessments.length && (
+          {user?.access &&
+            assessments.map((a) => <AssessmentLI key={a.id} {...a} />)}
+          {user?.access && loaded && !assessments.length && (
             <li>
               <div className='wrapper'>
                 <Empty>

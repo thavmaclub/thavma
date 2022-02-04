@@ -29,7 +29,10 @@ export interface Test {
 
 export interface User {
   id: string;
-  phone: string;
+  cus: string | null;
+  sub: string | null;
+  phone: string | null;
+  access: boolean;
 }
 
 export interface Code {
@@ -39,7 +42,7 @@ export interface Code {
 }
 
 export class APIError extends Error {
-  public constructor(message: string, public readonly code: number = 400) {
+  public constructor(message: string, public readonly code: number = 500) {
     super(message);
   }
 }

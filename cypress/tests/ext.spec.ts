@@ -2,6 +2,7 @@ import assessment from 'cypress/fixtures/assessment.json';
 
 describe('Firefox EXT', () => {
   it('syncs assessment with backend', () => {
+    if (!Cypress.isBrowser({ family: 'firefox' })) return;
     cy.seed({ skipQuestions: true }).then((ids) => {
       cy.visit('/schoology');
       /* eslint-disable promise/no-nesting */

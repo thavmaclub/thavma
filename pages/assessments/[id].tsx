@@ -11,7 +11,7 @@ import Page from 'components/page';
 
 import { APIError, Assessment } from 'lib/model';
 import dateString from 'lib/date';
-import { fetcher } from 'lib/fetch';
+import fetcher from 'lib/fetch';
 
 const clone = rfdc();
 

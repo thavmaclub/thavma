@@ -18,6 +18,7 @@ create table assessments (
   "date" timestamptz not null,
   "questions" question[] not null
 );
+alter publication supabase_realtime add table assessments;
 alter table assessments enable row level security;
 create policy "Assessments can be created by users"
   on assessments for insert with check (
@@ -68,10 +69,17 @@ language sql stable security definer;
 create domain phone as text check (value ~ '^(\+\d{1,3})\d{10}$');
 create table users (
   "id" uuid not null references auth.users(id) primary key,
-  "phone" phone unique not null
+  "cus" text unique,
+  "sub" text unique,
+  "phone" phone unique,
+  "access" boolean not null default false
 );
 alter table users enable row level security;
 create policy "Users can view their own profiles"
   on users for select using (
     auth.uid() = "id"
+  );
+create policy "Users can create their own profiles"
+  on users for insert with check (
+    auth.uid() = "id" and "cus" is null and "sub" is null and "access" is false
   );
