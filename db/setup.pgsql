@@ -18,6 +18,7 @@ create table assessments (
   "date" timestamptz not null,
   "questions" question[] not null
 );
+alter publication supabase_realtime add table assessments;
 alter table assessments enable row level security;
 create policy "Assessments can be created by users"
   on assessments for insert with check (
