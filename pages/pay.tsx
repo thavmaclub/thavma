@@ -128,7 +128,7 @@ export default function PayPage(): JSX.Element {
         <Input
           error={!!error}
           loading={loading}
-          label='[$10/wk][secured by stripe]'
+          label='[$10/wk][cancel anytime]'
           id='card'
           button='gain access'
           onSubmit={onSubmit}
