@@ -7,7 +7,7 @@ import user from 'cypress/fixtures/user.json';
 describe('Assessments PG', () => {
   it('redirects to /join when logged out', () => {
     cy.visit('/assessments');
-    cy.url().should('eq', 'http://localhost:3000/join');
+    cy.url().should('eq', 'http://localhost:3000/join?r=%2Fassessments');
   });
 
   it('shows fallback during login', () => {
@@ -23,6 +23,12 @@ describe('Assessments PG', () => {
       'POST',
       `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
     ).as('create-assessment');
+    cy.intercept(
+      'GET',
+      `${
+        Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string
+      }/rest/v1/assessments?select=*&order=date.desc.nullslast`
+    ).as('get-assessments');
     cy.seed({ skipAssessment: true });
     cy.login(user);
     cy.visit('/assessments', {
@@ -30,6 +36,10 @@ describe('Assessments PG', () => {
         cy.stub(win, 'postMessage');
       },
     });
+    cy.get('dt.loading').should('be.visible');
+    cy.get('dd.loading').should('be.visible');
+    cy.wait('@get-assessments');
+    cy.get('.loading').should('not.exist');
     cy.get('input[placeholder="ex: chapter 6 psych test"]')
       .as('assessment-input')
       .type(`${assessment.name}{enter}`)
@@ -95,6 +105,7 @@ describe('Assessments PG', () => {
     cy.get('dt.loading').should('be.visible');
     cy.get('dd.loading').should('be.visible');
     cy.wait('@get-assessments');
+    cy.get('.loading').should('not.exist');
     cy.contains('no assessments to show').should('be.visible');
     cy.percySnapshot('Assessments Empty');
     cy.get('input[placeholder="ex: chapter 6 psych test"]')
