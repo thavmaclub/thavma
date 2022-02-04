@@ -22,6 +22,9 @@ export default async function fetcher<T, D = T>(
     }
     return (await res.json()) as T;
   } catch (e) {
-    throw new APIError(`Error calling API (${url}): ${(e as Error).message}`);
+    if (e instanceof APIError) throw e;
+    if (e instanceof Error) throw new APIError(e.message, 500);
+    if (typeof e === 'string') throw new APIError(e, 500);
+    throw new APIError(`Unknown API error (${url}): ${e}`, 500);
   }
 }
