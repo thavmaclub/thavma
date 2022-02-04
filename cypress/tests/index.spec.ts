@@ -8,8 +8,8 @@ describe('Index PG', () => {
     cy.url().should('eq', 'http://localhost:3000/join?r=%2F');
   });
 
-  it('redirects to /join for users w/out an invite', () => {
-    cy.seed({ skipUser: true, skipCodes: true });
+  it('redirects to /join when user does not exist', () => {
+    cy.seed({ skipUser: true });
     cy.login(user);
     cy.visit('/');
     cy.url().should('eq', 'http://localhost:3000/join?r=%2F');

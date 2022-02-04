@@ -5,14 +5,14 @@ describe('Join PG', () => {
   beforeEach(() => {});
 
   it('redirects to / when logged in', () => {
-    cy.seed({ skipUser: true });
+    cy.seed();
     cy.login(user);
     cy.visit('/join');
     cy.url().should('eq', 'http://localhost:3000/');
   });
 
   it('redirects to specified page', () => {
-    cy.seed({ skipUser: true });
+    cy.seed();
     cy.login(user);
     cy.visit(`/join?r=${encodeURIComponent('/assessments?q=p')}`);
     cy.url().should('eq', 'http://localhost:3000/assessments?q=p');
@@ -54,7 +54,7 @@ describe('Join PG', () => {
       .should('be.calledOnce')
       .and(
         'be.calledWithExactly',
-        `http://localhost:3000/?code=${codes[0].id}`
+        `http://localhost:3000/pay?r=%2F&code=${codes[0].id}`
       );
   });
 });
