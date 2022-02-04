@@ -42,7 +42,7 @@ export interface Code {
 }
 
 export class APIError extends Error {
-  public constructor(message: string, public readonly code: number = 400) {
+  public constructor(message: string, public readonly code: number = 500) {
     super(message);
   }
 }
