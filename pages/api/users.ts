@@ -30,11 +30,12 @@ export default async function usersAPI(req: Req, res: Res): Promise<void> {
       const { phoneNumber } = phone((req.body as { phone: string }).phone);
       if (!phoneNumber) throw new APIError('Invalid phone number', 400);
 
-      log.info(`Inserting phone (${phoneNumber}) for user (${user.id})...`);
-      const { error: insertPhoneErr } = await supabase
+      log.info(`Updating phone (${phoneNumber}) for user (${user.id})...`);
+      const { error: updatePhoneErr } = await supabase
         .from<User>('users')
-        .insert({ phone: phoneNumber, id: user.id });
-      if (insertPhoneErr) throw new APIError(insertPhoneErr.message, 500);
+        .update({ phone: phoneNumber })
+        .eq('id', user.id);
+      if (updatePhoneErr) throw new APIError(updatePhoneErr.message, 500);
 
       log.info(`Inserting codes for user (${user.id})...`);
       const codes = [
