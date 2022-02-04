@@ -3,19 +3,12 @@ import '@percy/cypress';
 
 import { createClient } from '@supabase/supabase-js';
 
+import { Overrides } from 'cypress/plugins';
+
 const supabase = createClient(
   Cypress.env().NEXT_PUBLIC_SUPABASE_URL,
   Cypress.env().NEXT_PUBLIC_SUPABASE_KEY
 );
-
-interface Overrides {
-  skipCode?: boolean;
-  skipCodes?: boolean;
-  skipUser?: boolean;
-  skipInviter?: boolean;
-  skipAssessment?: boolean;
-  skipQuestions?: boolean;
-}
 
 Cypress.Commands.add(
   'seed',

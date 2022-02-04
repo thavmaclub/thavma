@@ -23,10 +23,11 @@ let env = {};
   env = { ...env, ...dotenv.config({ path: dotfile }).parsed };
 });
 
-interface Overrides {
+export interface Overrides {
   skipCode?: boolean;
   skipCodes?: boolean;
   skipUser?: boolean;
+  skipPhone?: boolean;
   skipInviter?: boolean;
   skipAssessment?: boolean;
   skipQuestions?: boolean;
@@ -55,6 +56,7 @@ export default function plugins(
       skipCode,
       skipCodes,
       skipUser,
+      skipPhone,
       skipInviter,
       skipAssessment,
       skipQuestions,
@@ -73,13 +75,17 @@ export default function plugins(
       if (!skipUser) {
         const { error } = await supabase
           .from<User>('users')
-          .insert({ id: user.id, phone: user.phone });
+          .insert({
+            id: user.id,
+            phone: skipPhone ? null : user.phone,
+            access: true,
+          });
         if (error) throw new Error(`Error inserting user: ${error.message}`);
       }
       if (!skipInviter) {
         const { error } = await supabase
           .from<User>('users')
-          .insert({ id: inviter.id, phone: inviter.phone });
+          .insert({ id: inviter.id, phone: inviter.phone, access: true });
         if (error) throw new Error(`Error inserting inviter: ${error.message}`);
       }
       const { error: errr } = await supabase
