@@ -19,10 +19,6 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [firefox]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -39,6 +35,7 @@ jobs:
       - run: yarn install --immutable
       - run: yarn build
       - run: yarn start & yarn wait-on http-get://localhost:3000
-      - run: yarn start:cy --record --parallel --headless --group ${{ matrix.browser }} -b ${{ matrix.browser }}
+      - run: yarn start:cy --record --parallel --headless --group firefox -b firefox
+      - run: yarn start:cy --record --parallel --headless --group chrome -b chrome
       - uses: codecov/codecov-action@v1
         if: ${{ success() || failure() }}
