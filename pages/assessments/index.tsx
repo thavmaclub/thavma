@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid';
 import Empty from 'components/empty';
 import Form from 'components/form';
 import Header from 'components/header';
+import HowTo from 'components/how-to';
 import Page from 'components/page';
 import TextField from 'components/textfield';
 import ThemeSelect from 'components/theme-select';
@@ -104,10 +105,6 @@ function AssessmentLI({
         dd.loading span {
           height: 15px;
           display: block;
-        }
-
-        dd a {
-          color: inherit;
         }
       `}</style>
     </li>
@@ -224,11 +221,27 @@ export default function AssessmentsPage(): JSX.Element {
             error={error}
           />
         </Form>
+        <HowTo>
+          <li>
+            create an assessment using the form above; send the created test
+            link and pwd to a trustworthy friend
+          </li>
+          <li>
+            click on THAVMA’s extension icon (the black box in the top right of
+            Firefox; <a href='/ext/latest.xpi'>install it</a> if missing){' '}
+            <b>a single time</b> (clicking multiple times can cause issues)
+            after Schoology’s test questions have loaded
+          </li>
+          <li>
+            then, simply hover over the bottom left of Schoology to see ur
+            friend’s answers as they go
+          </li>
+        </HowTo>
         {ext === false && assessment && (
           <div className='dialog'>
             <article>
               <p>
-                to connect to your friend—and their answers—during your{' '}
+                to connect to ur friend—and their answers—during ur{' '}
                 <i>{assessment.name}</i>, you’ll have to install THAVMA’s
                 Firefox extension (and, ofc, install Firefox first):
               </p>
@@ -253,7 +266,7 @@ export default function AssessmentsPage(): JSX.Element {
             <article>
               <p>you’re almost setup; now, simply:</p>
               <ol>
-                <li>send your test link and pwd to a friend</li>
+                <li>send ur test link and pwd to a trustworthy friend</li>
                 <li>
                   click on THAVMA’s extension icon (the black box in the top
                   right of Firefox) <b>a single time</b> (clicking multiple
@@ -261,7 +274,7 @@ export default function AssessmentsPage(): JSX.Element {
                   loaded
                 </li>
                 <li>
-                  hover over the bottom left of Schoology to see your friend’s
+                  hover over the bottom left of Schoology to see ur friend’s
                   answers as they go
                 </li>
               </ol>

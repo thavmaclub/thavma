@@ -7,6 +7,7 @@ import useSWR from 'swr';
 
 import Empty from 'components/empty';
 import Header from 'components/header';
+import HowTo from 'components/how-to';
 import Page from 'components/page';
 
 import { APIError, Assessment } from 'lib/model';
@@ -29,6 +30,16 @@ export default function AssessmentPage(): JSX.Element {
     <Page name='Assessment'>
       <main>
         <Header />
+        <HowTo>
+          <li>
+            if you’ve been sent this link, answer each and every question only
+            after consulting Google and Quizlet
+          </li>
+          <li>
+            ur friend will see ur answers in their Schoology test as u select
+            them; so be quick
+          </li>
+        </HowTo>
         <article>
           <header className='wrapper'>
             <h2
@@ -194,33 +205,33 @@ export default function AssessmentPage(): JSX.Element {
             padding: 0;
           }
 
-          li {
+          ul li {
             list-style: none;
             margin: 4px 0;
           }
 
-          li.loading {
+          ul li.loading {
             min-height: 16px;
             margin: 8px 0;
           }
 
-          li.loading:nth-of-type(1) {
+          ul li.loading:nth-of-type(1) {
             max-width: 500px;
           }
 
-          li.loading:nth-of-type(2) {
+          ul li.loading:nth-of-type(2) {
             max-width: 350px;
           }
 
-          li.loading:nth-of-type(3) {
+          ul li.loading:nth-of-type(3) {
             max-width: 450px;
           }
 
-          li.loading:nth-of-type(4) {
+          ul li.loading:nth-of-type(4) {
             max-width: 475px;
           }
 
-          li.loading:nth-of-type(5) {
+          ul li.loading:nth-of-type(5) {
             max-width: 400px;
           }
 

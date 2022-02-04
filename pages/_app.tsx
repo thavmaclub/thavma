@@ -211,6 +211,10 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
             color: var(--on-background);
           }
 
+          a {
+            color: inherit;
+          }
+
           .wrapper {
             max-width: calc(var(--page-width) + 48px);
             padding: 0 24px;

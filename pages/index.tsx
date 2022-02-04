@@ -6,6 +6,7 @@ import BookIcon from 'components/icons/book';
 import Empty from 'components/empty';
 import Form from 'components/form';
 import Header from 'components/header';
+import HowTo from 'components/how-to';
 import Page from 'components/page';
 import PinIcon from 'components/icons/pin';
 import Select from 'components/select';
@@ -191,25 +192,23 @@ export default function IndexPage(): JSX.Element {
             />
           )}
         </Form>
-        <section>
-          <ol className='wrapper'>
-            <li>
-              make a contribution: whenever u ask someone about a test, dm{' '}
-              <a
-                href='https://instagram.com/thavmaclub'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                @thavmaclub
-              </a>{' '}
-              with whatever they tell u about it
-            </li>
-            <li>
-              then, whenever u need info and no one’s awake at 1am the night
-              before a test, login and it’ll be here
-            </li>
-          </ol>
-        </section>
+        <HowTo>
+          <li>
+            make a contribution: whenever u ask someone about a test, dm{' '}
+            <a
+              href='https://instagram.com/thavmaclub'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              @thavmaclub
+            </a>{' '}
+            with whatever they tell u about it
+          </li>
+          <li>
+            then, whenever u need info and no one’s awake at 1am the night
+            before a test, login and it’ll be here
+          </li>
+        </HowTo>
         {!user?.access &&
           Array(5)
             .fill(null)
@@ -245,26 +244,6 @@ export default function IndexPage(): JSX.Element {
           section {
             border-top: 1px solid var(--accents-2);
             padding: var(--margin) 0;
-          }
-
-          section li {
-            margin: 8px 0;
-            font-style: italic;
-            color: var(--accents-5);
-          }
-
-          section li.loading {
-            height: 54px;
-            margin-left: -24px;
-            list-style: none;
-          }
-
-          section ol {
-            padding-left: 48px;
-          }
-
-          main :global(a) {
-            color: inherit;
           }
 
           main :global(form button) {
