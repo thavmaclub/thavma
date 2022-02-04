@@ -1,5 +1,5 @@
 {
-  "projectId": "936nmz",
+  "projectId": "4abzdt",
   "baseUrl": "http://localhost:3000",
   "pluginsFile": "cypress/plugins/index.ts",
   "supportFile": "cypress/support/index.ts",
