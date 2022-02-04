@@ -244,5 +244,24 @@
       "find the volume of the figure bounded by the x-axis, x = 1, y = x^2, y = 3 - x and rotated around x = -2... u have to set the height to the difference of the y = x^2 and y = 3 - x and then account for the x-axis translation by 2 in your radius",
       "find the arc length of the parametric function x(t) = 2t^2 + C and y(t) = t^3 + C from t = 1 to t = 4"
     ]
+  },
+  {
+    "id": 16,
+    "course": "ap-psych",
+    "name": "7.1 Quiz: Mod 52-55",
+    "date": "2022-02-04T07:00:00.000Z",
+    "difficulty": "easy; questions on quizlet",
+    "content": [
+      "For most of his life, Mike has been overweight. Not long after going on a diet and losing over 30 pounds, Mike gained back nearly all the weight. Which of the following concepts best explains Mike’s experience? ANSWER: (4) Set-point theory",
+      "Chandler and Ross live mostly similar lifestyles in terms of physical activity and diet, but Chandler is significantly heavier than Ross. They are likely different in what respect? ANSWER: (3) differing Basal Metabolic Rate",
+      "Alfred Kinsey used a method that allowed for extensive information to be collected from discussions with individual participants. The research method that he used, and his research contributions, were ANSWER: (3) personal interviews; sexual behavior in men and women",
+      "Masters and Johnson were a pair of researchers who sought to understand ANSWER: (3) the human sexual response cycle",
+      "An example of a primary drive is ANSWER: (1) sleeping",
+      "Which of the following concepts explains motivation in terms of an organism seeking to maintain its biological equilibrium? ANSWER: (3) Homeostasis",
+      "A brain tumor that results in obesity would most likely be located in the ANSWER: (3) area of the hypothalamus",
+      "According to Maslow's Hierarchy, which of the following is considered the most basic of needs? ANSWER: (5) Obtaining food and water",
+      "Which of the following is the best example of a homeostatic process? ANSWER: (2) Cathy drinks a large amount of water to reduce thirst after a long race.",
+      "Byron has been diligently studying for the past several months to pass the LSATs. He has dreams of becoming an influential lawyer to help the low income community. Byron demonstrates high levels of what? ANSWER: (1) achievement motivation"
+    ]
   }
 ]
