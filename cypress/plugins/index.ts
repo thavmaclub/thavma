@@ -28,6 +28,7 @@ export interface Overrides {
   skipCodes?: boolean;
   skipUser?: boolean;
   skipPhone?: boolean;
+  skipAccess?: boolean;
   skipInviter?: boolean;
   skipAssessment?: boolean;
   skipQuestions?: boolean;
@@ -57,6 +58,7 @@ export default function plugins(
       skipCodes,
       skipUser,
       skipPhone,
+      skipAccess,
       skipInviter,
       skipAssessment,
       skipQuestions,
@@ -73,13 +75,11 @@ export default function plugins(
       const { error: err } = await supabase.from<User>('users').delete();
       if (err) throw new Error(`Error deleting users: ${err.message}`);
       if (!skipUser) {
-        const { error } = await supabase
-          .from<User>('users')
-          .insert({
-            id: user.id,
-            phone: skipPhone ? null : user.phone,
-            access: true,
-          });
+        const { error } = await supabase.from<User>('users').insert({
+          id: user.id,
+          phone: skipPhone ? null : user.phone,
+          access: !skipAccess,
+        });
         if (error) throw new Error(`Error inserting user: ${error.message}`);
       }
       if (!skipInviter) {

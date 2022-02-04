@@ -4,6 +4,7 @@
   "pluginsFile": "cypress/plugins/index.ts",
   "supportFile": "cypress/support/index.ts",
   "integrationFolder": "cypress/tests",
+  "chromeWebSecurity": false,
   "env": {
     "codeCoverage": {
       "url": "/api/coverage"

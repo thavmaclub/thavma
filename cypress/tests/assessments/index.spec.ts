@@ -19,6 +19,7 @@ describe('Assessments PG', () => {
   });
 
   it('prompts to install extension', () => {
+    if (!Cypress.isBrowser({ family: 'firefox' })) return;
     cy.intercept(
       'POST',
       `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
@@ -85,6 +86,7 @@ describe('Assessments PG', () => {
   });
 
   it('creates and shows assessments', () => {
+    if (!Cypress.isBrowser({ family: 'firefox' })) return;
     cy.intercept(
       'POST',
       `${Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string}/rest/v1/assessments`
