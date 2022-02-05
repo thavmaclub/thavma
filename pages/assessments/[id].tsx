@@ -37,7 +37,7 @@ export default function AssessmentPage(): JSX.Element {
           </li>
           <li>
             ur friend will see ur answers in their Schoology test as u select
-            them; so be quick
+            them; so be quick <b>and</b> accurate
           </li>
         </HowTo>
         <article>

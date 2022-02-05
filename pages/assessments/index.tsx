@@ -232,18 +232,12 @@ export default function AssessmentsPage(): JSX.Element {
         </Form>
         <HowTo>
           <li>
-            create an assessment using the form above; send the created test
-            link and pwd to a trustworthy friend
+            before test: create an assessment using the form above; send the
+            created test link and pwd to a friend
           </li>
           <li>
-            click on THAVMA’s extension icon (the black box in the top right of
-            Firefox; <a href='/ext/latest.xpi'>install it</a> if missing){' '}
-            <b>a single time</b> (clicking multiple times can cause issues)
-            after Schoology’s test questions have loaded
-          </li>
-          <li>
-            then, simply hover over the bottom left of Schoology to see ur
-            friend’s answers as they go
+            during test: click THAVMA’s extension icon and then hover over the
+            bottom left to see ur friend’s answers
           </li>
         </HowTo>
         {ext === false && assessment && (
