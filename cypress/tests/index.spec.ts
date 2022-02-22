@@ -14,7 +14,7 @@ describe('Index PG', () => {
     cy.visit('/');
     cy.url().should('eq', 'http://localhost:3000/join?r=%2F');
   });
-
+  
   it('redirects to /join for users w/ invalid invite', () => {
     cy.intercept(
       'PATCH',
@@ -27,6 +27,20 @@ describe('Index PG', () => {
     cy.visit(`/?code=${codes[0].id}`);
     cy.wait('@use-code').its('response.statusCode').should('eq', 404);
     cy.url().should('contain', '/join').and('contain', `code%3D${codes[0].id}`);
+  });
+
+  it('only allows one code per user', () => {
+    cy.intercept(
+      'PATCH',
+      `${
+        Cypress.env().NEXT_PUBLIC_SUPABASE_URL as string
+      }/rest/v1/codes?id=eq.${codes[2].id}`
+    ).as('use-code');
+    cy.seed({ skipUser: true });
+    cy.login(user);
+    cy.visit(`/?code=${codes[2].id}`);
+    cy.wait('@use-code').its('response.statusCode').should('eq', 409);
+    cy.url().should('contain', '/join').and('contain', `code%3D${codes[2].id}`);
   });
 
   it('collects phone for invite codes', () => {
