@@ -43,6 +43,43 @@ describe('Index PG', () => {
     cy.url().should('contain', '/join').and('contain', `code%3D${codes[2].id}`);
   });
 
+  it('cancels paid membership', () => {
+    cy.intercept('GET', '/api/cancel').as('cancel');
+    cy.seed();
+    cy.login(user);
+    cy.visit('/', {
+      onBeforeLoad(win: Window) {
+        cy.spy(win, 'confirm');
+        cy.spy(win, 'alert');
+      },
+    });
+    let count = 0;
+    cy.on('window:confirm', (str) => {
+      count += 1;
+      expect(str).to.contain('cancel your THAVMA membership?');
+      return count !== 1;
+    });
+    cy.on('window:alert', (str) => {
+      expect(str).to.contain('Could not cancel membership');
+      return true;
+    });
+    cy.contains('button', 'cancel membership')
+      .should('be.visible')
+      .and('not.be.disabled')
+      .click();
+    cy.window().its('confirm').should('be.calledOnce');
+    cy.url().should('eq', 'http://localhost:3000/');
+    cy.contains('button', 'cancel membership').click();
+    cy.window().its('confirm').should('be.calledTwice');
+    cy.wait('@cancel').as('cancel-response');
+    cy.get('@cancel-response').its('response.statusCode').should('eq', 404);
+    cy.get('@cancel-response')
+      .its('response.body.message')
+      .should('eq', 'No subscription');
+    cy.window().its('alert').should('be.calledOnce');
+    // TODO: Add test for successful cancellation (i.e. seed Stripe data).
+  });
+
   it('collects phone for invite codes', () => {
     cy.intercept('POST', '/api/users').as('create-user');
     cy.seed({ skipPhone: true });
