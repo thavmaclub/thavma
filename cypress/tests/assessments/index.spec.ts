@@ -55,8 +55,7 @@ describe('Assessments PG', () => {
       .then((body: Assessment[]) => {
         cy.window()
           .its('postMessage')
-          .should('be.calledOnce')
-          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+          .should('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
         cy.contains('no assessments to show').should('not.exist');
         cy.contains('dd', assessment.name).should('be.visible');
         cy.contains('.dialog', 'install THAVMA’s Firefox extension')
@@ -78,8 +77,7 @@ describe('Assessments PG', () => {
           });
         cy.window()
           .its('postMessage')
-          .should('be.calledTwice')
-          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+          .should('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
         cy.get('.dialog').should('be.visible');
         cy.percySnapshot('Assessments Install');
       });
@@ -135,8 +133,7 @@ describe('Assessments PG', () => {
       .then((body: Assessment[]) => {
         cy.window()
           .its('postMessage')
-          .should('be.calledOnce')
-          .and('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
+          .should('be.calledWithExactly', { id: body[0].id, pwd: body[0].pwd });
         /* eslint-disable-next-line promise/no-nesting */
         cy.window().then((win) => {
           const listener = cy.stub().as('message');
@@ -146,7 +143,7 @@ describe('Assessments PG', () => {
       });
     cy.contains('no assessments to show').should('not.exist');
     cy.contains('dd', assessment.name).should('be.visible');
-    cy.contains('.dialog', 'you’re almost setup').should('be.visible');
+    cy.contains('.dialog', 'you’re all setup').should('be.visible');
     cy.percySnapshot('Assessments Agree');
     cy.contains('button', 'i agree not to raise my test average').click();
     cy.get('.dialog').should('not.exist');
@@ -159,7 +156,7 @@ describe('Assessments PG', () => {
     cy.percySnapshot('Assessments Light');
     cy.get('@theme-select').select('system');
     cy.seed({ skipAssessment: true });
-    cy.contains('dd').should('not.exist');
+    cy.get('dd').should('not.exist');
     cy.contains('no assessments to show').should('be.visible');
   });
 });
