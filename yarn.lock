@@ -12572,13 +12572,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stripe@npm:^8.203.0":
-  version: 8.203.0
-  resolution: "stripe@npm:8.203.0"
+"stripe@npm:^8.205.0":
+  version: 8.205.0
+  resolution: "stripe@npm:8.205.0"
   dependencies:
     "@types/node": ">=8.1.0"
     qs: ^6.6.0
-  checksum: 98d921d0c4e779dc9bbd52bc645c0b17bf7770e14013757fdfadb448766285d921e94ce8e1e132dff8f3e06b084de873c43c52203f947089b18260a928e836a1
+  checksum: 12189137b2c18f9a7ce5ff6db8a2426949206d737908bc377d81f269862a2cd6bd23923bd9c0f5f247ab681cba601645963bb9874d62e45fec400cffb2da1f48
   languageName: node
   linkType: hard
 
@@ -12785,7 +12785,7 @@ __metadata:
     release: ^6.3.0
     rfdc: ^1.3.0
     source-map-support: ^0.5.21
-    stripe: ^8.203.0
+    stripe: ^8.205.0
     supabase: ^0.5.0
     swr: ^1.2.2
     ts-node: ^10.5.0
