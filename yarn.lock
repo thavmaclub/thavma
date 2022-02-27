@@ -2496,21 +2496,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^1.22.1":
-  version: 1.22.1
-  resolution: "@supabase/gotrue-js@npm:1.22.1"
+"@supabase/gotrue-js@npm:^1.22.3":
+  version: 1.22.3
+  resolution: "@supabase/gotrue-js@npm:1.22.3"
   dependencies:
     cross-fetch: ^3.0.6
-  checksum: 972b874a5f21eee7fcfe1e709b0642641738c6f03474a4e60ad15ee33c553ba27200ea34605d4be42ac28f7c04e51d4c53775b4eebcfd3e3667ac850b978c245
+  checksum: 384d2a8566b8774ba82193c90a813e930dcadf338adf7a3d21651c9f4895e327dccc5aaf55a1068dd4a0f6bcf3cb7366d1783fce7e1ac6588453dbdbd3336544
   languageName: node
   linkType: hard
 
-"@supabase/postgrest-js@npm:^0.36.0":
-  version: 0.36.0
-  resolution: "@supabase/postgrest-js@npm:0.36.0"
+"@supabase/postgrest-js@npm:^0.36.2":
+  version: 0.36.2
+  resolution: "@supabase/postgrest-js@npm:0.36.2"
   dependencies:
     cross-fetch: ^3.0.6
-  checksum: 01ea639747c6cb3110b646ac4d2adc152ce4592e6cca7ac8137d91578cdcc760408ae6d7a1417439b0100e3069235e2c5132babc6681bfeb3e225eab14c107f0
+  checksum: 381be5e257d15b45f0d7ee7169cb8f716d7085b4bb9eb65af7a1eb7b6bfe604db133d7653dfd3d127d05430676350901401e42b1ddc0d26479af6122d925a5d8
   languageName: node
   linkType: hard
 
@@ -2524,24 +2524,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/storage-js@npm:^1.6.2":
-  version: 1.6.2
-  resolution: "@supabase/storage-js@npm:1.6.2"
+"@supabase/storage-js@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "@supabase/storage-js@npm:1.6.4"
   dependencies:
     cross-fetch: ^3.1.0
-  checksum: dfa4d4ea6aabe7c92af4ca8e2db664dff7eb2afbe6e3c5f66b9178ecdf78c25a82e701ee02845c8018400221a4aa65a53ba785eda9a9792c9ae310358a166151
+  checksum: 14c1a78b307b6229c356d875023331999a08037b65c3c1c430ae7ed71d666e5f9449a3754807d6c5e9d4ee3d56387bcf8e721e562cccdd160ef121954c720cde
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^1.30.6":
-  version: 1.30.6
-  resolution: "@supabase/supabase-js@npm:1.30.6"
+"@supabase/supabase-js@npm:^1.30.7":
+  version: 1.30.7
+  resolution: "@supabase/supabase-js@npm:1.30.7"
   dependencies:
-    "@supabase/gotrue-js": ^1.22.1
-    "@supabase/postgrest-js": ^0.36.0
+    "@supabase/gotrue-js": ^1.22.3
+    "@supabase/postgrest-js": ^0.36.2
     "@supabase/realtime-js": ^1.3.6
-    "@supabase/storage-js": ^1.6.2
-  checksum: e1aa20612d41870f12e73e0dffc468c91740e48c7c87b780eba90b175f81efe7bdc734db1a2083d2a70009a1591f575b9397319dec55137df2e7fbde0df093f6
+    "@supabase/storage-js": ^1.6.4
+  checksum: f39959c257977bf86960e1a259e3aaa9f67baf3d7bfa3270d13abbb59ca41f360c523bdeef4934fc3a8b0f040dd11a9b5b71326a071cb11722574ceb527cff3f
   languageName: node
   linkType: hard
 
@@ -12742,7 +12742,7 @@ __metadata:
     "@percy/cypress": ^3.1.1
     "@segment/analytics.js-core": ^4.1.11
     "@stripe/stripe-js": ^1.23.0
-    "@supabase/supabase-js": ^1.30.6
+    "@supabase/supabase-js": ^1.30.7
     "@types/cors": ^2.8.12
     "@types/micro": ^7.3.6
     "@types/node": ^16.11.25
