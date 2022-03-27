@@ -2496,52 +2496,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^1.22.1":
-  version: 1.22.1
-  resolution: "@supabase/gotrue-js@npm:1.22.1"
+"@supabase/functions-js@npm:^1.2.2":
+  version: 1.2.3
+  resolution: "@supabase/functions-js@npm:1.2.3"
   dependencies:
-    cross-fetch: ^3.0.6
-  checksum: 972b874a5f21eee7fcfe1e709b0642641738c6f03474a4e60ad15ee33c553ba27200ea34605d4be42ac28f7c04e51d4c53775b4eebcfd3e3667ac850b978c245
+    cross-fetch: ^3.1.5
+  checksum: 1b4ba850f363c73072bd1b9d6595279007f2ffcaa1839108eb2d07486f80e5102a0227c0bb9a870ac0b9495f8aba256aec7e4732490dbe7c6f3938e0d52e5f73
   languageName: node
   linkType: hard
 
-"@supabase/postgrest-js@npm:^0.36.0":
-  version: 0.36.0
-  resolution: "@supabase/postgrest-js@npm:0.36.0"
+"@supabase/gotrue-js@npm:^1.22.8":
+  version: 1.22.8
+  resolution: "@supabase/gotrue-js@npm:1.22.8"
   dependencies:
     cross-fetch: ^3.0.6
-  checksum: 01ea639747c6cb3110b646ac4d2adc152ce4592e6cca7ac8137d91578cdcc760408ae6d7a1417439b0100e3069235e2c5132babc6681bfeb3e225eab14c107f0
+  checksum: 701412266addf7f1ae95913146373f5f340c6f9bfb60d369f7fa019b88f8bde8358535aad737272d5faf882b068a4422192e2c70c1c75bd07ebd0a426564d232
   languageName: node
   linkType: hard
 
-"@supabase/realtime-js@npm:^1.3.6":
-  version: 1.3.6
-  resolution: "@supabase/realtime-js@npm:1.3.6"
+"@supabase/postgrest-js@npm:^0.37.1":
+  version: 0.37.1
+  resolution: "@supabase/postgrest-js@npm:0.37.1"
   dependencies:
+    cross-fetch: ^3.0.6
+  checksum: 622e4d5e060d69860d09333242ca7a59c02fb6af45e08985feb8fa3d53c554ba75d6e77f1382abaf51399f52e5dad284d372d9cb4e18e217292615d16b88a7cf
+  languageName: node
+  linkType: hard
+
+"@supabase/realtime-js@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@supabase/realtime-js@npm:1.4.0"
+  dependencies:
+    "@types/lodash.clonedeep": ^4.5.6
+    "@types/phoenix": ^1.5.4
     "@types/websocket": ^1.0.3
+    lodash.clonedeep: ^4.5.0
     websocket: ^1.0.34
-  checksum: 1c560359b43870f09fdd6ce96dc27d307938d9c2f56d33e062f5286232c3f2063d773a7e26ed03f9b517d8f5651d8bba4b6ff017d5e90143854b27578d64516d
+  checksum: a6bb57e28e6880de5fa8b258a08d7cef625b81693368bb07b9a390d7700c14286db1b601b9e39b92f73ea5fd75dbf3a0efa8e82bc619504a6a9fcc3ce3ca0fd7
   languageName: node
   linkType: hard
 
-"@supabase/storage-js@npm:^1.6.2":
-  version: 1.6.2
-  resolution: "@supabase/storage-js@npm:1.6.2"
+"@supabase/storage-js@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "@supabase/storage-js@npm:1.6.4"
   dependencies:
     cross-fetch: ^3.1.0
-  checksum: dfa4d4ea6aabe7c92af4ca8e2db664dff7eb2afbe6e3c5f66b9178ecdf78c25a82e701ee02845c8018400221a4aa65a53ba785eda9a9792c9ae310358a166151
+  checksum: 14c1a78b307b6229c356d875023331999a08037b65c3c1c430ae7ed71d666e5f9449a3754807d6c5e9d4ee3d56387bcf8e721e562cccdd160ef121954c720cde
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^1.30.6":
-  version: 1.30.6
-  resolution: "@supabase/supabase-js@npm:1.30.6"
+"@supabase/supabase-js@npm:^1.32.2":
+  version: 1.32.2
+  resolution: "@supabase/supabase-js@npm:1.32.2"
   dependencies:
-    "@supabase/gotrue-js": ^1.22.1
-    "@supabase/postgrest-js": ^0.36.0
-    "@supabase/realtime-js": ^1.3.6
-    "@supabase/storage-js": ^1.6.2
-  checksum: e1aa20612d41870f12e73e0dffc468c91740e48c7c87b780eba90b175f81efe7bdc734db1a2083d2a70009a1591f575b9397319dec55137df2e7fbde0df093f6
+    "@supabase/functions-js": ^1.2.2
+    "@supabase/gotrue-js": ^1.22.8
+    "@supabase/postgrest-js": ^0.37.1
+    "@supabase/realtime-js": ^1.4.0
+    "@supabase/storage-js": ^1.6.4
+  checksum: f8a1e5db8dea8ecd5332b91b89edb9370bb121d1e5c97ccb8103233947dff5a84818fe2f6f83ea33bdd4fd78a47a87c624e89d6b2b22ecbbb495b3608674fd41
   languageName: node
   linkType: hard
 
@@ -2628,6 +2641,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash.clonedeep@npm:^4.5.6":
+  version: 4.5.6
+  resolution: "@types/lodash.clonedeep@npm:4.5.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: f21159ee191262282d33af046fdf2a654a8e3077d02f42e7aaffea5768960d818e6e458d397f4288b37caee70e3d1658b8430f416f3ffe436fd374fe1c824334
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.180
+  resolution: "@types/lodash@npm:4.14.180"
+  checksum: fc42ae3473695cac6e91553f832fef8eb51a31c1c0381cafa81b00dc3efe18e279786bdda77caf0b90a8340ba2ba7aa46ae6541d69870565f775d04c89128bc1
+  languageName: node
+  linkType: hard
+
 "@types/micro@npm:^7.3.6":
   version: 7.3.6
   resolution: "@types/micro@npm:7.3.6"
@@ -2684,6 +2713,13 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: fd6bce2b674b6efc3db4c7c3d336bd70c90838e8439de639b909ce22f3720d21344f52427f1d9e57b265fcb7f6c018699b99e5e0c208a1a4823014269a6bf35b
+  languageName: node
+  linkType: hard
+
+"@types/phoenix@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "@types/phoenix@npm:1.5.4"
+  checksum: be6635e3dd63b9ae80e375c3918075cb1d63264f46039665c62390d2a5249335c32c7f0d154da27724a7859c0eaef1476fb61f7fa40541b4013e0bc1d5a47fd5
   languageName: node
   linkType: hard
 
@@ -5063,6 +5099,15 @@ __metadata:
   dependencies:
     node-fetch: 2.6.1
   checksum: 2107e5e633aa327bdacab036b1907c7ddd28651ede0c1d4fd14db04510944d56849a8255e2f5b8f9a1da0e061b6cee943f6819fe29ed9a130195e7fadd82a4ff
+  languageName: node
+  linkType: hard
+
+"cross-fetch@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "cross-fetch@npm:3.1.5"
+  dependencies:
+    node-fetch: 2.6.7
+  checksum: f6b8c6ee3ef993ace6277fd789c71b6acf1b504fd5f5c7128df4ef2f125a429e29cd62dc8c127523f04a5f2fa4771ed80e3f3d9695617f441425045f505cf3bb
   languageName: node
   linkType: hard
 
@@ -9888,6 +9933,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:2.6.7":
+  version: 2.6.7
+  resolution: "node-fetch@npm:2.6.7"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
+  languageName: node
+  linkType: hard
+
 "node-fetch@npm:^2.1.1":
   version: 2.6.6
   resolution: "node-fetch@npm:2.6.6"
@@ -12742,7 +12801,7 @@ __metadata:
     "@percy/cypress": ^3.1.1
     "@segment/analytics.js-core": ^4.1.11
     "@stripe/stripe-js": ^1.23.0
-    "@supabase/supabase-js": ^1.30.6
+    "@supabase/supabase-js": ^1.32.2
     "@types/cors": ^2.8.12
     "@types/micro": ^7.3.6
     "@types/node": ^16.11.25
